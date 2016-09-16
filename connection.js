@@ -9,7 +9,7 @@ function Connection() {
 			host: '127.0.0.1',
 			user: 'root',
 			password: 'admin',
-			database: 'provadb' // chiamare neptis
+			database: 'neptis' // chiamare neptis(prima si chiamava provadb)
 		});
 	};
 	
