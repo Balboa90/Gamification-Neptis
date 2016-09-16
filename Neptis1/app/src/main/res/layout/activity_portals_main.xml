@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.anna.neptis.PortalsMainActivity"
+    android:touchscreenBlocksFocus="false"
+    android:gravity="center_horizontal">
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tableRow1"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="TITLE"
+                android:id="@+id/title_text"
+                android:textSize="@dimen/title_size"
+                android:layout_gravity="center"
+                android:layout_marginBottom="@dimen/title_bottom_margin"
+                android:layout_marginTop="@dimen/title_top_margin" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/table_row_margin_size"
+            android:id="@+id/tableRow2"
+            android:gravity="center_horizontal">
+
+            <ImageButton
+                android:layout_width="@dimen/portal_width"
+                android:layout_height="wrap_content"
+                android:id="@+id/yellow_portal"
+                android:src="@drawable/yellow_portal"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                android:layout_marginRight="@dimen/portals_margin_size" />
+
+            <ImageButton
+                android:layout_width="@dimen/portal_width"
+                android:layout_height="wrap_content"
+                android:id="@+id/green_portal"
+                android:src="@drawable/green_portal"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                android:layout_marginLeft="@dimen/portals_margin_size" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/tableRow3"
+            android:gravity="center_horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/logo_width_height_size"
+                android:layout_height="@dimen/logo_width_height_size"
+                android:id="@+id/logo_app"
+                android:src="@drawable/logo"
+                android:layout_margin="@dimen/logo_margin_size" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/tableRow4"
+            android:gravity="center_horizontal"
+            android:layout_margin="@dimen/table_row_margin_size">
+
+            <ImageButton
+                android:layout_width="@dimen/portal_width"
+                android:layout_height="wrap_content"
+                android:id="@+id/red_portal"
+                android:src="@drawable/red_portal"
+                android:layout_marginRight="@dimen/portals_margin_size"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter" />
+
+            <ImageButton
+                android:layout_width="@dimen/portal_width"
+                android:layout_height="wrap_content"
+                android:id="@+id/blue_portal"
+                android:src="@drawable/blue_portal"
+                android:layout_marginLeft="@dimen/portals_margin_size"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true" />
+        </TableRow>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="74dp"
+            android:id="@+id/login_register">
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/facebook_icon"
+                android:src="@drawable/facebook_icon"
+                android:scaleType="fitStart"
+                android:adjustViewBounds="true"
+                android:layout_marginLeft="@dimen/face_icon_margin_size"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/com_facebook_blue"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Login Register"
+                android:id="@+id/login"
+                android:layout_toRightOf="@+id/facebook_icon"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/login_register_margin_size"
+                android:textSize="@dimen/login_text_size" />
+
+            <TextView
+                android:textColor="@color/colosseo_background"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/logout"
+                android:id="@+id/logout"
+                android:textSize="7sp"
+                android:layout_below="@+id/logout_icon"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="5dp" />
+
+            <ImageButton
+                android:onClick="logout"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:id="@+id/logout_icon"
+                android:src="@drawable/logout_icon"
+                android:backgroundTint="@android:color/background_light"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="25dp"
+                android:layout_marginRight="7dp" />
+
+
+        </RelativeLayout>
+
+
+
+    </TableLayout>
+
+</LinearLayout>

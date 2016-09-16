@@ -1,0 +1,34 @@
+<resources>
+    <string name="facebook_app_id">621653938002925</string>
+    <string name="app_name">Neptis</string>
+    <string name="treasure">TREASURE</string>
+    <string name="portal">PORTAL</string>
+    <string name="cards_list">CARDS LIST</string>
+    <string name="missions_list">MISSIONS LIST</string>
+
+    <string name="spin">Choose a structure</string>
+    <string name="textLogin">Login</string>
+    <string name="textCancel">Cancel</string>
+    <string name="register">Register Here</string>
+    <string name="etPassword">Password</string>
+    <string name="etUsername">Username</string>
+    <string name="user_login">User Login</string>
+    <string name="register_account">Register</string>
+    <string name="etConfirmPass">Confirm Password</string>
+    <string name="user_register">Register a new account</string>
+    <string name="cancel_login">Operazione annullata</string>
+    <string name="error_login">Errore nel login!</string>
+    <string name="logout">Logout</string>
+
+
+    <string-array name="spinner_options">
+        <item></item>
+        <item>Colosseo</item>
+        <item>San Pietro</item>
+        <item>Musei Vaticani</item>
+        <item>Villa Borghese</item>
+        <item>Castel Sant\'Angelo</item>
+    </string-array>
+
+
+</resources>

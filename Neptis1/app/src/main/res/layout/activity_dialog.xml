@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center">
+
+
+    <TextView
+        android:layout_width="286dp"
+        android:layout_height="wrap_content"
+        android:text="Welcome!"
+        android:id="@+id/welcome"
+        android:textSize="60sp"
+        android:layout_margin="20dp" />
+
+    <TextView
+        android:layout_width="273dp"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Effettuare il login per accedere al gioco.."
+        android:id="@+id/textView2"
+        android:layout_margin="30dp"
+        android:textSize="30sp" />
+
+    <Button
+        android:layout_width="278dp"
+        android:layout_height="wrap_content"
+        android:text="Go to login!"
+        android:id="@+id/go_to_login"
+        android:layout_marginTop="40dp" />
+
+
+</LinearLayout>
