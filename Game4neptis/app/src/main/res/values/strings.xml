@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">Game4neptis</string>
+    <string name="app_name">Puzzle Portal</string>
+    <string name="title">Puzzle \n Portal </string>
+    <string name="empty_puzz_list">There are no active puzzles to visualize! </string>
+    <string name="empty_inc_puzz_list">There are no incoming puzzles! </string>
+
 </resources>
