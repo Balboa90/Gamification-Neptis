@@ -7,8 +7,8 @@ function Connection() {
 		this.pool = mysql.createPool({
 			connectionLimit: 10,
 			host: '127.0.0.1',
-			user: 'root',
-			password: 'admin',
+			user: 'balboa',
+			password: 'ipotenusa',
 			database: 'neptis' // chiamare neptis(prima si chiamava provadb)
 		});
 	};
