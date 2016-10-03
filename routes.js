@@ -34,7 +34,9 @@ module.exports = {
 				todo.getMedals(res);
 			});
 
-			
+			app.get('/getPuzzle/',function(req,res){
+				todo.getPuzzle(res);
+			});
 
 			app.get('/getPuzzleFromHeritage/',function(req,res){
 				todo.getPuzzleFromHeritage(res);

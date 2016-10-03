@@ -83,6 +83,16 @@ function Todo(){
 			});
 		});
 	};
+
+	//game3 
+	this.getPuzzle = function(res){
+		connection.acquire(function(err,con){
+			con.query('SELECT code from puzzle', function(err,result){
+				con.release();
+				res.send(result);
+			});
+		});
+	};
 	
 	//game3 
 	this.getPuzzleFromHeritage = function(todo,res){
