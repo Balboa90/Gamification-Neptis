@@ -23,7 +23,7 @@
             android:layout_marginTop="32dp"
             android:id="@+id/list_active"
             android:layout_marginBottom="16dp"
-            android:background="@android:color/darker_gray"
+            android:background="@android:color/background_light"
             android:layout_height="128dp">
 
         </ListView>
@@ -34,7 +34,7 @@
             android:id="@+id/list_incoming"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="16dp"
-            android:background="@android:color/darker_gray"
+            android:background="@android:color/background_light"
             android:layout_height="110dp">
         </ListView>
 

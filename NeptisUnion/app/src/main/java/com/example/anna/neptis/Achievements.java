@@ -23,15 +23,11 @@ import org.json.JSONObject;
 public class Achievements extends AppCompatActivity {
 
     TextView title;
-    //TEST
+
     ListView list_achieve;
-    //TEST
-    /*TextView test_achiev;
-    TextView test_achiev_desc;
-    ImageView test_star_empty;*/
-    //TEST
+
     String id = "";
-    String[] list_item;
+    ObjAchievement[] list_active;
     String url;
 
 
@@ -53,16 +49,16 @@ public class Achievements extends AppCompatActivity {
         RequestQueue queue = Volley.newRequestQueue(this);
         switch(id){
             case "game1":
-                url ="http://10.50.6.67:8000/getAchievementGame1/"; break;
+                url ="http://10.0.2.2/getAchievementGame1/"; break;
 
             case "game2":
-                url ="http://10.50.6.67:8000/getAchievementGame2/"; break;
+                url ="http://10.0.2.2:8000/getAchievementGame2/"; break;
 
             case "game3":
-                url ="http://10.50.6.67:8000/getAchievementGame3/"; break;
+                url ="http://10.0.2.2:8000/getAchievementGame3/"; break;
 
             case "game4":
-                url ="http://10.50.6.67:8000/getAchievementGame4/"; break; //10.0.2.2
+                url ="http://10.0.2.2:8000/getAchievementGame4/"; break; //10.0.2.2
 
             default: break;
         }
@@ -76,14 +72,16 @@ public class Achievements extends AppCompatActivity {
                 //Log.d("Response is: ", response.toString());
                 try{
                     int contLength = response.length();
-                    list_item = new String[contLength];
+                    list_active = new ObjAchievement[contLength];
                     for(int i = 0;i< contLength;i++){
                         JSONObject jsObj = (JSONObject)response.get(i);
+
                         String value = jsObj.getString("achievement");
-                        list_item[i] = value;
-                        //Log.d("Spinner: ",spinner_options[i]+ "\n");
-                        ArrayAdapter<?>adapter = new ArrayAdapter<Object>(Achievements.this,android.R.layout.simple_spinner_dropdown_item,list_item);
-                        //applico l'adapter allo spinner
+                        ObjAchievement a_value = new ObjAchievement(value,"ciao_test");
+
+                        list_active[i] = a_value;
+
+                        ArrayAdapterAchievement adapter = new ArrayAdapterAchievement(Achievements.this,android.R.layout.simple_list_item_1,list_active);
                         list_achieve.setAdapter(adapter);
                     }
                 } catch (JSONException e) {
@@ -100,17 +98,6 @@ public class Achievements extends AppCompatActivity {
         // Add the request to the RequestQueue.
         queue.add(jsArray);
         //***********_______END TEMPLATE JSON REQUEST________**********
-
-        /*TEST
-        test_achiev = (TextView) findViewById(R.id.l_achievement_title);
-        test_achiev_desc = (TextView) findViewById(R.id.l_achievement_descr);
-        test_star_empty = (ImageView) findViewById(R.id.img_empty_star);
-
-        test_achiev.setText("Aspirant Detective");
-        test_achiev_desc.setText("Solve your first puzzle");
-        */
-
-
 
 
     }

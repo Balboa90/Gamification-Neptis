@@ -61,7 +61,7 @@
             android:theme="@android:style/Theme.Holo.Light.Dialog.NoActionBar" />
         <activity android:name=".PuzzlePortal" />
         <activity android:name=".Achievements" />
-        <activity android:name=".MainScreen" />
+
         <activity android:name=".ShowPuzzle"></activity>
     </application>
 

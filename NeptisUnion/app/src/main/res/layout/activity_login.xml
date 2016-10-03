@@ -64,7 +64,7 @@
             android:id="@+id/regPassword"
             android:hint="@string/etPassword"
             android:layout_alignParentStart="true"
-            android:layout_toEndOf="@id/regUsername"
+            android:layout_toEndOf="@id/regEmail"
             android:layout_margin="10dp" />
 
         <TableRow
