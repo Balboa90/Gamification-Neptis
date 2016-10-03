@@ -1,7 +1,7 @@
 var express = require ('express');
 var bodyparser = require ('body-parser');
-var connection = require('C:\\Program Files\\eclipse\\Progetti\\ProvaNode\\connection');
-var routes = require ('C:\\Program Files\\eclipse\\Progetti\\ProvaNode\\routes');
+var connection = require('C:\\Users\\Anna\\Desktop\\connection');
+var routes = require ('C:\\Users\\Anna\\Desktop\\routes');
 
 
 var app = express ();
