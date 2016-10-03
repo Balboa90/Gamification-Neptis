@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">TravelPortal</string>
+    <string name="google_maps_key">AIzaSyCqEkdkjEv2l9kvTV74woCIHzb98EmSD6s</string>
+    <string name="title">Travel Portal</string>
+</resources>
