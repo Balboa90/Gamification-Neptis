@@ -38,7 +38,7 @@ public class PuzzlePortal extends AppCompatActivity {
 
 
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url ="http://10.0.2.2/getPuzzle/";
+        String url ="http://10.0.2.2:8000/getPuzzle/";
         // Request a string response from the provided URL.
 
         JsonArrayRequest jsArray = new JsonArrayRequest(Request.Method.GET, url,null, new Response.Listener<JSONArray>() {
@@ -54,7 +54,7 @@ public class PuzzlePortal extends AppCompatActivity {
                         String value = jsObj.getString("code");
                         list_item[i] = value;
 
-                        ArrayAdapter<?> adapter = new ArrayAdapter<Object>(PuzzlePortal.this,android.R.layout.simple_list_item_1,list_item);
+                        ArrayAdapter<?> adapter = new ArrayAdapter<Object>(PuzzlePortal.this,android.R.layout.simple_selectable_list_item,list_item);
                         list_attivi.setAdapter(adapter);
                     }
                 } catch (JSONException e) {
