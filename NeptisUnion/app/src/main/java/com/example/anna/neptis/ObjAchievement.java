@@ -5,13 +5,19 @@ package com.example.anna.neptis;
  */
 
 class ObjAchievement {
+    private String codice;
     private String nome;
     private String descrizione;
     private boolean completato = false; // stelletta grigia
 
-    public ObjAchievement(String n, String d){
+    public ObjAchievement(String c,String n, String d){
+        this.codice =c;
         this.nome=n;
         this.descrizione=d;
+    }
+
+    public String getCodice(){
+        return this.codice;
     }
 
     public String getNome(){

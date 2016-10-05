@@ -49,7 +49,7 @@ public class Achievements extends AppCompatActivity {
         RequestQueue queue = Volley.newRequestQueue(this);
         switch(id){
             case "game1":
-                url ="http://10.0.2.2:8000  /getAchievementGame1/"; break;
+                url ="http://10.0.2.2:8000/getAchievementGame1/"; break;
 
             case "game2":
                 url ="http://10.0.2.2:8000/getAchievementGame2/"; break;
@@ -76,8 +76,8 @@ public class Achievements extends AppCompatActivity {
                     for(int i = 0;i< contLength;i++){
                         JSONObject jsObj = (JSONObject)response.get(i);
 
-                        String value = jsObj.getString("achievement");
-                        ObjAchievement a_value = new ObjAchievement(value,"ciao_test");
+                        String code = jsObj.getString("achievement");
+                        ObjAchievement a_value = new ObjAchievement(code,"nome achievement","descrizione achievement blablablablabalaba");
 
                         list_active[i] = a_value;
 

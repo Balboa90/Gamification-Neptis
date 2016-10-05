@@ -28,7 +28,7 @@ public class PuzzlePortal extends AppCompatActivity {
     ImageButton ib_partecipa;
     ImageButton ib_cerca;
     String[] list_item;
-
+    String[] list_item2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +38,7 @@ public class PuzzlePortal extends AppCompatActivity {
 
 
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url ="http://10.0.2.2:8000/getPuzzle/";
+        String url ="http://10.0.2.2:8000/getEnabledPuzzle/";
         // Request a string response from the provided URL.
 
         JsonArrayRequest jsArray = new JsonArrayRequest(Request.Method.GET, url,null, new Response.Listener<JSONArray>() {
@@ -73,6 +73,43 @@ public class PuzzlePortal extends AppCompatActivity {
         //***********_______END TEMPLATE JSON REQUEST________**********
 
         list_incoming = (ListView) findViewById(R.id.list_incoming);
+
+        RequestQueue queue2 = Volley.newRequestQueue(this);
+        String url2 ="http://10.0.2.2:8000/getSoonPuzzle/";
+        // Request a string response from the provided URL.
+
+        JsonArrayRequest jsArray2 = new JsonArrayRequest(Request.Method.GET, url2,null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                // Display the first 500 characters of the response string.
+                //Log.d("Response is: ", response.toString());
+                try{
+                    int contLength = response.length();
+                    list_item2 = new String[contLength];
+                    for(int i = 0;i< contLength;i++){
+                        JSONObject jsObj = (JSONObject)response.get(i);
+                        String value = jsObj.getString("code") + "  - coming soon!";
+                        list_item2[i] = value;
+
+                        ArrayAdapter<?> adapter = new ArrayAdapter<Object>(PuzzlePortal.this,android.R.layout.simple_selectable_list_item,list_item2);
+                        list_incoming.setAdapter(adapter);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("That didn't work!",error.toString());
+            }
+        });
+
+        // Add the request to the RequestQueue.
+        queue2.add(jsArray2);
+        //***********_______END TEMPLATE JSON REQUEST________**********
+
+
 
         ib_achievements = (ImageButton) findViewById(R.id.ib_obiettivi) ;
         ib_achievements.setOnClickListener(new View.OnClickListener() {
