@@ -12,8 +12,8 @@ function Todo(){
 		});
 	};
 
-	//game1 (per recuperare latitudine e longitudine dei diversi heritage)
-	this.getLatitude = function(todo,res){
+	//tutti i game (per recuperare latitudine e longitudine dei diversi heritage)
+	this.getHeritageLatitude = function(todo,res){
 		connection.acquire(function(err,con){
 			con.query('SELECT latitude from heritage where name = ?',todo, function(err,result){
 				con.release();
@@ -21,7 +21,7 @@ function Todo(){
 			});
 		});
 	};
-	this.getLongitude = function(todo,res){
+	this.getHeritageLongitude = function(todo,res){
 		connection.acquire(function(err,con){
 			con.query('SELECT longitude from heritage where name = ?',todo, function(err,result){
 				con.release();
@@ -30,16 +30,6 @@ function Todo(){
 		});
 	};
 	
-
-	//game1 e 2 e 3
-	this.getHeritagesCoordinates = function(res){
-		connection.acquire(function(err,con){
-			con.query('SELECT coordinates from heritage', function(err,result){
-				con.release();
-				res.send(result);
-			});
-		});
-	};
 
 	//game2 (insieme degli heritage visitati)
 	this.getVisitedHeritagesCount = function(res){
@@ -62,25 +52,6 @@ function Todo(){
 	};
 
 
-	//game2 per punti rossi e verdi (coordinate)
-	this.getVisitedHeritagesCoordinates = function(res){
-		connection.acquire(function(err,con){
-			con.query('SELECT coordinates from heritage WHERE name IN(SELECT heritage from g2h)', function(err,result){
-				con.release();
-				res.send(result);
-			});
-		});
-	};
-
-	//utile per tutti i portali
-	this.getTreasureCoordinates = function(todo,res){
-		connection.acquire(function(err,con){
-			con.query('SELECT coordinates from treasure WHERE heritage = ?',todo, function(err,result){
-				con.release();
-				res.send(result);
-			});
-		});
-	};
 
 	//per scrollbar game1
 	this.getTreasureCode = function(res){
@@ -91,6 +62,26 @@ function Todo(){
 			});
 		});
 	};
+
+	//tutti i game (per recuperare latitudine e longitudine dei diversi treasure)
+	this.getTreasureLatitude = function(todo,res){
+		connection.acquire(function(err,con){
+			con.query('SELECT latitude from treasure where code = ?',todo, function(err,result){
+				con.release();
+				res.send(result);
+			});
+		});
+	};
+	this.getTreasureLongitude = function(todo,res){
+		connection.acquire(function(err,con){
+			con.query('SELECT longitude from treasure where code = ?',todo, function(err,result){
+				con.release();
+				res.send(result);
+			});
+		});
+	};
+
+
 
 	
 	//per tutti i game (medaglie )
@@ -127,6 +118,36 @@ function Todo(){
 	this.getPuzzleLevel = function(todo,res){
 		connection.acquire(function(err,con){
 			con.query('SELECT level from puzzle where code = ?',todo, function(err,result){
+				con.release();
+				res.send(result);
+			});
+		});
+	};
+
+	//game3 (puzzle attivati)
+	this.getEnabledPuzzle = function(res){
+		connection.acquire(function(err,con){
+			con.query('SELECT code from puzzle where enable = "1"', function(err,result){
+				con.release();
+				res.send(result);
+			});
+		});
+	};
+
+	//game3 (puzzle disattivati)
+	this.getSoonPuzzle = function(res){
+		connection.acquire(function(err,con){
+			con.query('SELECT code from puzzle where enable = "0"', function(err,result){
+				con.release();
+				res.send(result);
+			});
+		});
+	};
+
+	//game3 (descrizione puzzle)
+	this.getPuzzleDescription = function(todo,res){
+		connection.acquire(function(err,con){
+			con.query('SELECT description from puzzle where code = ?',todo, function(err,result){
 				con.release();
 				res.send(result);
 			});
@@ -172,6 +193,18 @@ function Todo(){
 			});
 		});
 	};
+
+
+	//per tutti i games(achievement description)
+	this.getAchievementName = function(todo,res){
+		connection.acquire(function(err,con){
+			con.query('SELECT name from achievement where code = ?', todo, function(err,result){
+				con.release();
+				res.send(result);
+			});
+		});
+	};
+
 
 	//per tutti i games(achievement description)
 	this.getAchievementDescr = function(todo,res){

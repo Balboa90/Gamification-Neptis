@@ -6,18 +6,15 @@ module.exports = {
 				todo.getHeritages(res);
 			});
 
-			app.get('/getLatitude/',function(req,res){
-				todo.getLatitude(res);
+			app.get('/getHeritageLatitude/',function(req,res){
+				todo.getHeritageLatitude(res);
 			});
 
-			app.get('/getLongitude/',function(req,res){
-				todo.getLongitude(res);
+			app.get('/getHeritageLongitude/',function(req,res){
+				todo.getHeritageLongitude(res);
 			});
 
-			app.get('/getHeritagesCoordinates/',function(req,res){
-				todo.getHeritagesCoordinates(res);
-			});
-
+			
 			app.get('/getVisitedHeritagesCount/',function(req,res){
 				todo.getVisitedHeritagesCount(res);
 			});
@@ -26,16 +23,17 @@ module.exports = {
 				todo.getHeritagesCount(res);
 			});
 
-			app.get('/getVisitedHeritagesCoordinates/',function(req,res){
-				todo.getVisitedHeritagesCoordinates(res);
-			});
-
-			app.get('/getTreasureCoordinates/',function(req,res){
-				todo.getTreasureCoordinates(res);
-			});
 
 			app.get('/getTreasureCode/',function(req,res){
 				todo.getTreasureCode(res);
+			});
+
+			app.get('/getTreasureLatitude/',function(req,res){
+				todo.getTreasureLatitude(res);
+			});
+
+			app.get('/getTreasureLongitude/',function(req,res){
+				todo.getTreasureLongitude(res);
 			});
 
 			app.get('/getMedals/',function(req,res){
@@ -48,6 +46,18 @@ module.exports = {
 
 			app.get('/getPuzzleFromHeritage/',function(req,res){
 				todo.getPuzzleFromHeritage(res);
+			});
+
+			app.get('/getEnabledPuzzle/',function(req,res){
+				todo.getEnabledPuzzle(res);
+			});
+
+			app.get('/getSoonPuzzle/',function(req,res){
+				todo.getSoonPuzzle(res);
+			});
+
+			app.get('/getPuzzleDescription/',function(req,res){
+				todo.getPuzzleDescription(res);
 			});
 
 			app.get('/getAchievementGame1/',function(req,res){
@@ -63,6 +73,10 @@ module.exports = {
 
 			app.get('/getAchievementGame4/',function(req,res){
 				todo.getAchievementGame4(res);
+			});
+
+			app.get('/getAchievementName/',function(req,res){
+				todo.getAchievementDescr(res);
 			});
 
 			app.get('/getAchievementDescr/',function(req,res){
