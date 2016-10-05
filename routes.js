@@ -6,6 +6,14 @@ module.exports = {
 				todo.getHeritages(res);
 			});
 
+			app.get('/getLatitude/',function(req,res){
+				todo.getLatitude(res);
+			});
+
+			app.get('/getLongitude/',function(req,res){
+				todo.getLongitude(res);
+			});
+
 			app.get('/getHeritagesCoordinates/',function(req,res){
 				todo.getHeritagesCoordinates(res);
 			});
@@ -41,7 +49,6 @@ module.exports = {
 			app.get('/getPuzzleFromHeritage/',function(req,res){
 				todo.getPuzzleFromHeritage(res);
 			});
-
 
 			app.get('/getAchievementGame1/',function(req,res){
 				todo.getAchievementGame1(res);

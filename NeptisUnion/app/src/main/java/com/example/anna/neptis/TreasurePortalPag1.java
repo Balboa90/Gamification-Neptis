@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -43,16 +44,6 @@ public class TreasurePortalPag1 extends AppCompatActivity implements OnItemSelec
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
 
-        //questo posso aggiungerlo quando ho sistemato server e database
-        /*if(LoginActivity.flag_login_session == false) {*/
-
-        //verifico se la sessione tramite facebook è iniziata
-        //altrimento faccio un Toast in cui dico all'utente che deve loggarsi prima di giocare
-        /*if (AccessToken.getCurrentAccessToken() == null)
-            Toast.makeText(getApplicationContext(),"Effettuare il login..",Toast.LENGTH_SHORT).show();*/
-
-        //}
-
         /*******inizio configurazione dello spinner*******/
 
         dropdown = (Spinner)findViewById(R.id.spinner_menu);
@@ -75,7 +66,7 @@ public class TreasurePortalPag1 extends AppCompatActivity implements OnItemSelec
         //***********_______TEMPLATE JSON REQUEST________**********
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url ="http://10.50.6.67:8000/getHeritages/";
+        String url ="http://10.0.2.2:8000/getHeritages/";
 
         // Request a string response from the provided URL.
 
@@ -114,38 +105,36 @@ public class TreasurePortalPag1 extends AppCompatActivity implements OnItemSelec
         //***********_______END TEMPLATE JSON REQUEST________**********
 
         ImageView lente = (ImageView)findViewById(R.id.lens);
-        lente.setImageAlpha(100);
+        //lente.setImageAlpha(100);
 
 
         /*******fine configurazione dello spinner*******/
 
 
-        /******inizio configurazione bottoni cards_list e missions_list******/
-        Button card_list_button = (Button)findViewById(R.id.cards_list_button);
-        card_list_button.setOnClickListener(new View.OnClickListener() {
+        /******inizio configurazione bottoni cards_list e achievement_list******/
+        ImageButton card_list_image = (ImageButton) findViewById(R.id.cards_list_image);
+        card_list_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //questo funziona correttamente
-                Toast toast = Toast.makeText(view.getContext(),"Hai cliccato su cards list button",Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(view.getContext(),"Hai cliccato su cards list",Toast.LENGTH_SHORT);
                 toast.show();
                 /*definisco l'intenzione di aprire la pagina2(TreasurePortalPag2
                 Intent openPage2 = new Intent(TreasurePortalPag1.this,TreasurePortalPag2.class);
                 startActivity(openPage2);*/
 
             }});
-        Button missions_list_button = (Button)findViewById(R.id.missions_list_button);
-        missions_list_button.setOnClickListener(new View.OnClickListener() {
+        ImageButton achivement_list_image= (ImageButton) findViewById(R.id.achieve);
+        achivement_list_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent openAchievements = new Intent(TreasurePortalPag1.this,Achievements.class);
                 //per inviare parametri all'activity Achievement
                 openAchievements.putExtra("game","game1");
                 startActivity(openAchievements);
-                /*Toast toast = Toast.makeText(view.getContext(),"Hai cliccato su missions list button",Toast.LENGTH_SHORT);
-                toast.show();*/
             }
         });
-        /******fine configurazione bottoni cards_list e missions_list******/
+        /******fine configurazione bottoni cards_list e achievement_list******/
 
 
     }

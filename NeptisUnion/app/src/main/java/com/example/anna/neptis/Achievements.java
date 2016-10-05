@@ -49,7 +49,7 @@ public class Achievements extends AppCompatActivity {
         RequestQueue queue = Volley.newRequestQueue(this);
         switch(id){
             case "game1":
-                url ="http://10.0.2.2/getAchievementGame1/"; break;
+                url ="http://10.0.2.2:8000  /getAchievementGame1/"; break;
 
             case "game2":
                 url ="http://10.0.2.2:8000/getAchievementGame2/"; break;

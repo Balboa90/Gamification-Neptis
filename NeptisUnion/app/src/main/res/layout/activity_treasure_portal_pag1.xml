@@ -26,7 +26,6 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true" />
 
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -38,47 +37,54 @@
             android:layout_alignParentTop="false"
             android:layout_alignWithParentIfMissing="false" />
 
+        <ImageButton
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:id="@+id/achieve"
+            android:src="@android:drawable/btn_star_big_on"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            android:padding="15dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="38dp" />
+
+        <ImageButton
+            android:id="@+id/cards_list_image"
+            android:layout_weight="1"
+            android:src="@drawable/cards_icon"
+            android:background="@android:color/transparent"
+            android:layout_width="85dp"
+            android:layout_height="96dp"
+            android:adjustViewBounds="true"
+            android:padding="15dp"
+            android:scaleType="fitCenter"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="38dp" />
+
+        <ImageView
+            android:id="@+id/lens"
+            android:src="@drawable/lens"
+            android:layout_weight="5"
+            android:background="@android:color/transparent"
+            android:layout_width="match_parent"
+            android:layout_height="280dp"
+            android:layout_above="@+id/achieve"
+            android:layout_centerHorizontal="true" />
+
         <Spinner
             android:id="@+id/spinner_menu"
-            android:layout_width="150dp"
             android:layout_height="50dp"
             android:background="@android:drawable/btn_dropdown"
             android:spinnerMode="dropdown"
             android:layout_gravity="center_horizontal"
+            android:layout_marginTop="81dp"
+            android:contextClickable="true"
+            android:layout_width="150dp"
             android:layout_alignTop="@+id/lens"
-            android:layout_alignEnd="@+id/cards_list_button"
-            android:layout_marginTop="80dp"
-            android:layout_marginEnd="43dp"
-            android:contextClickable="true" />
-        <!--android:entries="@array/spinner_options"-->
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="280dp"
-            android:id="@+id/lens"
-            android:src="@drawable/lens"
-            android:layout_weight="5"
-            android:layout_centerVertical="true"
-            android:layout_alignParentEnd="true" />
-
-        <Button
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:text="@string/cards_list"
-            android:id="@+id/cards_list_button"
-            android:layout_weight="1"
-            android:layout_below="@+id/lens"
-            android:layout_centerHorizontal="true" />
-
-        <Button
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:text="@string/achievement_list"
-            android:id="@+id/missions_list_button"
-            android:layout_weight="1"
-            android:layout_below="@+id/cards_list_button"
-            android:layout_centerHorizontal="true" />
-
+            android:layout_alignEnd="@+id/cards_list_image"
+            android:layout_marginEnd="20dp" />
 
     </RelativeLayout>
 

@@ -12,6 +12,25 @@ function Todo(){
 		});
 	};
 
+	//game1 (per recuperare latitudine e longitudine dei diversi heritage)
+	this.getLatitude = function(todo,res){
+		connection.acquire(function(err,con){
+			con.query('SELECT latitude from heritage where name = ?',todo, function(err,result){
+				con.release();
+				res.send(result);
+			});
+		});
+	};
+	this.getLongitude = function(todo,res){
+		connection.acquire(function(err,con){
+			con.query('SELECT longitude from heritage where name = ?',todo, function(err,result){
+				con.release();
+				res.send(result);
+			});
+		});
+	};
+	
+
 	//game1 e 2 e 3
 	this.getHeritagesCoordinates = function(res){
 		connection.acquire(function(err,con){

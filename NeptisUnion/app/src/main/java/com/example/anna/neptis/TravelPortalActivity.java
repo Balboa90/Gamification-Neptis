@@ -58,15 +58,14 @@ public class TravelPortalActivity extends FragmentActivity implements OnMapReady
 
 
 
-        /***************gestione click su classification****************/
-        ImageButton classification = (ImageButton)findViewById(R.id.Classification);
-        classification.setOnClickListener(new View.OnClickListener() {
+        /***************gestione click su achievement****************/
+        ImageButton achivement = (ImageButton)findViewById(R.id.achievement);
+        achivement.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent openAchivement = new Intent(TravelPortalActivity.this, Achievements.class);
                 openAchivement.putExtra("game","game2");
                 startActivity(openAchivement);
-                //Toast.makeText(view.getContext(),"Classifica in tempo reale",Toast.LENGTH_SHORT).show();
             }
         });
         /***************fine gestione click su classification****************/
