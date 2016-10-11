@@ -81,11 +81,21 @@ module.exports = {
 				todo.getAchievementDescr(req.params.code,res);
 			});
 
-
+			app.get('/getUserFromSession/:session',function(req,res){
+				todo.getUserFromSession(req.params.session,res);
+			});
 
 			//Insert email e password per login
 			app.get('/createUser/:email/:password',function(req,res){
 				todo.createUser(req.params.email,req.params.password,res);
+			});
+
+			app.get('/createSession/:email/:password',function(req,res){
+				todo.createSession(req.params.email,req.params.password,res);
+			});
+
+			app.get('/deleteSession/:email',function(req,res){
+				todo.deleteSession(req.params.email,res);
 			});
 
 			app.get('/setPassword/:password/:email',function(req,res){
@@ -99,6 +109,8 @@ module.exports = {
 			app.get('/setCoins/:coins/:email',function(req,res){
 				todo.setCoins(req.params.coins,req.params.email,res);
 			});
+
+
 
 
 
