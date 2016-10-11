@@ -41,14 +41,7 @@ public class LoginDialogActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        /*final Dialog d = new Dialog(this);
-        d.setTitle("Login");
-        d.setCancelable(false);
-        d.setContentView(R.layout.activity_login);
-        d.show();*/
-
-
-        final EditText username = (EditText)findViewById(R.id.regUsername);
+        final EditText username = (EditText)findViewById(R.id.regEmail);
         final EditText password = (EditText)findViewById(R.id.regPassword);
         final TextView registerLink = (TextView)findViewById(R.id.registerHere);
 
