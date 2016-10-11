@@ -88,8 +88,16 @@ module.exports = {
 				todo.createUser(req.params.email,req.params.password,res);
 			});
 
-			app.get('/setPassword/:password',function(req,res){
-				todo.setPassword(req.params.password,res);
+			app.get('/setPassword/:password/:email',function(req,res){
+				todo.setPassword(req.params.password,req.params.email,res);
+			});
+
+			app.get('/setTitle/:title/:email',function(req,res){
+				todo.setTitle(req.params.title,req.params.email,res);
+			});
+
+			app.get('/setCoins/:coins/:email',function(req,res){
+				todo.setCoins(req.params.coins,req.params.email,res);
 			});
 
 
