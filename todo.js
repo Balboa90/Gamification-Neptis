@@ -13,17 +13,17 @@ function Todo(){
 	};
 
 	//tutti i game (per recuperare latitudine e longitudine dei diversi heritage)
-	this.getHeritageLatitude = function(todo,res){
+	this.getHeritageLatitude = function(name,res){
 		connection.acquire(function(err,con){
-			con.query('SELECT latitude from heritage where name = ?',todo, function(err,result){
+			con.query('SELECT latitude from heritage where name = ?',name, function(err,result){
 				con.release();
 				res.send(result);
 			});
 		});
 	};
-	this.getHeritageLongitude = function(todo,res){
+	this.getHeritageLongitude = function(name,res){
 		connection.acquire(function(err,con){
-			con.query('SELECT longitude from heritage where name = ?',todo, function(err,result){
+			con.query('SELECT longitude from heritage where name = ?',name, function(err,result){
 				con.release();
 				res.send(result);
 			});
@@ -64,17 +64,17 @@ function Todo(){
 	};
 
 	//tutti i game (per recuperare latitudine e longitudine dei diversi treasure)
-	this.getTreasureLatitude = function(todo,res){
+	this.getTreasureLatitude = function(code,res){
 		connection.acquire(function(err,con){
-			con.query('SELECT latitude from treasure where code = ?',todo, function(err,result){
+			con.query('SELECT latitude from treasure where code = ?',code, function(err,result){
 				con.release();
 				res.send(result);
 			});
 		});
 	};
-	this.getTreasureLongitude = function(todo,res){
+	this.getTreasureLongitude = function(code,res){
 		connection.acquire(function(err,con){
-			con.query('SELECT longitude from treasure where code = ?',todo, function(err,result){
+			con.query('SELECT longitude from treasure where code = ?',code, function(err,result){
 				con.release();
 				res.send(result);
 			});
@@ -85,9 +85,9 @@ function Todo(){
 
 	
 	//per tutti i game (medaglie )
-	this.getMedals= function(todo,res){
+	this.getMedals= function(type,res){
 		connection.acquire(function(err,con){
-			con.query('SELECT name from medal where type = ?',todo, function(err,result){
+			con.query('SELECT name from medal where type = ?',type, function(err,result){
 				con.release();
 				res.send(result);
 			});
@@ -105,9 +105,9 @@ function Todo(){
 	};
 	
 	//game3 
-	this.getPuzzleFromHeritage = function(todo,res){
+	this.getPuzzleFromHeritage = function(name,res){
 		connection.acquire(function(err,con){
-			con.query('SELECT code from puzzle where heritage = ?',todo, function(err,result){
+			con.query('SELECT code from puzzle where heritage = ?',name, function(err,result){
 				con.release();
 				res.send(result);
 			});
@@ -115,9 +115,9 @@ function Todo(){
 	};
 
 	//game3 (livelli)
-	this.getPuzzleLevel = function(todo,res){
+	this.getPuzzleLevel = function(code,res){
 		connection.acquire(function(err,con){
-			con.query('SELECT level from puzzle where code = ?',todo, function(err,result){
+			con.query('SELECT level from puzzle where code = ?',code, function(err,result){
 				con.release();
 				res.send(result);
 			});
@@ -127,7 +127,7 @@ function Todo(){
 	//game3 (puzzle attivati)
 	this.getEnabledPuzzle = function(res){
 		connection.acquire(function(err,con){
-			con.query('SELECT code from puzzle where enable = "1"', function(err,result){
+			con.query('SELECT code from puzzle where enabled = 1', function(err,result){
 				con.release();
 				res.send(result);
 			});
@@ -137,7 +137,7 @@ function Todo(){
 	//game3 (puzzle disattivati)
 	this.getSoonPuzzle = function(res){
 		connection.acquire(function(err,con){
-			con.query('SELECT code from puzzle where enable = "0"', function(err,result){
+			con.query('SELECT code from puzzle where enabled = 0', function(err,result){
 				con.release();
 				res.send(result);
 			});
@@ -145,9 +145,9 @@ function Todo(){
 	};
 
 	//game3 (descrizione puzzle)
-	this.getPuzzleDescription = function(todo,res){
+	this.getPuzzleDescription = function(code,res){
 		connection.acquire(function(err,con){
-			con.query('SELECT description from puzzle where code = ?',todo, function(err,result){
+			con.query('SELECT description from puzzle where code = ?',code, function(err,result){
 				con.release();
 				res.send(result);
 			});
@@ -196,9 +196,9 @@ function Todo(){
 
 
 	//per tutti i games(achievement description)
-	this.getAchievementName = function(todo,res){
+	this.getAchievementName = function(code,res){
 		connection.acquire(function(err,con){
-			con.query('SELECT name from achievement where code = ?', todo, function(err,result){
+			con.query('SELECT name from achievement where code = ?', code, function(err,result){
 				con.release();
 				res.send(result);
 			});
@@ -207,9 +207,9 @@ function Todo(){
 
 
 	//per tutti i games(achievement description)
-	this.getAchievementDescr = function(todo,res){
+	this.getAchievementDescr = function(code,res){
 		connection.acquire(function(err,con){
-			con.query('SELECT description from achievement where code = ?', todo, function(err,result){
+			con.query('SELECT description from achievement where code = ?', code, function(err,result){
 				con.release();
 				res.send(result);
 			});

@@ -6,15 +6,14 @@ module.exports = {
 				todo.getHeritages(res);
 			});
 
-			app.get('/getHeritageLatitude/',function(req,res){
-				todo.getHeritageLatitude(res);
+			app.get('/getHeritageLatitude/:name',function(req,res){
+				todo.getHeritageLatitude(req.params.name,res);
 			});
 
-			app.get('/getHeritageLongitude/',function(req,res){
-				todo.getHeritageLongitude(res);
+			app.get('/getHeritageLongitude/:name',function(req,res){
+				todo.getHeritageLongitude(req.params.name,res);
 			});
 
-			
 			app.get('/getVisitedHeritagesCount/',function(req,res){
 				todo.getVisitedHeritagesCount(res);
 			});
@@ -23,29 +22,28 @@ module.exports = {
 				todo.getHeritagesCount(res);
 			});
 
-
 			app.get('/getTreasureCode/',function(req,res){
 				todo.getTreasureCode(res);
 			});
 
-			app.get('/getTreasureLatitude/',function(req,res){
-				todo.getTreasureLatitude(res);
+			app.get('/getTreasureLatitude/:code',function(req,res){
+				todo.getTreasureLatitude(req.params.code,res);
 			});
 
-			app.get('/getTreasureLongitude/',function(req,res){
-				todo.getTreasureLongitude(res);
+			app.get('/getTreasureLongitude/:code',function(req,res){
+				todo.getTreasureLongitude(req.params.code,res);
 			});
 
-			app.get('/getMedals/',function(req,res){
-				todo.getMedals(res);
+			app.get('/getMedals/:type',function(req,res){
+				todo.getMedals(req.params.type,res);
 			});
 
 			app.get('/getPuzzle/',function(req,res){
 				todo.getPuzzle(res);
 			});
 
-			app.get('/getPuzzleFromHeritage/',function(req,res){
-				todo.getPuzzleFromHeritage(res);
+			app.get('/getPuzzleFromHeritage/:name',function(req,res){
+				todo.getPuzzleFromHeritage(req.params.name,res);
 			});
 
 			app.get('/getEnabledPuzzle/',function(req,res){
@@ -56,8 +54,8 @@ module.exports = {
 				todo.getSoonPuzzle(res);
 			});
 
-			app.get('/getPuzzleDescription/',function(req,res){
-				todo.getPuzzleDescription(res);
+			app.get('/getPuzzleDescription/:code',function(req,res){
+				todo.getPuzzleDescription(req.params.code,res);
 			});
 
 			app.get('/getAchievementGame1/',function(req,res){
@@ -75,12 +73,12 @@ module.exports = {
 				todo.getAchievementGame4(res);
 			});
 
-			app.get('/getAchievementName/',function(req,res){
-				todo.getAchievementDescr(res);
+			app.get('/getAchievementName/:code/',function(req,res){
+				todo.getAchievementName(req.params.code,res);
 			});
 
-			app.get('/getAchievementDescr/',function(req,res){
-				todo.getAchievementDescr(res);
+			app.get('/getAchievementDescr/:code',function(req,res){
+				todo.getAchievementDescr(req.params.code,res);
 			});
 
 
