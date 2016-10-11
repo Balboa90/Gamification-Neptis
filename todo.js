@@ -229,9 +229,31 @@ function Todo(){
 	};
 
 	//Insert password
-	this.setPassword = function(password,res){
+	this.setPassword = function(password,email,res){
 		connection.acquire(function(err,con){
-			con.query('INSERT into user (email) values ?', email, function(err,result){
+			con.query('UPDATE user set password=? where email=?', [password,email], function(err,result){
+				con.release();
+				res.send(result);
+			});
+		});
+	};
+
+
+	//Insert title
+	this.setTitle = function(title,email,res){
+		connection.acquire(function(err,con){
+			con.query('UPDATE user set title=? where email=?', [title,email], function(err,result){
+				con.release();
+				res.send(result);
+			});
+		});
+	};
+
+
+	//Insert coins
+	this.setCoins = function(coins,email,res){
+		connection.acquire(function(err,con){
+			con.query('UPDATE user set coins=? where email=?', [coins,email], function(err,result){
 				con.release();
 				res.send(result);
 			});
@@ -240,24 +262,7 @@ function Todo(){
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	
 
 
 
