@@ -21,6 +21,7 @@ function Todo(){
 			});
 		});
 	};
+
 	this.getHeritageLongitude = function(name,res){
 		connection.acquire(function(err,con){
 			con.query('SELECT longitude from heritage where name = ?',name, function(err,result){
@@ -215,6 +216,51 @@ function Todo(){
 			});
 		});
 	};
+
+
+	//Insert user 
+	this.createUser = function(email,password,res){
+		connection.acquire(function(err,con){
+			con.query('INSERT into user (email,password) values (?,?)', email, password, function(err,result){
+				con.release();
+				res.send(result);
+			});
+		});
+	};
+
+	//Insert password
+	this.setPassword = function(password,res){
+		connection.acquire(function(err,con){
+			con.query('INSERT into user (email) values ?', email, function(err,result){
+				con.release();
+				res.send(result);
+			});
+		});
+	};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 	

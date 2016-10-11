@@ -83,9 +83,14 @@ module.exports = {
 
 
 
+			//Insert email e password per login
+			app.get('/createUser/:email/:password',function(req,res){
+				todo.createUser(req.params.email,req.params.password,res);
+			});
 
-
-
+			app.get('/setPassword/:password',function(req,res){
+				todo.setPassword(req.params.password,res);
+			});
 
 
 
