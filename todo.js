@@ -14,25 +14,15 @@ function Todo(){
 	};
 
 	//tutti i game (per recuperare latitudine e longitudine dei diversi heritage)
-	this.getHeritageLatitude = function(name,res){
+	this.getCoordinates = function(name,res){
 		connection.acquire(function(err,con){
-			con.query('SELECT latitude from heritage where name = ?',name, function(err,result){
-				con.release();
-				res.send(result);
-			});
-		});
-	};
-
-	this.getHeritageLongitude = function(name,res){
-		connection.acquire(function(err,con){
-			con.query('SELECT longitude from heritage where name = ?',name, function(err,result){
+			con.query('SELECT latitude,longitude from heritage where name = ?',name, function(err,result){
 				con.release();
 				res.send(result);
 			});
 		});
 	};
 	
-
 	//game2 (insieme degli heritage visitati)
 	this.getVisitedHeritagesCount = function(res){
 		connection.acquire(function(err,con){
@@ -52,7 +42,6 @@ function Todo(){
 			});
 		});
 	};
-
 
 
 	//per scrollbar game1

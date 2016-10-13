@@ -6,6 +6,18 @@ module.exports = {
 				todo.getHeritages(res);
 			});
 
+
+
+
+
+
+			app.get('/getCoordinates/:name',function(req,res){
+				todo.getCoordinates(req.params.name,res);
+			});
+		
+
+		
+
 			app.get('/getHeritageLatitude/:name',function(req,res){
 				todo.getHeritageLatitude(req.params.name,res);
 			});
