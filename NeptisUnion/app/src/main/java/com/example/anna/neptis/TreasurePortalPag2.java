@@ -2,18 +2,30 @@ package com.example.anna.neptis;
 
 import android.content.Intent;
 import android.provider.MediaStore;
+import android.renderscript.Double2;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -22,11 +34,20 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class TreasurePortalPag2 extends FragmentActivity implements OnMapReadyCallback{
 
     private final static int CAMERA_REQUEST_CODE = 1;
     private GoogleMap mMap;
 
+    String heritage = "";
+    String url;
+    String url2;
+    String latitudine;
+    String longitudine;
 
 
     @Override
@@ -108,7 +129,6 @@ public class TreasurePortalPag2 extends FragmentActivity implements OnMapReadyCa
          /*__________________fine gestione imageButton COLOSSEO e FOTOCAMERA____________________*/
 
 
-
         /*__________________gestione bottone SITE INFORMATION____________________*/
         Button siteInformation = (Button)findViewById(R.id.site_information);
         siteInformation.setOnClickListener(new View.OnClickListener() {
@@ -122,12 +142,7 @@ public class TreasurePortalPag2 extends FragmentActivity implements OnMapReadyCa
             }});
         /*__________________fine gestione bottone SITE INFORMATION____________________*/
 
-
-
-
     }
-
-
 
     /**
      * Manipulates the map once available.
@@ -140,19 +155,51 @@ public class TreasurePortalPag2 extends FragmentActivity implements OnMapReadyCa
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
+
+        heritage = getIntent().getExtras().getString("heritage");
+
+        /***********_______START TEMPLATE JSON REQUEST________**********/
         mMap = googleMap;
+        RequestQueue queue = Volley.newRequestQueue(TreasurePortalPag2.this);
+        String spaces = heritage.replace(" ","%20");
+        url ="http://10.0.2.2:8000/getCoordinates/"+spaces+"/";
 
-        // Add a marker in Sydney and move the camera
-        LatLng colosseo = new LatLng(41.89015,12.49244);
-        mMap.addMarker(new MarkerOptions().position(colosseo).title("Colosseo"));
-        CameraPosition cameraPosition = new CameraPosition.Builder().target(colosseo).zoom(15).build();
-        mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+        Log.d("url= ",url);
 
-        /*LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));*/
+        //latitudine
+        JsonArrayRequest jsCoordinates = new JsonArrayRequest(Request.Method.GET, url,null, new Response.Listener<JSONArray>() {
+                @Override
+                public void onResponse(JSONArray response) {
+                    try {
+                        int contLength = response.length();
+                        for(int i = 0;i< contLength;i++) {
+                            JSONObject jsObj = (JSONObject) response.get(i);
+                            latitudine = jsObj.getString("latitude");
+                            longitudine = jsObj.getString("longitude");
+                            //Log.d("VERIFICA LATITUDINE ",latitudine);
+                            //Log.d("VERIFICA LONGITUDINE ",longitudine);
+
+                            LatLng herit = new LatLng(Double.parseDouble(latitudine),Double.parseDouble(longitudine));
+                            mMap.addMarker(new MarkerOptions().position(herit).title(heritage));
+                            CameraPosition cameraPosition = new CameraPosition.Builder().target(herit).zoom(15).build();
+                            mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("That didn't work!",error.toString());
+                //Toast.makeText(TreasurePortalPag2.this,"Errore latitude!",Toast.LENGTH_SHORT).show();
+            }
+        });
+        // Add the request to the RequestQueue.
+        queue.add(jsCoordinates);
+
+        /***********_______END TEMPLATE JSON REQUEST________**********/
     }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode,Intent data)

@@ -60,7 +60,7 @@ public class RegisterActivity extends AppCompatActivity {
 
             Log.d("url= ",url);
 
-            JsonObjectRequest jsArray = new JsonObjectRequest(Request.Method.GET, url,null, new Response.Listener<JSONObject>() {
+            JsonObjectRequest jsObject = new JsonObjectRequest(Request.Method.GET, url,null, new Response.Listener<JSONObject>() {
                 @Override
                 public void onResponse(JSONObject response) {
                     // Display the first 500 characters of the response string.
@@ -76,7 +76,7 @@ public class RegisterActivity extends AppCompatActivity {
                 }
             });
             // Add the request to the RequestQueue.
-            queue.add(jsArray);
+            queue.add(jsObject);
             /***********_______END TEMPLATE JSON REQUEST________**********/
 
             }

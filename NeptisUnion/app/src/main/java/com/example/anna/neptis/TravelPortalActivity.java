@@ -15,8 +15,10 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class TravelPortalActivity extends FragmentActivity implements OnMapReadyCallback {
@@ -30,8 +32,6 @@ public class TravelPortalActivity extends FragmentActivity implements OnMapReady
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-
-
 
 
         /***************gestione click su medals icon****************/
@@ -59,8 +59,8 @@ public class TravelPortalActivity extends FragmentActivity implements OnMapReady
 
 
         /***************gestione click su achievement****************/
-        ImageButton achivement = (ImageButton)findViewById(R.id.achievement);
-        achivement.setOnClickListener(new View.OnClickListener() {
+        ImageButton achievement = (ImageButton)findViewById(R.id.achievement);
+        achievement.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent openAchivement = new Intent(TravelPortalActivity.this, Achievements.class);
@@ -79,10 +79,24 @@ public class TravelPortalActivity extends FragmentActivity implements OnMapReady
         mMap = googleMap;
 
         LatLng firenze = new LatLng(43.776366, 11.247822);
-        mMap.addMarker(new MarkerOptions().position(firenze).title("Siamo a Firenze!"));
-        CameraPosition cameraPosition = new CameraPosition.Builder().target(firenze).zoom(15).build();
+        mMap.addMarker(new MarkerOptions()
+                .position(firenze)
+                .title("This is my title")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
 
+        CameraPosition cameraPosition = new CameraPosition.Builder().target(firenze).zoom(15).build();
         mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+        // create marker
+        /*MarkerOptions marker = new MarkerOptions().position(firenze).title("Hello Maps");
+
+        // Changing marker icon
+        marker.icon(BitmapDescriptorFactory.fromResource(R.drawable.marke_ok));
+
+        // adding marker
+        googleMap.addMarker(marker);
+        CameraPosition cameraPosition = new CameraPosition.Builder().target(firenze).zoom(15).build();
+        mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));*/
+
     }
     /**************fine gestione google map****************/
 }

@@ -1,11 +1,14 @@
 package com.example.anna.neptis;
 
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
@@ -35,6 +38,10 @@ public class TreasurePortalPag1 extends AppCompatActivity implements OnItemSelec
     int contLength;
     String [] spinner_options;
     Spinner dropdown;
+    private Animation lens_anim = null;
+    private Animation lens_anim2 = null;
+    private ImageView lente = null;
+    String item;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,8 +51,9 @@ public class TreasurePortalPag1 extends AppCompatActivity implements OnItemSelec
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
 
+        lente = (ImageView)findViewById(R.id.lens);
+        //lente.setImageAlpha(100);
         /*******inizio configurazione dello spinner*******/
-
         dropdown = (Spinner)findViewById(R.id.spinner_menu);
 
         try {
@@ -62,14 +70,13 @@ public class TreasurePortalPag1 extends AppCompatActivity implements OnItemSelec
             Toast.makeText(getApplicationContext(),"Errore!",Toast.LENGTH_SHORT).show();
         }
 
-
+        //inserimento item nello spinner da database
         //***********_______TEMPLATE JSON REQUEST________**********
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this);
         String url ="http://10.0.2.2:8000/getHeritages/";
 
         // Request a string response from the provided URL.
-
         JsonArrayRequest jsArray = new JsonArrayRequest(Request.Method.GET, url,null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
@@ -103,25 +110,15 @@ public class TreasurePortalPag1 extends AppCompatActivity implements OnItemSelec
         // Add the request to the RequestQueue.
         queue.add(jsArray);
         //***********_______END TEMPLATE JSON REQUEST________**********
-
-        ImageView lente = (ImageView)findViewById(R.id.lens);
-        //lente.setImageAlpha(100);
-
-
         /*******fine configurazione dello spinner*******/
-
 
         /******inizio configurazione bottoni cards_list e achievement_list******/
         ImageButton card_list_image = (ImageButton) findViewById(R.id.cards_list_image);
         card_list_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //questo funziona correttamente
                 Toast toast = Toast.makeText(view.getContext(),"Hai cliccato su cards list",Toast.LENGTH_SHORT);
                 toast.show();
-                /*definisco l'intenzione di aprire la pagina2(TreasurePortalPag2
-                Intent openPage2 = new Intent(TreasurePortalPag1.this,TreasurePortalPag2.class);
-                startActivity(openPage2);*/
 
             }});
         ImageButton achivement_list_image= (ImageButton) findViewById(R.id.achieve);
@@ -135,29 +132,43 @@ public class TreasurePortalPag1 extends AppCompatActivity implements OnItemSelec
             }
         });
         /******fine configurazione bottoni cards_list e achievement_list******/
-
-
     }
+
 
     /********************gestione click sugli elementi dello spinner*********************/
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
         //prendo il valore dell'elemento selezionato
-        String item = parent.getItemAtPosition(position).toString();
+        item = parent.getItemAtPosition(position).toString();
 
-        if(item.equals("Colosseo")){
-            Intent openTreasurePage2 = new Intent(TreasurePortalPag1.this,TreasurePortalPag2.class);
-            startActivity(openTreasurePage2);
+        Log.d("ITEM SELEZIONATO", item);
+
+        if(!item.equals("")){
+            lens_anim = AnimationUtils.loadAnimation(TreasurePortalPag1.this,R.anim.lens_animation);
+            lente.startAnimation(lens_anim);
+
+            //l'activity si apre dopo un certo tempo (dopo che è terminata l'animazione)
+            Handler mHandler = new Handler();
+            mHandler.postDelayed(new Runnable() {
+
+                @Override
+                public void run() {
+                    //start your activity here
+                    Intent openTreasurePage2 = new Intent(TreasurePortalPag1.this,TreasurePortalPag2.class);
+                    openTreasurePage2.putExtra("heritage",item);
+                    startActivity(openTreasurePage2);
+                }
+
+            }, 1100L);
+
         }
-        //visualizzo l'elemento selezionato
-        if(!(item.equals(""))&& (!item.equals("Colosseo")))
-            Toast.makeText(parent.getContext(),item,Toast.LENGTH_SHORT).show();
     }
 
     public void onNothingSelected(AdapterView<?> arg0) {
 
     }
+
     /********************fine gestione click sugli elementi dello spinner*********************/
 
 }

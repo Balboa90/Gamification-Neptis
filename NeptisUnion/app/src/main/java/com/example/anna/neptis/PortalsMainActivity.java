@@ -62,15 +62,14 @@ public class PortalsMainActivity extends AppCompatActivity {
         yellowPortalButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (accedi == false) {
+                /*if (accedi == false) {
                     Intent openYellowPortal = new Intent(PortalsMainActivity.this, LoginDialogActivity.class);
                     startActivityForResult(openYellowPortal, RQ_CODE);
 
-                } else {
-
+                } else {*/
                     Intent openYellowPortal = new Intent(PortalsMainActivity.this, TreasurePortalPag1.class);
                     startActivity(openYellowPortal);
-                }
+               // }
                     }
                // }
 
@@ -85,14 +84,14 @@ public class PortalsMainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if (accedi == false) {
+                /*if (accedi == false) {
                     Intent openGreenPortal = new Intent(PortalsMainActivity.this,LoginDialogActivity.class);
                     startActivityForResult(openGreenPortal, RQ_CODE);
 
-                } else {
+                } else {*/
                     Intent openGreenPortal = new Intent(PortalsMainActivity.this, TravelPortalActivity.class);
                     startActivity(openGreenPortal);
-                }
+                //}
             }
         });
         /**
