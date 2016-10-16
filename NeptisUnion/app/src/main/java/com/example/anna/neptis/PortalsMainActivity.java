@@ -62,16 +62,18 @@ public class PortalsMainActivity extends AppCompatActivity {
         yellowPortalButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*if (accedi == false) {
+                if (accedi == false) {
                     Intent openYellowPortal = new Intent(PortalsMainActivity.this, LoginDialogActivity.class);
                     startActivityForResult(openYellowPortal, RQ_CODE);
 
                 } else {
-                */
+
                     Intent openYellowPortal = new Intent(PortalsMainActivity.this, TreasurePortalPag1.class);
                     startActivity(openYellowPortal);
-                //}
-            }
+                }
+                    }
+               // }
+
         });
         /**
          *
@@ -83,14 +85,14 @@ public class PortalsMainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                /*if (accedi == false) {
+                if (accedi == false) {
                     Intent openGreenPortal = new Intent(PortalsMainActivity.this,LoginDialogActivity.class);
                     startActivityForResult(openGreenPortal, RQ_CODE);
 
-                } else {*/
+                } else {
                     Intent openGreenPortal = new Intent(PortalsMainActivity.this, TravelPortalActivity.class);
                     startActivity(openGreenPortal);
-                //}
+                }
             }
         });
         /**
@@ -102,16 +104,14 @@ public class PortalsMainActivity extends AppCompatActivity {
         redPortalButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*if (accedi == false) {
+               if (accedi == false) {
                     Intent openRedPortal = new Intent(PortalsMainActivity.this,LoginDialogActivity.class);
                     startActivityForResult(openRedPortal, RQ_CODE);
 
-                } else {*/
+                } else {
                     Intent openRedPortal = new Intent(PortalsMainActivity.this, PuzzlePortal.class);
                     startActivity(openRedPortal);
-                //}
-               /* Toast toast = Toast.makeText(view.getContext(),"Red portal",Toast.LENGTH_SHORT);
-                toast.show();*/
+                }
             }
         });
         /**
@@ -148,16 +148,7 @@ public class PortalsMainActivity extends AppCompatActivity {
         });*/
         /*____________________fine gestione imageButton login FACEBOOK_______________________*/
 
-        /*__________________gestione textView Login Register___________________*/
-       /* TextView loginRegister = (TextView)findViewById(R.id.login);
-        loginRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent openLoginActivity = new Intent(PortalsMainActivity.this,LoginActivity.class);
-                startActivity(openLoginActivity);
-            }
-        });*/
-         /*__________________fine gestione textView Login Register___________________*/
+
 
 
     }

@@ -1,4 +1,5 @@
 var connection = require('C:\\Users\\Anna\\Desktop\\connection');
+var hash = require('C:\\Users\\Anna\\Desktop\\hash');
 
 function Todo(){
 
@@ -13,25 +14,15 @@ function Todo(){
 	};
 
 	//tutti i game (per recuperare latitudine e longitudine dei diversi heritage)
-	this.getHeritageLatitude = function(name,res){
+	this.getCoordinates = function(name,res){
 		connection.acquire(function(err,con){
-			con.query('SELECT latitude from heritage where name = ?',name, function(err,result){
-				con.release();
-				res.send(result);
-			});
-		});
-	};
-
-	this.getHeritageLongitude = function(name,res){
-		connection.acquire(function(err,con){
-			con.query('SELECT longitude from heritage where name = ?',name, function(err,result){
+			con.query('SELECT latitude,longitude from heritage where name = ?',name, function(err,result){
 				con.release();
 				res.send(result);
 			});
 		});
 	};
 	
-
 	//game2 (insieme degli heritage visitati)
 	this.getVisitedHeritagesCount = function(res){
 		connection.acquire(function(err,con){
@@ -51,7 +42,6 @@ function Todo(){
 			});
 		});
 	};
-
 
 
 	//per scrollbar game1
@@ -82,9 +72,6 @@ function Todo(){
 		});
 	};
 
-
-
-	
 	//per tutti i game (medaglie )
 	this.getMedals= function(type,res){
 		connection.acquire(function(err,con){
@@ -218,6 +205,17 @@ function Todo(){
 	};
 
 
+	//per tutti i games(achievement description)
+	this.getUserFromSession = function(session,res){
+		connection.acquire(function(err,con){
+			con.query('SELECT email from user where session = ?', session, function(err,result){
+				con.release();
+				res.send(result);
+			});
+		});
+	};
+
+
 	//Insert user 
 	this.createUser = function(email,password,res){
 		connection.acquire(function(err,con){
@@ -227,6 +225,28 @@ function Todo(){
 			});
 		});
 	};
+
+	//Insert token  
+	this.createSession = function(email,password,res){
+		var token = hash.createToken(email,password);
+		connection.acquire(function(err,con){
+			con.query('UPDATE user set session=? where email=?', [token, email], function(err,result){
+				con.release();
+				res.send(token);
+			});
+		});
+	};	
+
+
+	//Delete token  
+	this.deleteSession = function(email,res){
+		connection.acquire(function(err,con){
+			con.query('UPDATE user set session=NULL where email=?', email, function(err,result){
+				con.release();
+				res.send(result);
+			});
+		});
+	};	
 
 	//Insert password
 	this.setPassword = function(password,email,res){

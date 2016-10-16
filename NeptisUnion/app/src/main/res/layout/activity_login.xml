@@ -111,15 +111,6 @@
             android:layout_marginBottom="5dp"
             android:layout_below="@+id/OR" />
 
-       <!-- <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Login with facebook"
-            android:id="@+id/face_login"
-            android:layout_alignEnd="@+id/tableRow"
-            android:layout_alignStart="@+id/tableRow"
-            android:layout_below="@+id/OR" />-->
-
        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -146,29 +137,6 @@
             android:layout_below="@+id/tableRow"
             android:layout_centerHorizontal="true" />
 
-        <!--<TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="___"
-            android:id="@+id/textView"
-            android:textSize="10sp"
-            android:layout_marginRight="8dp"
-            android:layout_marginEnd="9dp"
-            android:layout_below="@+id/tableRow"
-            android:layout_toStartOf="@+id/OR" />-->
-
-        <!--<TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="___"
-            android:id="@+id/textView3"
-            android:textSize="10sp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginStart="8dp"
-            android:layout_below="@+id/tableRow"
-            android:layout_toEndOf="@+id/OR" />-->
 
     </RelativeLayout>
 </ScrollView>

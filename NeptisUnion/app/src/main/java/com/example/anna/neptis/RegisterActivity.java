@@ -5,21 +5,34 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Toast;
 
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 
 public class RegisterActivity extends AppCompatActivity {
-
-
-
-    EditText reg_username;
+    EditText reg_email;
     EditText reg_password;
     EditText confirm_password;
+    String email;
+    String password;
+    String url;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +41,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        reg_username = (EditText) findViewById(R.id.regUsername);
+        reg_email = (EditText) findViewById(R.id.regEmail);
         reg_password = (EditText) findViewById(R.id.regPassword);
         confirm_password = (EditText) findViewById(R.id.regConfirmPass);
 
@@ -37,27 +50,42 @@ public class RegisterActivity extends AppCompatActivity {
         bRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*Toast success = Toast.makeText(getApplicationContext(),"Registrazione avvenuta con successo!",Toast.LENGTH_SHORT);
-                success.show();*/
+            email = reg_email.getText().toString();
+            password = reg_password.getText().toString();
+            /***********_______START TEMPLATE JSON REQUEST________**********/
 
-                Intent returnPageLogin = new Intent(RegisterActivity.this,LoginActivity.class);
-                startActivity(returnPageLogin);
+            RequestQueue queue = Volley.newRequestQueue(RegisterActivity.this);
+            url ="http://10.0.2.2:8000/createUser/"+email+"/"+password+"/";
+            // Request a string response from the provided URL.
+
+            Log.d("url= ",url);
+
+            JsonObjectRequest jsArray = new JsonObjectRequest(Request.Method.GET, url,null, new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    // Display the first 500 characters of the response string.
+                    String body = response.toString();
+                    Toast.makeText(RegisterActivity.this,"Registrazione avvenuta con successo!",Toast.LENGTH_LONG).show();
+                    Intent returnPageLogin = new Intent(RegisterActivity.this,LoginDialogActivity.class);
+                    startActivity(returnPageLogin);
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(RegisterActivity.this,"Errore di registrazione!",Toast.LENGTH_LONG).show();
+                }
+            });
+            // Add the request to the RequestQueue.
+            queue.add(jsArray);
+            /***********_______END TEMPLATE JSON REQUEST________**********/
+
             }
         });
 
+
+
+
     }
 
-
-    /*
-    public static String getUser(){
-        if(reg_username == null)return null;
-        return reg_username.getText().toString();
-    }
-
-
-    public static String getPassword(){
-        if(reg_password == null) return null;
-        return reg_password.getText().toString();
-    }*/
 
 }
