@@ -5,9 +5,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -109,6 +111,24 @@ public class PuzzlePortal extends AppCompatActivity {
         queue2.add(jsArray2);
         //***********_______END TEMPLATE JSON REQUEST________**********
 
+        list_attivi.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent goto_show_puzzle = new Intent(PuzzlePortal.this, ShowPuzzle.class);
+                Object selected_puzzle = list_attivi.getItemAtPosition(position);
+                String extra_nome = selected_puzzle.toString();
+                //Log.d("Nome del puzzle: ",extra_nome);
+                goto_show_puzzle.putExtra("name", extra_nome);
+                startActivity(goto_show_puzzle);
+            }
+        });
+
+        list_incoming.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(view.getContext(),"This puzzle will be available soon!",Toast.LENGTH_SHORT).show();;
+            }
+        });
 
 
         ib_achievements = (ImageButton) findViewById(R.id.ib_obiettivi) ;
