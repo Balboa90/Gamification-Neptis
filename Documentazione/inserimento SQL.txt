@@ -385,18 +385,22 @@ insert into Mission values('mission0010','Critico','Vota una recensione');
 insert into Mission values('mission0011','L attraversa-fiumi','Visita un ponte');
 insert into Mission values('mission0012','Re Artù','Visita un castello');
 
-insert into Achievement values('achi0001','Il Pellegrino','Visita 50 chiese');
-insert into Achievement values('achi0002','Guru','Raggiungi il livello 15 in un portale');
+insert into Achievement values('achi0001','Dipinto di Giallo','Entra nel portale tesori');
+insert into Achievement values('achi0002','Cerca Tesori','Apri 25 forzieri');
 insert into Achievement values('achi0003','Maniaco di tesori','Apri 100 forzieri');
 insert into Achievement values('achi0004','Maniaco di carte','Colleziona 100 carte');
-insert into Achievement values('achi0005','Il Gran Risolutore','Risolvi 25 enigmi');
+insert into Achievement values('achi0005','Dipinto di Verde','Entra nel portale viaggi');
 insert into Achievement values('achi0006','Campione Olimpico','Vinci 10 medaglie');
 insert into Achievement values('achi0007','Eroe Olimpico','Vinci 50 medaglie');
 insert into Achievement values('achi0008','Viaggiatore universale','Visita 100 beni culturali');
-insert into Achievement values('achi0009','Mezza Italia','Visita 10 regioni');
-insert into Achievement values('achi0010','L Italia non mi basta','Visita 20 regioni');
-insert into Achievement values('achi0011','Il grande critico','Scrivi 50 recensioni');
-insert into Achievement values('achi0012','Critico Guru','Vota 100 recensioni');
+insert into Achievement values('achi0009','Dipinto di Rosso','Entra nel portale enigmi');
+insert into Achievement values('achi0010','Il Gran Risolutore','Risolvi 25 enigmi');
+insert into Achievement values('achi0011','Detective','Ottieni 25 indizi');
+insert into Achievement values('achi0012','Ispettore capo','Risolvi 50 enigmi');
+insert into Achievement values('achi0013','Dipinto di Blu','Entra nel portale info');
+insert into Achievement values('achi0014','Sentite qua!','Scrivi la tua prima recensione');
+insert into Achievement values('achi0015','Il grande critico','Scrivi 50 recensioni');
+insert into Achievement values('achi0016','Sono d'accordo!','Vota 100 recensioni');
 
 insert into Heritage values('Colosseo','Il colosseo è chiamato Anfiteatro Flavio','Impero Romano','Anfiteatro','41.89015','12.49244','statoitaliano@gmail.com',true,true,true,true);
 insert into Heritage values('Altare della Patria','Si trova vicino Piazza Venezia','Rinascimento','Monumento','41.894599','12.483092','statoitaliano@gmail.com',true,true,false,true);
@@ -677,22 +681,22 @@ insert into Mg4 values('mission0010','game40008');
 
 
 
-insert into Ag1 values('achi0003','game10004');
-insert into Ag1 values('achi0003','game10005');
-insert into Ag1 values('achi0004','game10006');
+insert into Ag1 values('achi0001','game10004');
+insert into Ag1 values('achi0002','game10005');
+insert into Ag1 values('achi0003','game10006');
 insert into Ag1 values('achi0004','game10007');
 
-insert into Ag2 values('achi0001','game20001');
+insert into Ag2 values('achi0005','game20001');
 insert into Ag2 values('achi0006','game20001');
 insert into Ag2 values('achi0007','game20003');
 insert into Ag2 values('achi0008','game20008');
 
-insert into Ag3 values('achi0005','game30003');
-insert into Ag3 values('achi0005','game30004');
-insert into Ag3 values('achi0005','game30005');
-insert into Ag3 values('achi0005','game30006');
+insert into Ag3 values('achi0009','game30003');
+insert into Ag3 values('achi00010','game30004');
+insert into Ag3 values('achi00011','game30005');
+insert into Ag3 values('achi00012','game30006');
 
-insert into Ag4 values('achi0011','game40001');
-insert into Ag4 values('achi0011','game40002');
-insert into Ag4 values('achi0012','game40007');
-insert into Ag4 values('achi0012','game40008');
+insert into Ag4 values('achi0013','game40001');
+insert into Ag4 values('achi0014','game40002');
+insert into Ag4 values('achi0015','game40007');
+insert into Ag4 values('achi0016','game40008');
