@@ -1,4 +1,4 @@
-drop database if exists neptis;
+﻿drop database if exists neptis;
 
 create database neptis;
 
@@ -7,6 +7,7 @@ use neptis;
 create table User(
 	email varchar (100) primary key,
 	password varchar (100),
+	session varchar (100),
 	title varchar (100),
 	coins int,
 	game1 varchar (100) unique,
@@ -58,6 +59,7 @@ create table Puzzle(
 	enabled boolean,
 	answer varchar (100),
 	heritage varchar (100),
+	name varchar (100),
 	description varchar (999),
 	hint varchar (100),
 	costhint int,
@@ -160,8 +162,6 @@ mission varchar (100),
 game2 varchar (100),
 primary key (mission, game2));
 
-
-
 create table Mg3(
 mission varchar (100),
 game3 varchar (100),
@@ -263,8 +263,6 @@ add constraint fk28 foreign key G2m (medal) references Medal (code) ON DELETE CA
 alter table G3p
 add constraint fk29 foreign key G3p (game3) references Game3 (code) ON DELETE CASCADE,
 add constraint fk30 foreign key G3p (puzzle) references Puzzle (code) ON DELETE CASCADE;
-
-
 
 alter table G4h
 add constraint fk31 foreign key G4h (game4) references Game4 (code) ON DELETE CASCADE,
@@ -436,10 +434,10 @@ insert into Treasure values('treas0008','InfoTesoroArco2','41.889822','12.490933
 insert into Treasure values('treas0009','InfoTesoroPonteMilvio1','41.933562728','12.466631266','Ponte Milvio');
 insert into Treasure values('treas0010','InfoTesoroPonteMilvio2','41.934862998','12.467031536','Ponte Milvio');
 
-insert into Puzzle values('puzzle0001',true,'risposta11','Basilica di San Pietro','description1','hint1',10,'group1');
-insert into Puzzle values('puzzle0002',true,'risposta23','Colosseo','description2','hint2',10,'group2');
-insert into Puzzle values('puzzle0003',true,'risposta32','Arco di Trionfo','description3','hint3',10,'group1');
-insert into Puzzle values('puzzle0004',false,'risposta44','Ponte Milvio','description4','hint4',10,'group3');
+insert into Puzzle values('puzzle0001',true,'risposta11','Basilica di San Pietro','Angeli e demoni','description1','hint1',10,'group1');
+insert into Puzzle values('puzzle0002',true,'risposta23','Colosseo','description2','Delitto al colosseo','hint2',10,'group2');
+insert into Puzzle values('puzzle0003',false,'risposta32','Arco di Trionfo','description3','Angeli e demoni - Parte 2','hint3',10,'group1');
+insert into Puzzle values('puzzle0004',true,'risposta44','Ponte Milvio','description4','Il ponte delle spie','hint4',10,'group3');
 
 SET foreign_key_checks = 0;
 
