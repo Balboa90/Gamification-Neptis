@@ -446,14 +446,14 @@ insert into Puzzle values('puzzle0004',true,'risposta44','Ponte Milvio','descrip
 
 SET foreign_key_checks = 0;
 
-insert into User values('player1@gmail.it','pass1',null,0,'game10001','game20001','game30001','game40001');
-insert into User values('player2@gmail.it','pass2',null,0,'game10002','game20002','game30002','game40002');
-insert into User values('player3@gmail.it','pass3',null,0,'game10003','game20003','game30003','game40003');
-insert into User values('player4@gmail.it','pass4',null,0,'game10004','game20004','game30004','game40004');
-insert into User values('player5@gmail.it','pass5',null,0,'game10005','game20005','game30005','game40005');
-insert into User values('player6@gmail.it','pass6',null,0,'game10006','game20006','game30006','game40006');
-insert into User values('player7@gmail.it','pass7',null,0,'game10007','game20007','game30007','game40007');
-insert into User values('player8@gmail.it','pass8',null,0,'game10008','game20008','game30008','game40008');
+insert into User values('player1@gmail.it','pass1',null,null,0,'game10001','game20001','game30001','game40001');
+insert into User values('player2@gmail.it','pass2',null,null,0,'game10002','game20002','game30002','game40002');
+insert into User values('player3@gmail.it','pass3',null,null,0,'game10003','game20003','game30003','game40003');
+insert into User values('player4@gmail.it','pass4',null,null,0,'game10004','game20004','game30004','game40004');
+insert into User values('player5@gmail.it','pass5',null,null,0,'game10005','game20005','game30005','game40005');
+insert into User values('player6@gmail.it','pass6',null,null,0,'game10006','game20006','game30006','game40006');
+insert into User values('player7@gmail.it','pass7',null,null,0,'game10007','game20007','game30007','game40007');
+insert into User values('player8@gmail.it','pass8',null,null,0,'game10008','game20008','game30008','game40008');
 
 insert into Game1 values('game10001','player1@gmail.it');
 insert into Game1 values('game10002','player2@gmail.it');

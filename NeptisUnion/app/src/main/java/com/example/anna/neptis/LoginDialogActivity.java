@@ -2,39 +2,46 @@ package com.example.anna.neptis;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
-import org.w3c.dom.Text;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.URL;
 
 public class LoginDialogActivity extends Activity {
     //utilizziamo queste 2 variabili per individuare gli eventi sul bottone di loginFacebook
     private LoginButton loginButton;
     private CallbackManager callbackManager;
     public static boolean flag_login_session = false;
+    private String url;
+    private String user;
+    private String pass;
+    private String session_result="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,20 +85,49 @@ public class LoginDialogActivity extends Activity {
             @Override
             public void onClick(View view) {
 
-                //istruzioni da eseguire appena viene cliccato il bottone Login
-                /*if(RegisterActivity.getUser() == null || RegisterActivity.getPassword() == null){
-                    Toast erroreLogin = Toast.makeText(getApplicationContext(),"User inesistente! Effettuare la registrazione..",Toast.LENGTH_SHORT);
-                    erroreLogin.show();
-                }else if(username.getText().toString().equals(RegisterActivity.getUser())&& password.getText().toString().equals(RegisterActivity.getPassword())){
-                   Toast openHomePage = Toast.makeText(getApplicationContext(),"Open Home Page",Toast.LENGTH_SHORT);
-                    openHomePage.show();
-                    flag_login_session = true;
-                    Intent openHomePage = new Intent(LoginActivity.this,PortalsMainActivity.class);
-                    startActivity(openHomePage);
-                }else{
-                    Toast erroreLogin = Toast.makeText(getApplicationContext(),"Username o password errate! Riprovare..",Toast.LENGTH_SHORT);
-                    erroreLogin.show();
-                }*/
+                user = username.getText().toString();
+                pass = password.getText().toString();
+
+                /***********_______START TEMPLATE JSON REQUEST________**********/
+
+                RequestQueue queue = Volley.newRequestQueue(LoginDialogActivity.this);
+                url ="http://10.0.2.2:8000/checkUser/"+user+"/"+pass+"/";
+                // Request a string response from the provided URL.
+
+                Log.d("url= ",url);
+
+                JsonArrayRequest jsObject = new JsonArrayRequest(Request.Method.GET, url,null, new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        JSONObject obj_log = null;
+                        int isLog = 0;
+                        try {
+                            obj_log = response.getJSONObject(0);
+                            Log.d("log result: ",obj_log.toString());
+                            isLog = obj_log.getInt("exists (select * from user where email='"+user+"' and password='"+pass+"')");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        if (isLog==1) {
+                            Toast.makeText(LoginDialogActivity.this, "Autenticazione avvenuta con successo!", Toast.LENGTH_LONG).show();
+                            // REGISTRA CHIAVE DI SESSIONE
+                            createSessionToken(user,pass);
+                            getSessionToken(user);
+                            Intent returnMain = new Intent(LoginDialogActivity.this, PortalsMainActivity.class);
+                            startActivity(returnMain);
+                        }else {Toast.makeText(LoginDialogActivity.this, "User inesistente! Ricontrollare i dati inseriti.", Toast.LENGTH_LONG).show();}
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d("Error: ",error.toString());
+                        Toast.makeText(LoginDialogActivity.this,"Errore di autenticazione",Toast.LENGTH_LONG).show();
+                    }
+                });
+                // Add the request to the RequestQueue.
+                queue.add(jsObject);
+                /***********_______END TEMPLATE JSON REQUEST________**********/
+
 
             }
         });
@@ -109,18 +145,6 @@ public class LoginDialogActivity extends Activity {
         /*******fine gestione click sui bottoni Login e Cancel********/
 
 
-        /*
-        Button bFacebook = (Button)findViewById(R.id.face_login);
-
-        bFacebook.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent openFacebookLoginActivity = new Intent(LoginActivity.this,FacebookLoginActivity.class);
-                startActivity(openFacebookLoginActivity);
-            }
-        });
-        */
-
 
 
         /*******gestione click su TextView Register here********/
@@ -134,33 +158,6 @@ public class LoginDialogActivity extends Activity {
         /*******fine gestione click su TextView Register here********/
 
 
-        /*gestione database*/
-        try {
-            URL url = new URL("http://www.android.com/");
-            HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-
-            try {
-                urlConnection.setDoOutput(true);
-                urlConnection.setChunkedStreamingMode(0);
-
-                /*post nome utente*/
-                OutputStream out = new BufferedOutputStream(urlConnection.getOutputStream());
-                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out));
-                writer.write("Nome utente");
-                writer.flush();
-                writer.close();
-
-                InputStream in = new BufferedInputStream(urlConnection.getInputStream());
-                BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-
-
-                //readStream(in);
-            } finally {
-                urlConnection.disconnect();
-            }
-
-        }catch(Exception e){}
-
     }
 
     private void goMainScreen() {
@@ -170,6 +167,56 @@ public class LoginDialogActivity extends Activity {
         setResult(Activity.RESULT_OK,openPortalPage);
         finish();
 
+    }
+
+    private void createSessionToken(String e, String p){
+
+        RequestQueue queue = Volley.newRequestQueue(LoginDialogActivity.this);
+        url ="http://10.0.2.2:8000/createSession/"+e+"/"+p+"/";
+        // Request a string response from the provided URL.
+        Log.d("url= ",url);
+        JsonObjectRequest jsObject = new JsonObjectRequest(Request.Method.GET, url,null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("Volley error:", error.toString());
+            }
+        });
+        // Add the request to the RequestQueue.
+        queue.add(jsObject);
+        /***********_______END TEMPLATE JSON REQUEST________**********/
+    }
+
+    private void getSessionToken(String e){
+
+        RequestQueue queue = Volley.newRequestQueue(LoginDialogActivity.this);
+        url ="http://10.0.2.2:8000/getSession/"+e+"/";
+        // Request a string response from the provided URL.
+        Log.d("url= ",url);
+        JsonArrayRequest jsObject = new JsonArrayRequest(Request.Method.GET, url,null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                try {
+                    JSONObject obj_sess = response.getJSONObject(0);
+                    session_result = obj_sess.getString("session");
+                    Log.d("session result :",session_result);
+                } catch (JSONException e1) {
+                    e1.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("Volley error:", error.toString());
+            }
+        });
+        // Add the request to the RequestQueue.
+        queue.add(jsObject);
+        /***********_______END TEMPLATE JSON REQUEST________**********/
     }
 
     @Override

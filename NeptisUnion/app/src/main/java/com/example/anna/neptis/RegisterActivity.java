@@ -63,8 +63,7 @@ public class RegisterActivity extends AppCompatActivity {
             JsonObjectRequest jsObject = new JsonObjectRequest(Request.Method.GET, url,null, new Response.Listener<JSONObject>() {
                 @Override
                 public void onResponse(JSONObject response) {
-                    // Display the first 500 characters of the response string.
-                    String body = response.toString();
+
                     Toast.makeText(RegisterActivity.this,"Registrazione avvenuta con successo!",Toast.LENGTH_LONG).show();
                     Intent returnPageLogin = new Intent(RegisterActivity.this,LoginDialogActivity.class);
                     startActivity(returnPageLogin);
