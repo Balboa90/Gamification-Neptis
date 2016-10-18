@@ -400,7 +400,8 @@ insert into Achievement values('achi0012','Ispettore capo','Risolvi 50 enigmi');
 insert into Achievement values('achi0013','Dipinto di Blu','Entra nel portale info');
 insert into Achievement values('achi0014','Sentite qua!','Scrivi la tua prima recensione');
 insert into Achievement values('achi0015','Il grande critico','Scrivi 50 recensioni');
-insert into Achievement values('achi0016','Sono d'accordo!','Vota 100 recensioni');
+insert into Achievement values('achi0016','Rencesitore esperto','Scrivi 100 recensioni');
+
 
 insert into Heritage values('Colosseo','Il colosseo è chiamato Anfiteatro Flavio','Impero Romano','Anfiteatro','41.89015','12.49244','statoitaliano@gmail.com',true,true,true,true);
 insert into Heritage values('Altare della Patria','Si trova vicino Piazza Venezia','Rinascimento','Monumento','41.894599','12.483092','statoitaliano@gmail.com',true,true,false,true);
@@ -692,9 +693,9 @@ insert into Ag2 values('achi0007','game20003');
 insert into Ag2 values('achi0008','game20008');
 
 insert into Ag3 values('achi0009','game30003');
-insert into Ag3 values('achi00010','game30004');
-insert into Ag3 values('achi00011','game30005');
-insert into Ag3 values('achi00012','game30006');
+insert into Ag3 values('achi0010','game30004');
+insert into Ag3 values('achi0011','game30005');
+insert into Ag3 values('achi0012','game30006');
 
 insert into Ag4 values('achi0013','game40001');
 insert into Ag4 values('achi0014','game40002');
