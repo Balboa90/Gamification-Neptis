@@ -1,0 +1,700 @@
+drop database if exists neptis;
+
+create database neptis;
+
+use neptis;
+
+create table User(
+	email varchar (100) primary key,
+	password varchar (100),
+	title varchar (100),
+	coins int,
+	game1 varchar (100) unique,
+	game2 varchar (100) unique,
+	game3 varchar (100) unique,
+	game4 varchar (100) unique);
+
+create table Game1(
+	code varchar (100) primary key,
+	user varchar (100) unique);
+
+create table Game2(
+	code varchar (100) primary key,
+	user varchar (100) unique);
+
+create table Game3(
+	code varchar (100) primary key,
+	user varchar (100) unique);
+
+create table Game4(
+	code varchar (100) primary key,
+	user varchar (100) unique);
+
+create table Match1(
+	code varchar (100) primary key,
+	heritage varchar (100),
+	game1 varchar (100) unique);
+
+create table Treasure(
+	code varchar (100) primary key,
+	info varchar (999),
+	latitude varchar(100),
+	longitude varchar(100),
+	heritage varchar (100));
+
+create table Card(
+	code varchar (100) primary key,
+	cost int,
+	description varchar (999));
+
+create table Medal(
+	code varchar (100) primary key,
+	name varchar (100),
+	type varchar (100));
+
+
+create table Puzzle(
+	code varchar (100) primary key,
+	enabled boolean,
+	answer varchar (100),
+	heritage varchar (100),
+	description varchar (999),
+	hint varchar (100),
+	costhint int,
+	puzzlegroup varchar (100));
+
+create table Review(
+	game4 varchar (100),
+	heritage varchar (100),
+	likes int,
+	dislikes int,
+	data varchar (999),
+	primary key (game4,heritage));
+
+create table Infopoint(
+	code varchar (100) primary key,
+	description varchar (999),
+	latitude double,
+	longitude double,
+	heritage varchar (100));
+
+create table Culturalorganization(
+	email varchar (100) primary key);
+
+create table Heritage(
+	name varchar (100) primary key,
+	info varchar (999),
+	period varchar (100),
+	typology varchar (100),
+	latitude varchar(100),
+	longitude varchar(100),
+	culturalorganization varchar (100),
+	g1 boolean,
+	g2 boolean,
+	g3 boolean,
+	g4 boolean);
+
+create table Mission(
+	code varchar (100) primary key,
+	name varchar(100),
+	description varchar (999));
+
+create table Achievement(
+	code varchar (100) primary key,
+	name varchar(100),
+	description varchar (999));
+
+create table Tc(
+treasure varchar (100),
+card varchar (100),
+primary key (treasure, card));
+
+create table Th(
+treasure varchar (100),
+heritage varchar (100),
+primary key (treasure, heritage));
+
+create table Mt(
+match1 varchar (100),
+treasure varchar (100),
+found boolean,
+primary key (match1, treasure));
+
+create table Ha(
+heritage varchar (100),
+culturalorganization varchar (100),
+primary key (heritage, culturalorganization));
+
+create table G1h(
+game1 varchar (100),
+heritage varchar (100),
+primary key (game1, heritage));
+
+create table G2h(
+game2 varchar (100),
+heritage varchar (100),
+primary key (game2, heritage));
+
+create table G2m(
+game2 varchar (100),
+medal varchar (100),
+primary key (game2, medal));
+
+create table G3p(
+game3 varchar (100),
+puzzle varchar (100),
+primary key (game3, puzzle));
+
+create table G4h(
+game4 varchar (100),
+heritage varchar (100),
+primary key (game4, heritage));
+
+create table Mg1(
+mission varchar (100),
+game1 varchar (100),
+primary key (mission, game1));
+
+create table Mg2(
+mission varchar (100),
+game2 varchar (100),
+primary key (mission, game2));
+
+
+
+create table Mg3(
+mission varchar (100),
+game3 varchar (100),
+primary key (mission, game3));
+
+create table Mg4(
+mission varchar (100),
+game4 varchar (100),
+primary key (mission, game4));
+
+create table Ag1(
+achievement varchar (100),
+game1 varchar (100),
+primary key (achievement , game1));
+
+create table Ag2(
+achievement varchar (100),
+game2 varchar (100),
+primary key (achievement , game2));
+
+create table Ag3(
+achievement varchar (100),
+game3 varchar (100),
+primary key (achievement , game3));
+
+create table Ag4(
+achievement varchar (100),
+game4 varchar (100),
+primary key (achievement , game4));
+
+create table G1c(
+game1 varchar (100),
+card varchar (100),
+primary key (game1,card));
+
+alter table Treasure
+add constraint fk1 foreign key Treasure (heritage) references Heritage (name) ON DELETE CASCADE;
+
+alter table Match1
+add constraint fk2 foreign key Match1 (game1) references Game1 (code) ON DELETE CASCADE,
+add constraint fk3 foreign key Match1 (heritage) references heritage (name) ON DELETE CASCADE;
+
+alter table Heritage
+add constraint fk4 foreign key Heritage (culturalorganization) references Culturalorganization (email)
+ON DELETE CASCADE;
+
+alter table Infopoint
+add constraint fk5 foreign key Infopoint (heritage) references Heritage (name) ON DELETE CASCADE;
+
+alter table Puzzle
+add constraint fk6 foreign key Puzzle (heritage) references Heritage (name) ON DELETE CASCADE;
+
+alter table Review
+add constraint fk7 foreign key Review (heritage) references Heritage (name) ON DELETE CASCADE,
+add constraint fk8 foreign key Review (game4) references Game4 (code) ON DELETE CASCADE;
+
+alter table User
+add constraint fk9 foreign key User (game1) references Game1 (code) ON DELETE CASCADE,
+add constraint fk10 foreign key User (game2) references Game2 (code) ON DELETE CASCADE,
+add constraint fk11 foreign key User (game3) references Game3 (code) ON DELETE CASCADE,
+add constraint fk12 foreign key User (game4) references Game4 (code) ON DELETE CASCADE;
+
+alter table Game1
+add constraint fk13 foreign key Game1 (user) references User (email) ON DELETE CASCADE;
+
+alter table Game2
+add constraint fk14 foreign key Game2 (user) references User (email) ON DELETE CASCADE;
+
+alter table Game3
+add constraint fk15 foreign key Game3 (user) references User (email) ON DELETE CASCADE;
+
+alter table Game4
+add constraint fk16 foreign key Game4 (user) references User (email) ON DELETE CASCADE;
+
+alter table Tc
+add constraint fk17 foreign key Tc (treasure) references Treasure (code) ON DELETE CASCADE,
+add constraint fk18 foreign key Tc (card) references Card (code) ON DELETE CASCADE;
+
+alter table Mt
+add constraint fk19 foreign key Mt (match1) references Match1 (code) ON DELETE CASCADE,
+add constraint fk20 foreign key Mt (treasure) references Treasure (code) ON DELETE CASCADE;
+
+alter table Ha
+add constraint fk21 foreign key Ha (heritage) references Heritage (name) ON DELETE CASCADE,
+add constraint fk22 foreign key Ha (culturalorganization) references Culturalorganization (email) ON DELETE CASCADE;
+
+alter table G1h
+add constraint fk23 foreign key G1h (game1) references Game1 (code) ON DELETE CASCADE,
+add constraint fk24 foreign key G1h (heritage) references Heritage (name) ON DELETE CASCADE;
+
+alter table G2h
+add constraint fk25 foreign key G2h (game2) references Game2 (code) ON DELETE CASCADE,
+add constraint fk26 foreign key G2h (heritage) references Heritage (name) ON DELETE CASCADE;
+
+alter table G2m
+add constraint fk27 foreign key G2m (game2) references Game2 (code) ON DELETE CASCADE,
+add constraint fk28 foreign key G2m (medal) references Medal (code) ON DELETE CASCADE;
+
+alter table G3p
+add constraint fk29 foreign key G3p (game3) references Game3 (code) ON DELETE CASCADE,
+add constraint fk30 foreign key G3p (puzzle) references Puzzle (code) ON DELETE CASCADE;
+
+
+
+alter table G4h
+add constraint fk31 foreign key G4h (game4) references Game4 (code) ON DELETE CASCADE,
+add constraint fk32 foreign key G4h (heritage) references Heritage (name) ON DELETE CASCADE;
+
+alter table Mg1
+add constraint fk33 foreign key Mg1 (mission) references Mission (code) ON DELETE CASCADE,
+add constraint fk34 foreign key Mg1 (game1) references Game1 (code) ON DELETE CASCADE;
+
+alter table Mg2
+add constraint fk35 foreign key Mg2 (mission) references Mission (code) ON DELETE CASCADE,
+add constraint fk36 foreign key Mg2 (game2) references Game2 (code) ON DELETE CASCADE;
+
+alter table Mg3
+add constraint fk37 foreign key Mg3 (mission) references Mission (code) ON DELETE CASCADE,
+add constraint fk38 foreign key Mg3 (game3) references Game3 (code) ON DELETE CASCADE;
+
+alter table Mg4
+add constraint fk39 foreign key Mg4 (mission) references Mission (code) ON DELETE CASCADE,
+add constraint fk40 foreign key Mg4 (game4) references Game4 (code)  ON DELETE CASCADE;
+
+alter table Ag1
+add constraint fk41 foreign key Ag1 (achievement) references Achievement (code) ON DELETE CASCADE,
+add constraint fk42 foreign key Ag1 (game1) references Game1 (code) ON DELETE CASCADE;
+
+alter table Ag2
+add constraint fk43 foreign key Ag2 (achievement) references Achievement (code) ON DELETE CASCADE,
+add constraint fk44 foreign key Ag2 (game2) references Game2 (code) ON DELETE CASCADE;
+
+alter table Ag3
+add constraint fk45 foreign key Ag3 (achievement) references Achievement (code) ON DELETE CASCADE,
+add constraint fk46 foreign key Ag3 (game3) references Game3 (code) ON DELETE CASCADE;
+
+alter table Ag4
+add constraint fk47 foreign key Ag4 (achievement) references Achievement (code) ON DELETE CASCADE,
+add constraint fk48 foreign key Ag4 (game4) references Game4 (code)  ON DELETE CASCADE;
+
+alter table G1c
+add constraint fk49 foreign key G1c (game1) references Game1 (code) ON DELETE CASCADE,
+add constraint fk50 foreign key G1c (card) references Card (code) ON DELETE CASCADE;
+
+alter table Th
+add constraint fk51 foreign key Th (treasure) references Treasure (code) ON DELETE CASCADE,
+add constraint fk52 foreign key Th (heritage) references Heritage (name) ON DELETE CASCADE;
+
+
+
+
+
+
+
+insert into Card values ('card0001',50,'Il Colosseo');
+insert into Card values('card0002',30,'Il faro di Alessandria ');
+insert into Card values ('card0003',20,'Machu Picchu');
+insert into Card values ('card0004',20,'Il London Bridge');
+insert into Card values ('card0005',10,'La via Appia');
+insert into Card values('card0006',15,'Isola Tiberina');
+insert into Card values('card0007',30,'Il Partenone');
+insert into Card values('card0008',10,'Lo stile dorico');
+insert into Card values('card0009',10,'Lo stile ionico');
+insert into Card values('card0010',10,'Lo stile corinzio');
+insert into Card values('card0011',10,'Arco a tutto sesto');
+insert into Card values('card0012',10,'Arco a sesto acuto');
+insert into Card values('card0013',10,'Lo stile gotico');
+insert into Card values('card0014',40,'Basilica di San Pietro');
+insert into Card values('card0015',20,'Basilica di San Giovanni');
+insert into Card values('card0016',35,'Piazza del Popolo');
+insert into Card values('card0017',35,'Altare della patria');
+insert into Card values('card0018',20,'Balcone di Piazza Venezia');
+insert into Card values('card0019',15,'Museo Maxxi');
+insert into Card values('card0020',15,'Stadio Olimpico');
+insert into Card values('card0021',50,'Il Partenone');
+
+
+insert into Medal values('medal0001','Medaglia Lazio','regione');
+insert into Medal values('medal0002','Medaglia Abruzzo','regione');
+insert into Medal values('medal0003','Medaglia Sicilia','regione');
+insert into Medal values('medal0004','Medaglia Calabria','regione');
+insert into Medal values('medal0005','Medaglia Sardegna','regione');
+insert into Medal values('medal0006','Medaglia Basilicata','regione');
+insert into Medal values('medal0007','Medaglia Campania','regione');
+insert into Medal values('medal0008','Medaglia Puglia','regione');
+insert into Medal values('medal0009','Medaglia Impero Romano','periodo storico');
+insert into Medal values('medal0010','Medaglia Magna Grecia','periodo storico');
+insert into Medal values('medal0011','Medaglia Basso Medioevo','periodo storico');
+insert into Medal values('medal0012','Medaglia Alto Medioevo','periodo storico');
+insert into Medal values('medal0013','Medaglia Rinascimento','periodo storico');
+insert into Medal values('medal0014','Medaglia Barocco','periodo storico');
+insert into Medal values('medal0015','Medaglia Arte Moderna','periodo storico');
+insert into Medal values('medal0016','Medaglia Antica Roma','periodo storico');
+insert into Medal values('medal0017','Medaglia Arte Contemporanea','periodo storico');
+insert into Medal values('medal0018','Medaglia Cattedrale','tipologia');
+insert into Medal values('medal0019','Medaglia Ponte','tipologia');
+insert into Medal values('medal0020','Medaglia Museo','tipologia');
+insert into Medal values('medal0021','Medaglia Scavo archeologico','tipologia');
+insert into Medal values('medal0022','Medaglia Castello','tipologia');
+insert into Medal values('medal0023','Medaglia Anfiteatro','tipologia');
+insert into Medal values('medal0024','Medaglia Monumento','tipologia');
+insert into Medal values('medal0025','Medaglia Chiesa','tipologia');
+
+
+insert into Culturalorganization values('comuneroma@gmail.it');
+insert into Culturalorganization values('statovaticano@libero.it');
+insert into Culturalorganization values('associazioneculturale@hotmail.it');
+insert into Culturalorganization values('enteprivato@gmail.com');
+insert into Culturalorganization values('comunitaebraica@alice.it');
+insert into Culturalorganization values('statoitaliano@gmail.com');
+insert into Culturalorganization values('enteturismo@libero.com');
+
+insert into Mission values('mission0001','Benvenuti in Puglia','Visita la Puglia');
+insert into Mission values('mission0002','Benvenuti in Basilicata','Visita la Basilicata');
+insert into Mission values('mission0003','Cacciatore','Trova un tesoro');
+insert into Mission values('mission0004','Giornalista','Scrivi una recensione');
+insert into Mission values('mission0005','Figurine che passione','Apri un pacchetto di carte');
+insert into Mission values('mission0006','Religioso','Visita una chiesa');
+insert into Mission values('mission0007','Cacciatore doppio','Raccogli due forzieri');
+insert into Mission values('mission0008','Turista','Visita due beni culturali');
+insert into Mission values('mission0009','Sherlock','Risolvi un enigma');
+insert into Mission values('mission0010','Critico','Vota una recensione');
+insert into Mission values('mission0011','L attraversa-fiumi','Visita un ponte');
+insert into Mission values('mission0012','Re Artù','Visita un castello');
+
+insert into Achievement values('achi0001','Il Pellegrino','Visita 50 chiese');
+insert into Achievement values('achi0002','Guru','Raggiungi il livello 15 in un portale');
+insert into Achievement values('achi0003','Maniaco di tesori','Apri 100 forzieri');
+insert into Achievement values('achi0004','Maniaco di carte','Colleziona 100 carte');
+insert into Achievement values('achi0005','Il Gran Risolutore','Risolvi 25 enigmi');
+insert into Achievement values('achi0006','Campione Olimpico','Vinci 10 medaglie');
+insert into Achievement values('achi0007','Eroe Olimpico','Vinci 50 medaglie');
+insert into Achievement values('achi0008','Viaggiatore universale','Visita 100 beni culturali');
+insert into Achievement values('achi0009','Mezza Italia','Visita 10 regioni');
+insert into Achievement values('achi0010','L Italia non mi basta','Visita 20 regioni');
+insert into Achievement values('achi0011','Il grande critico','Scrivi 50 recensioni');
+insert into Achievement values('achi0012','Critico Guru','Vota 100 recensioni');
+
+insert into Heritage values('Colosseo','Il colosseo è chiamato Anfiteatro Flavio','Impero Romano','Anfiteatro','41.89015','12.49244','statoitaliano@gmail.com',true,true,true,true);
+insert into Heritage values('Altare della Patria','Si trova vicino Piazza Venezia','Rinascimento','Monumento','41.894599','12.483092','statoitaliano@gmail.com',true,true,false,true);
+insert into Heritage values('Ponte Milvio','Costruito dai Romani','Antica Roma','Ponte','41.934662928','12.466831466','comuneroma@gmail.it',true,true,true,false);
+insert into Heritage values('Basilica di San Pietro','Costruita in epoche diverse','Rinascimento','Chiesa','41.90226 ','12.45509','statovaticano@libero.it',true,true,true,true);
+insert into Heritage values('Arco di Trionfo','Costruito da Costantino','Impero Romano','Monumento','41.889722','12.490833','statoitaliano@gmail.com',true,true,true,false);
+insert into Heritage values('Nuvola di Fuksas','Usata come centro congressi','Arte contemporanea','Museo','41.83444 ','12.46965','enteprivato@gmail.com',true,true,false,true);
+
+insert into Infopoint values('info0001','Piazza fatta dal Bernini',80.99,80.99,'Basilica di San Pietro');
+insert into Infopoint values('info0002','Altare in oro',80.95,80.95,'Basilica di San Pietro');
+insert into Infopoint values('info0003','La cupola di San Pietro',80.94,80.94,'Basilica di San Pietro');
+insert into Infopoint values('info0004','Zona per i leoni',98.26,98.26,'Colosseo');
+insert into Infopoint values('info0005','Arco a tutto sesto',98.23,98.23,'Colosseo');
+insert into Infopoint values('info0006','Ingresso arena',98.25,98.25,'Colosseo');
+insert into Infopoint values('info0007','Tribuna per i nobili',98.30,98.30,'Colosseo');
+insert into Infopoint values('info0008','Entrata principale',91.16,91.16,'Nuvola di Fuksas');
+insert into Infopoint values('info0009','Zona panoramica',91.18,91.18,'Nuvola di Fuksas');
+insert into Infopoint values('info0010','Per costruirlo ci sono voluti 5 anni',91.20,91.20,'Nuvola di Fuksas');
+insert into Infopoint values('info0011','Milite ignoto',93.28,93.28,'Altare della Patria');
+insert into Infopoint values('info0012','Zona del Vittoriano',63.90,63.90,'Altare della Patria');
+insert into Infopoint values('info0013','Vicino al Colosseo',98.11,98.11,'Arco di Trionfo');
+insert into Infopoint values('info0014','Battaglia di Costantino',98.12,98.12,'Arco di Trionfo');
+insert into Infopoint values('info0015','Fatto costruire dal Senato',98.13,98.13,'Arco di Trionfo');
+insert into Infopoint values('info0016','Battaglia di Ponte Milvio',90.94,90.94,'Ponte Milvio');
+insert into Infopoint values('info0017','Edificato sul fiume Tevere',90.95,90.95,'Ponte Milvio');
+
+insert into Treasure values('treas0001','Pietro fu il primo Santo','41.90300 ','12.45609','Basilica di San Pietro');
+insert into Treasure values('treas0002','La cappella sistina di Michelangelo','41.90150 ','12.45409','Basilica di San Pietro');
+insert into Treasure values('treas0003','Completato dai Flavi','41.89095','12.49294','Colosseo');
+insert into Treasure values('treas0004','Piu di 500 spettacoli annuali ','41.88915','12.49144','Colosseo');
+insert into Treasure values('treas0005','Fuksas è un architetto','41.83344 ','12.46865','Nuvola di Fuksas');
+insert into Treasure values('treas0006','InfoTesoroAltare1','41.893499','12.481992','Altare della Patria');
+insert into Treasure values('treas0007','InfoTesoroArco1','41.889622','12.490733','Arco di Trionfo');
+insert into Treasure values('treas0008','InfoTesoroArco2','41.889822','12.490933','Arco di Trionfo');
+insert into Treasure values('treas0009','InfoTesoroPonteMilvio1','41.933562728','12.466631266','Ponte Milvio');
+insert into Treasure values('treas0010','InfoTesoroPonteMilvio2','41.934862998','12.467031536','Ponte Milvio');
+
+insert into Puzzle values('puzzle0001',true,'risposta11','Basilica di San Pietro','description1','hint1',10,'group1');
+insert into Puzzle values('puzzle0002',true,'risposta23','Colosseo','description2','hint2',10,'group2');
+insert into Puzzle values('puzzle0003',true,'risposta32','Arco di Trionfo','description3','hint3',10,'group1');
+insert into Puzzle values('puzzle0004',false,'risposta44','Ponte Milvio','description4','hint4',10,'group3');
+
+SET foreign_key_checks = 0;
+
+insert into User values('player1@gmail.it','pass1',null,0,'game10001','game20001','game30001','game40001');
+insert into User values('player2@gmail.it','pass2',null,0,'game10002','game20002','game30002','game40002');
+insert into User values('player3@gmail.it','pass3',null,0,'game10003','game20003','game30003','game40003');
+insert into User values('player4@gmail.it','pass4',null,0,'game10004','game20004','game30004','game40004');
+insert into User values('player5@gmail.it','pass5',null,0,'game10005','game20005','game30005','game40005');
+insert into User values('player6@gmail.it','pass6',null,0,'game10006','game20006','game30006','game40006');
+insert into User values('player7@gmail.it','pass7',null,0,'game10007','game20007','game30007','game40007');
+insert into User values('player8@gmail.it','pass8',null,0,'game10008','game20008','game30008','game40008');
+
+insert into Game1 values('game10001','player1@gmail.it');
+insert into Game1 values('game10002','player2@gmail.it');
+insert into Game1 values('game10003','player3@gmail.it');
+insert into Game1 values('game10004','player4@gmail.it');
+insert into Game1 values('game10005','player5@gmail.it');
+insert into Game1 values('game10006','player6@gmail.it');
+insert into Game1 values('game10007','player7@gmail.it');
+insert into Game1 values('game10008','player8@gmail.it');
+
+insert into Game2 values('game20001','player1@gmail.it');
+insert into Game2 values('game20002','player2@gmail.it');
+insert into Game2 values('game20003','player3@gmail.it');
+insert into Game2 values('game20004','player4@gmail.it');
+insert into Game2 values('game20005','player5@gmail.it');
+insert into Game2 values('game20006','player6@gmail.it');
+insert into Game2 values('game20007','player7@gmail.it');
+insert into Game2 values('game20008','player8@gmail.it');
+
+
+insert into Game3 values('game30001','player1@gmail.it');
+insert into Game3 values('game30002','player2@gmail.it');
+insert into Game3 values('game30003','player3@gmail.it');
+insert into Game3 values('game30004','player4@gmail.it');
+insert into Game3 values('game30005','player5@gmail.it');
+insert into Game3 values('game30006','player6@gmail.it');
+insert into Game3 values('game30007','player7@gmail.it');
+insert into Game3 values('game30008','player8@gmail.it');
+
+insert into Game4 values('game40001','player1@gmail.it');
+insert into Game4 values('game40002','player2@gmail.it');
+insert into Game4 values('game40003','player3@gmail.it');
+insert into Game4 values('game40004','player4@gmail.it');
+insert into Game4 values('game40005','player5@gmail.it');
+insert into Game4 values('game40006','player6@gmail.it');
+insert into Game4 values('game40007','player7@gmail.it');
+insert into Game4 values('game40008','player8@gmail.it');
+
+SET foreign_key_checks = 1;
+
+insert into Match1 values('match0001','Colosseo','game10001');
+insert into Match1 values('match0002','Colosseo','game10002');
+insert into Match1 values('match0003','Altare della Patria','game10003');
+insert into Match1 values('match0004','Ponte Milvio','game10004');
+insert into Match1 values('match0005','Ponte Milvio','game10005');
+insert into Match1 values('match0006','Basilica di San Pietro','game10006');
+insert into Match1 values('match0007','Basilica di San Pietro','game10007');
+insert into Match1 values('match0008','Basilica di San Pietro','game10008');
+
+insert into Review values('game40002','Colosseo',0,0,'Molto bello');
+insert into Review values('game40003','Nuvola di Fuksas',0,0,'Quanto è grande!');
+insert into Review values('game40006','Basilica di San Pietro',0,0,'Ci ritornerò sicuramente');
+insert into Review values('game40007','Colosseo',0,0,'Costa troppo');
+insert into Review values('game40008','Colosseo',0,0,'Mi piacciono i romani');
+
+insert into Tc values('treas0001','card0001');
+insert into Tc values('treas0001','card0005');
+insert into Tc values('treas0001','card0021');
+insert into Tc values('treas0001','card0020');
+insert into Tc values('treas0001','card0008');
+insert into Tc values('treas0002','card0017');
+insert into Tc values('treas0002','card0004');
+insert into Tc values('treas0002','card0009');
+insert into Tc values('treas0002','card0019');
+insert into Tc values('treas0002','card0014');
+insert into Tc values('treas0003','card0013');
+insert into Tc values('treas0003','card0012');
+insert into Tc values('treas0003','card0011');
+insert into Tc values('treas0003','card0010');
+insert into Tc values('treas0003','card0007');
+insert into Tc values('treas0004','card0001');
+insert into Tc values('treas0004','card0002');
+insert into Tc values('treas0004','card0003');
+insert into Tc values('treas0004','card0004');
+insert into Tc values('treas0004','card0005');
+insert into Tc values('treas0005','card0006');
+insert into Tc values('treas0005','card0007');
+insert into Tc values('treas0005','card0008');
+insert into Tc values('treas0005','card0009');
+insert into Tc values('treas0005','card0010');
+insert into Tc values('treas0006','card0011');
+insert into Tc values('treas0006','card0012');
+insert into Tc values('treas0006','card0013');
+insert into Tc values('treas0006','card0014');
+insert into Tc values('treas0006','card0015');
+insert into Tc values('treas0007','card0016');
+insert into Tc values('treas0007','card0017');
+insert into Tc values('treas0007','card0018');
+insert into Tc values('treas0007','card0019');
+insert into Tc values('treas0007','card0020');
+insert into Tc values('treas0008','card0021');
+insert into Tc values('treas0008','card0001');
+insert into Tc values('treas0008','card0002');
+insert into Tc values('treas0008','card0003');
+insert into Tc values('treas0008','card0004');
+insert into Tc values('treas0009','card0006');
+insert into Tc values('treas0009','card0009');
+insert into Tc values('treas0009','card0010');
+insert into Tc values('treas0009','card0011');
+insert into Tc values('treas0009','card0012');
+insert into Tc values('treas0010','card0013');
+insert into Tc values('treas0010','card0015');
+insert into Tc values('treas0010','card0017');
+insert into Tc values('treas0010','card0018');
+insert into Tc values('treas0010','card0019');
+
+SET foreign_key_checks = 0;
+insert into Ha values('Colosseo','statoitaliano@gmail.com');
+insert into Ha values('Altare della Patria','statoitaliano@gmail.com');
+insert into Ha values('Ponte Milvio','comuneroma@gmail.it');
+insert into Ha values('Basilica di San Pietro','statovaticano@libero.it');
+insert into Ha values('Arco di Trionfo','statoitaliano@gmail.com');
+insert into Ha values('Nuvola di Fuksas','enteprivato@gmail.com');
+SET foreign_key_checks = 1;
+
+insert into Mt values('Match0001','treas0003',true);
+insert into Mt values('Match0001','treas0004',false);
+insert into Mt values('Match0002','treas0003',true);
+insert into Mt values('Match0002','treas0004',false);
+insert into Mt values('Match0003','treas0006',false);
+insert into Mt values('Match0004','treas0009',true);
+insert into Mt values('Match0004','treas0010',false);
+insert into Mt values('Match0005','treas0009',false);
+insert into Mt values('Match0005','treas0010',false);
+insert into Mt values('Match0006','treas0001',true);
+insert into Mt values('Match0006','treas0002',false);
+insert into Mt values('Match0007','treas0001',true);
+insert into Mt values('Match0007','treas0002',false);
+insert into Mt values('Match0008','treas0001',false);
+insert into Mt values('Match0008','treas0002',true);
+
+SET foreign_key_checks = 0;
+insert into Th values('treas0001','Basilica di San Pietro');
+insert into Th values('treas0002','Basilica di San Pietro');
+insert into Th values('treas0003','Colosseo');
+insert into Th values('treas0004','Colosseo');
+insert into Th values('treas0005','Nuvola di Fuksas');
+insert into Th values('treas0006','Altare della Patria');
+insert into Th values('treas0007','Arco di Trionfo');
+insert into Th values('treas0008','Arco di Trionfo');
+insert into Th values('treas0009','Ponte Milvio');
+insert into Th values('treas0010','Ponte Milvio');
+
+SET foreign_key_checks = 1;
+
+
+
+insert into G1h values('game10001','Colosseo');
+insert into G1h values('game10002','Colosseo');
+insert into G1h values('game10003','Altare della Patria');
+insert into G1h values('game10004','Ponte Milvio');
+insert into G1h values('game10005','Ponte Milvio');
+insert into G1h values('game10006','Basilica di San Pietro');
+insert into G1h values('game10007','Basilica di San Pietro');
+insert into G1h values('game10008','Basilica di San Pietro');
+
+insert into G2h values('game20001','Arco di Trionfo');
+insert into G2h values('game20002','Colosseo');
+insert into G2h values('game20003','Nuvola di Fuksas');
+insert into G2h values('game20004','Ponte Milvio');
+insert into G2h values('game20005','Altare della Patria');
+insert into G2h values('game20006','Basilica di San Pietro');
+insert into G2h values('game20007','Altare della Patria');
+insert into G2h values('game20008','Colosseo');
+
+insert into G2m values('game20001','medal0001');
+insert into G2m values('game20002','medal0005');
+insert into G2m values('game20003','medal0006');
+insert into G2m values('game20004','medal0002');
+insert into G2m values('game20005','medal0004');
+insert into G2m values('game20006','medal0005');
+insert into G2m values('game20007','medal0006');
+insert into G2m values('game20008','medal0001');
+
+insert into G3p values('game30001','puzzle0001');
+insert into G3p values('game30002','puzzle0003');
+insert into G3p values('game30005','puzzle0003');
+insert into G3p values('game30006','puzzle0004');
+
+insert into G4h values('game40003','Colosseo');
+insert into G4h values('game40004','Nuvola di Fuksas');
+insert into G4h values('game40007','Altare della Patria');
+insert into G4h values('game40008','Colosseo');
+
+
+
+
+
+
+insert into G1c values('game10001','card0001');
+insert into G1c values('game10001','card0005');
+insert into G1c values('game10002','card0010');
+insert into G1c values('game10002','card0015');
+insert into G1c values('game10002','card0001');
+insert into G1c values('game10002','card0004');
+insert into G1c values('game10003','card0009');
+insert into G1c values('game10004','card0020');
+insert into G1c values('game10005','card0020');
+insert into G1c values('game10006','card0013');
+insert into G1c values('game10007','card0011');
+insert into G1c values('game10008','card0007');
+insert into G1c values('game10008','card0008');
+insert into G1c values('game10008','card0009');
+insert into G1c values('game10008','card0001');
+
+insert into Mg1 values('mission0001','game10001');
+insert into Mg1 values('mission0005','game10004');
+insert into Mg1 values('mission0011','game10005');
+insert into Mg1 values('mission0012','game10005');
+
+insert into Mg2 values('mission0002','game20006');
+insert into Mg2 values('mission0002','game20007');
+insert into Mg2 values('mission0006','game20007');
+insert into Mg2 values('mission0011','game20008');
+
+insert into Mg3 values('mission0006','game30002');
+insert into Mg3 values('mission0008','game30003');
+insert into Mg3 values('mission0009','game30004');
+insert into Mg3 values('mission0012','game30005');
+
+insert into Mg4 values('mission0001','game40003');
+insert into Mg4 values('mission0002','game40004');
+insert into Mg4 values('mission0004','game40005');
+insert into Mg4 values('mission0010','game40008');
+
+
+
+
+insert into Ag1 values('achi0003','game10004');
+insert into Ag1 values('achi0003','game10005');
+insert into Ag1 values('achi0004','game10006');
+insert into Ag1 values('achi0004','game10007');
+
+insert into Ag2 values('achi0001','game20001');
+insert into Ag2 values('achi0006','game20001');
+insert into Ag2 values('achi0007','game20003');
+insert into Ag2 values('achi0008','game20008');
+
+insert into Ag3 values('achi0005','game30003');
+insert into Ag3 values('achi0005','game30004');
+insert into Ag3 values('achi0005','game30005');
+insert into Ag3 values('achi0005','game30006');
+
+insert into Ag4 values('achi0011','game40001');
+insert into Ag4 values('achi0011','game40002');
+insert into Ag4 values('achi0012','game40007');
+insert into Ag4 values('achi0012','game40008');
