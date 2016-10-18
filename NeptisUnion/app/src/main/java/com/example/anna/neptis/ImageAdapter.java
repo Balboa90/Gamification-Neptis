@@ -1,14 +1,13 @@
 package com.example.anna.neptis;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
+
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
+
 
 /**
  * Implementazione efficiente dell'adapter(con uso della classe interna ViewHolder)
@@ -16,6 +15,14 @@ import android.widget.ImageView;
 public class ImageAdapter extends BaseAdapter {
 
     private Context mContext;
+
+    //references to or images
+    private Integer[]mThumbIds = {
+            R.drawable.treasures,R.drawable.treasures,
+            R.drawable.treasures,R.drawable.treasures,
+            R.drawable.treasures,R.drawable.treasures,
+            R.drawable.treasures,R.drawable.treasures
+    };
 
     // Constructor
     public ImageAdapter(Context c){
@@ -46,13 +53,7 @@ public class ImageAdapter extends BaseAdapter {
         return imageView;
     }
 
-    //references to or images
-    private Integer[]mThumbIds = {
-            R.drawable.treasures,R.drawable.treasures,
-            R.drawable.treasures,R.drawable.treasures,
-            R.drawable.treasures,R.drawable.treasures,
-            R.drawable.treasures,R.drawable.treasures
-    };
+
 
 
     /*

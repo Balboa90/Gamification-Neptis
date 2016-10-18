@@ -74,7 +74,7 @@ public class TreasurePortalPag1 extends AppCompatActivity implements OnItemSelec
         //***********_______TEMPLATE JSON REQUEST________**********
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url ="http://10.0.2.2:8000/getHeritages/";
+        String url ="http://10.0.2.2:8000/getHeritagesGame1/";
 
         // Request a string response from the provided URL.
         JsonArrayRequest jsArray = new JsonArrayRequest(Request.Method.GET, url,null, new Response.Listener<JSONArray>() {

@@ -4,7 +4,7 @@ var hash = require('C:\\Users\\Anna\\Desktop\\hash');
 function Todo(){
 
 	//game1 (per lente)
-	this.getHeritages = function(res){
+	this.getHeritagesGame1 = function(res){
 		connection.acquire(function(err,con){
 			con.query('SELECT distinct heritage from g1h', function(err,result){
 				con.release();
@@ -14,7 +14,7 @@ function Todo(){
 	};
 
 	//tutti i game (per recuperare latitudine e longitudine dei diversi heritage)
-	this.getCoordinates = function(name,res){
+	this.getCoordinatesHeritage = function(name,res){
 		connection.acquire(function(err,con){
 			con.query('SELECT latitude,longitude from heritage where name = ?',name, function(err,result){
 				con.release();
@@ -23,7 +23,7 @@ function Todo(){
 		});
 	};
 	
-	//game2 (insieme degli heritage visitati)
+	//game2 (insieme degli heritage visitati nel game2)
 	this.getVisitedHeritagesCount = function(res){
 		connection.acquire(function(err,con){
 			con.query('SELECT count(distinct heritage) as visitConto from g2h', function(err,result){
@@ -43,8 +43,17 @@ function Todo(){
 		});
 	};
 
+	//game1 (per game2)
+	this.getVisitedHeritagesGame2 = function(res){
+		connection.acquire(function(err,con){
+			con.query('SELECT distinct heritage from g2h', function(err,result){
+				con.release();
+				res.send(result);
+			});
+		});
+	};
 
-	//per scrollbar game1
+	//game1 ottieni il codice del tesoro
 	this.getTreasureCode = function(res){
 		connection.acquire(function(err,con){
 			con.query('SELECT code from treasure', function(err,result){
@@ -54,23 +63,48 @@ function Todo(){
 		});
 	};
 
-	//tutti i game (per recuperare latitudine e longitudine dei diversi treasure)
-	this.getTreasureLatitude = function(code,res){
+	//coordinate singoli tesori game1
+	this.getCoordinatesTreasure = function(code,res){
 		connection.acquire(function(err,con){
-			con.query('SELECT latitude from treasure where code = ?',code, function(err,result){
+			con.query('SELECT latitude,longitude from treasure where code = ?',name, function(err,result){
 				con.release();
 				res.send(result);
 			});
 		});
 	};
-	this.getTreasureLongitude = function(code,res){
+
+	//game1: ottieni il numero dei tesori relativi all'heritage passato come parametro
+	this.getHeritageTreasureNumber = function(name,res){
 		connection.acquire(function(err,con){
-			con.query('SELECT longitude from treasure where code = ?',code, function(err,result){
+			con.query('SELECT count(treasure) as treasureCount from TH where heritage = ?',name, function(err,result){
 				con.release();
 				res.send(result);
 			});
 		});
 	};
+
+	//game1:ottieni tutti gli elementi del tesoro relativo all'heritage passato come parametro
+	this.getTreasureElements = function(name,res){
+		connection.acquire(function(err,con){
+			con.query('SELECT code,latitude,longitude,info from treasure where heritage = ?', name,function(err,result){
+				con.release();
+				res.send(result);
+			});
+		});
+	};
+
+
+
+	//game1: ottieni i tesori trovati(saranno i marker verdi nella mappa)
+	this.getFoundTreasures = function(name,res){
+		connection.acquire(function(err,con){
+			con.query('SELECT found from MT where treasure = ?',name, function(err,result){
+				con.release();
+				res.send(result);
+			});
+		});
+	};
+
 
 	//per tutti i game (medaglie )
 	this.getMedals= function(type,res){

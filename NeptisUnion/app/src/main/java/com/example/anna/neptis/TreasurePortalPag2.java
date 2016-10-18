@@ -38,17 +38,27 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+
 public class TreasurePortalPag2 extends FragmentActivity implements OnMapReadyCallback{
 
     private final static int CAMERA_REQUEST_CODE = 1;
     private GoogleMap mMap;
 
-    String heritage = "";
+    String heritage;//= getIntent().getExtras().getString("heritage")
     String url;
     String url2;
     String latitudine;
     String longitudine;
+    String code,lat,lon,info;
+    List list; //lista de tesori presenti nell'heritage passato come parametro
 
+
+    private MarkerOptions options = new MarkerOptions();
+    private ArrayList<LatLng> latlngs = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,12 +68,100 @@ public class TreasurePortalPag2 extends FragmentActivity implements OnMapReadyCa
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+        //per abilitare la scrollview
+        //ScrollView sView = (ScrollView)findViewById(R.id.ScrollView01);
+
+
 
         /*___________________________gestione della gridView all'interno della scrollbar______________________*/
-        final GridView gridView = (GridView) findViewById(R.id.grid_treasures);
+        GridView gridView = (GridView) findViewById(R.id.grid_treasures);
+        list = new LinkedList<Tesoro>();
+
+        //***********_______TEMPLATE JSON REQUEST________**********
+        // Instantiate the RequestQueue.
+        heritage = getIntent().getExtras().getString("heritage").trim();
+        RequestQueue queue = Volley.newRequestQueue(this);
+        String spaces = heritage.replace(" ","%20");
+        url2 ="http://10.0.2.2:8000/getTreasureElements/" + spaces + "/";
+
+        Log.d("url= ",url2);
+
+        // Request a string response from the provided URL.
+        JsonArrayRequest jsTreasureElements = new JsonArrayRequest(Request.Method.GET, url2,null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                try {
+                    int contLength = response.length();
+                    for(int i = 0;i< contLength;i++) {
+                        JSONObject jsObj = (JSONObject) response.get(i);
+                        code = jsObj.getString("code");
+                        lat = jsObj.getString("latitude");
+                        lon = jsObj.getString("longitude");
+                        info = jsObj.getString("info");
+
+                        //Log.d("LATITUDINE: ",lat);
+
+                        latlngs.add(new LatLng(Double.parseDouble(lat),Double.parseDouble(lon))); //some latitude and logitude value
+
+                        for (LatLng point : latlngs) {
+                            options.position(point);
+                            options.title("someTitle");
+                            options.snippet("someDesc");
+                            mMap.addMarker(options);
+                        }
+
+                        list.add(new Tesoro(code,lat,lon,info));
+
+
+                        /*LatLng herit = new LatLng(Double.parseDouble(lat),Double.parseDouble(lon));
+                        mMap.addMarker(new MarkerOptions().position(herit).title(heritage));
+                        CameraPosition cameraPosition = new CameraPosition.Builder().target(herit).zoom(15).build();
+                        mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));*/
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("That didn't work!",error.toString());
+                //Toast.makeText(TreasurePortalPag2.this,"Errore latitude!",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+        TreasureAdapter adapter = new TreasureAdapter(this, R.layout.adapter_treasure, list);
+        gridView.setAdapter(adapter);
+        // Add the request to the RequestQueue.
+        queue.add(jsTreasureElements);
+
+        /***********_______END TEMPLATE JSON REQUEST________**********/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         // Instance of ImageAdapter Class
-        gridView.setAdapter(new ImageAdapter(this));
+        // gridView.setAdapter(new ImageAdapter(this));
         /*__________________________fine gestione gridView all'interno della scrollbar________________________*/
 
         /*___________________________On Click event for Single Gridview Item___________________________*/
@@ -89,30 +187,15 @@ public class TreasurePortalPag2 extends FragmentActivity implements OnMapReadyCa
         /*___________________fine gestione click sui tesori all'interno della scrollbar____________________*/
 
 
-        //per abilitare la scrollview
-        ScrollView sView = (ScrollView)findViewById(R.id.ScrollView01);
-
-
-        /*____________________To Hide the Scollbar__________________
-
-        sView.setVerticalScrollBarEnabled(false);
-        sView.setHorizontalScrollBarEnabled(false);
-         ___________________________________________________________*/
 
 
 
-        /*__________________gestione imageButton COLOSSEO e FOTOCAMERA____________________*/
-        /*ImageButton colosseo = (ImageButton)findViewById(R.id.colosseo_image);
-        colosseo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Toast toast = Toast.makeText(view.getContext(),"Colosseo ImageButton",Toast.LENGTH_SHORT);
-                toast.show();
 
 
-            }});*/
 
+
+
+        //gestione click su fotocamera
         ImageButton camera = (ImageButton)findViewById(R.id.camera_image);
         camera.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,9 +208,6 @@ public class TreasurePortalPag2 extends FragmentActivity implements OnMapReadyCa
 
 
             }});
-
-         /*__________________fine gestione imageButton COLOSSEO e FOTOCAMERA____________________*/
-
 
         /*__________________gestione bottone SITE INFORMATION____________________*/
         Button siteInformation = (Button)findViewById(R.id.site_information);
@@ -156,13 +236,13 @@ public class TreasurePortalPag2 extends FragmentActivity implements OnMapReadyCa
     @Override
     public void onMapReady(GoogleMap googleMap) {
 
-        heritage = getIntent().getExtras().getString("heritage");
+        //heritage = getIntent().getExtras().getString("heritage");
 
         /***********_______START TEMPLATE JSON REQUEST________**********/
         mMap = googleMap;
         RequestQueue queue = Volley.newRequestQueue(TreasurePortalPag2.this);
         String spaces = heritage.replace(" ","%20");
-        url ="http://10.0.2.2:8000/getCoordinates/"+spaces+"/";
+        url ="http://10.0.2.2:8000/getCoordinatesHeritage/"+spaces+"/";
 
         Log.d("url= ",url);
 
@@ -183,6 +263,7 @@ public class TreasurePortalPag2 extends FragmentActivity implements OnMapReadyCa
                             mMap.addMarker(new MarkerOptions().position(herit).title(heritage));
                             CameraPosition cameraPosition = new CameraPosition.Builder().target(herit).zoom(15).build();
                             mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();

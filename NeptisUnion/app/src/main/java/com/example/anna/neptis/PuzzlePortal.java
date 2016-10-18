@@ -31,6 +31,7 @@ public class PuzzlePortal extends AppCompatActivity {
     ImageButton ib_cerca;
     String[] list_item;
     String[] list_item2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,23 +41,23 @@ public class PuzzlePortal extends AppCompatActivity {
 
 
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url ="http://10.0.2.2:8000/getEnabledPuzzle/";
+        String url = "http://10.0.2.2:8000/getEnabledPuzzle/";
         // Request a string response from the provided URL.
 
-        JsonArrayRequest jsArray = new JsonArrayRequest(Request.Method.GET, url,null, new Response.Listener<JSONArray>() {
+        JsonArrayRequest jsArray = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
                 // Display the first 500 characters of the response string.
                 //Log.d("Response is: ", response.toString());
-                try{
+                try {
                     int contLength = response.length();
                     list_item = new String[contLength];
-                    for(int i = 0;i< contLength;i++){
-                        JSONObject jsObj = (JSONObject)response.get(i);
+                    for (int i = 0; i < contLength; i++) {
+                        JSONObject jsObj = (JSONObject) response.get(i);
                         String value = jsObj.getString("code");
                         list_item[i] = value;
 
-                        ArrayAdapter<?> adapter = new ArrayAdapter<Object>(PuzzlePortal.this,android.R.layout.simple_selectable_list_item,list_item);
+                        ArrayAdapter<?> adapter = new ArrayAdapter<Object>(PuzzlePortal.this, android.R.layout.simple_selectable_list_item, list_item);
                         list_attivi.setAdapter(adapter);
                     }
                 } catch (JSONException e) {
@@ -66,7 +67,7 @@ public class PuzzlePortal extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d("That didn't work!",error.toString());
+                Log.d("That didn't work!", error.toString());
             }
         });
 
@@ -77,23 +78,23 @@ public class PuzzlePortal extends AppCompatActivity {
         list_incoming = (ListView) findViewById(R.id.list_incoming);
 
         RequestQueue queue2 = Volley.newRequestQueue(this);
-        String url2 ="http://10.0.2.2:8000/getSoonPuzzle/";
+        String url2 = "http://10.0.2.2:8000/getSoonPuzzle/";
         // Request a string response from the provided URL.
 
-        JsonArrayRequest jsArray2 = new JsonArrayRequest(Request.Method.GET, url2,null, new Response.Listener<JSONArray>() {
+        JsonArrayRequest jsArray2 = new JsonArrayRequest(Request.Method.GET, url2, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
                 // Display the first 500 characters of the response string.
                 //Log.d("Response is: ", response.toString());
-                try{
+                try {
                     int contLength = response.length();
                     list_item2 = new String[contLength];
-                    for(int i = 0;i< contLength;i++){
-                        JSONObject jsObj = (JSONObject)response.get(i);
+                    for (int i = 0; i < contLength; i++) {
+                        JSONObject jsObj = (JSONObject) response.get(i);
                         String value = jsObj.getString("code") + "  - coming soon!";
                         list_item2[i] = value;
 
-                        ArrayAdapter<?> adapter = new ArrayAdapter<Object>(PuzzlePortal.this,android.R.layout.simple_selectable_list_item,list_item2);
+                        ArrayAdapter<?> adapter = new ArrayAdapter<Object>(PuzzlePortal.this, android.R.layout.simple_selectable_list_item, list_item2);
                         list_incoming.setAdapter(adapter);
                     }
                 } catch (JSONException e) {
@@ -103,7 +104,7 @@ public class PuzzlePortal extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d("That didn't work!",error.toString());
+                Log.d("That didn't work!", error.toString());
             }
         });
 
@@ -126,22 +127,23 @@ public class PuzzlePortal extends AppCompatActivity {
         list_incoming.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(view.getContext(),"This puzzle will be available soon!",Toast.LENGTH_SHORT).show();;
+                Toast.makeText(view.getContext(), "This puzzle will be available soon!", Toast.LENGTH_SHORT).show();
+                ;
             }
         });
 
 
-        ib_achievements = (ImageButton) findViewById(R.id.ib_obiettivi) ;
+        ib_achievements = (ImageButton) findViewById(R.id.ib_obiettivi);
         ib_achievements.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent goto_a = new Intent(PuzzlePortal.this, Achievements.class);
-                goto_a.putExtra("game","game3");
+                goto_a.putExtra("game", "game3");
                 startActivity(goto_a);
             }
         });
 
-        ib_partecipa = (ImageButton) findViewById(R.id.ib_partecipazioni) ;
+        ib_partecipa = (ImageButton) findViewById(R.id.ib_partecipazioni);
         ib_partecipa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -149,7 +151,7 @@ public class PuzzlePortal extends AppCompatActivity {
             }
         });
 
-        ib_cerca = (ImageButton) findViewById(R.id.ib_cerca_enigmi) ;
+        ib_cerca = (ImageButton) findViewById(R.id.ib_cerca_enigmi);
         ib_cerca.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

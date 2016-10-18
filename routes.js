@@ -2,28 +2,12 @@ var todo = require('C:\\Users\\Anna\\Desktop\\todo');
 module.exports = {
 		configure: function(app){
 			
-			app.get('/getHeritages/',function(req,res){
-				todo.getHeritages(res);
+			app.get('/getHeritagesGame1/',function(req,res){
+				todo.getHeritagesGame1(res);
 			});
 
-
-
-
-
-
-			app.get('/getCoordinates/:name',function(req,res){
-				todo.getCoordinates(req.params.name,res);
-			});
-		
-
-		
-
-			app.get('/getHeritageLatitude/:name',function(req,res){
-				todo.getHeritageLatitude(req.params.name,res);
-			});
-
-			app.get('/getHeritageLongitude/:name',function(req,res){
-				todo.getHeritageLongitude(req.params.name,res);
+			app.get('/getCoordinatesHeritage/:name',function(req,res){
+				todo.getCoordinatesHeritage(req.params.name,res);
 			});
 
 			app.get('/getVisitedHeritagesCount/',function(req,res){
@@ -34,17 +18,44 @@ module.exports = {
 				todo.getHeritagesCount(res);
 			});
 
+
+
+
+
+			app.get('/getVisitedHeritagesGame2/',function(req,res){
+				todo.getVisitedHeritagesGame2(res);
+			});
+
+
+
+
+
 			app.get('/getTreasureCode/',function(req,res){
 				todo.getTreasureCode(res);
 			});
-
-			app.get('/getTreasureLatitude/:code',function(req,res){
-				todo.getTreasureLatitude(req.params.code,res);
+			
+			app.get('/getCoordinatesTreasure/:code',function(req,res){
+				todo.getCoordinatesTreasure(req.params.code,res);
 			});
 
-			app.get('/getTreasureLongitude/:code',function(req,res){
-				todo.getTreasureLongitude(req.params.code,res);
+			app.get('/getHeritageTreasureNumber/:name',function(req,res){
+				todo.getHeritageTreasureNumber(req.params.name,res);
 			});
+			
+
+
+
+			app.get('/getTreasureElements/:name',function(req,res){
+				todo.getTreasureElements(req.params.name,res);
+			});
+
+			app.get('/getFoundTreasures/:code',function(req,res){
+				todo.getFoundTreasures(req.params.code,res);
+			});
+				
+		
+
+
 
 			app.get('/getMedals/:type',function(req,res){
 				todo.getMedals(req.params.type,res);

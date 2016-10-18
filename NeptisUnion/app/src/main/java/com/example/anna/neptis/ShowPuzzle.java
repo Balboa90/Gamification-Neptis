@@ -75,4 +75,3 @@ public class ShowPuzzle extends AppCompatActivity {
         /***********_______END TEMPLATE JSON REQUEST________**********/
     }
 }
-
