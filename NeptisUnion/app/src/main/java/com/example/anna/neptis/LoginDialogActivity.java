@@ -104,7 +104,7 @@ public class LoginDialogActivity extends Activity {
                         try {
                             obj_log = response.getJSONObject(0);
                             Log.d("log result: ",obj_log.toString());
-                            isLog = obj_log.getInt("exists (select * from user where email='"+user+"' and password='"+pass+"')");
+                            isLog = obj_log.getInt("EXISTS (SELECT * from user where email='"+user+"' and password='"+ pass+"')");
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -192,7 +192,6 @@ public class LoginDialogActivity extends Activity {
     }
 
     private void getSessionToken(String e){
-
         RequestQueue queue = Volley.newRequestQueue(LoginDialogActivity.this);
         url ="http://10.0.2.2:8000/getSession/"+e+"/";
         // Request a string response from the provided URL.

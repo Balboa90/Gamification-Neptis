@@ -54,7 +54,7 @@ function Todo(){
 	};
 
 	//game1 ottieni il codice del tesoro
-	this.getTreasureCode = function(res){
+	/*this.getTreasureCode = function(res){
 		connection.acquire(function(err,con){
 			con.query('SELECT code from treasure', function(err,result){
 				con.release();
@@ -81,7 +81,7 @@ function Todo(){
 				res.send(result);
 			});
 		});
-	};
+	};*/
 
 	//game1:ottieni tutti gli elementi del tesoro relativo all'heritage passato come parametro
 	this.getTreasureElements = function(name,res){
@@ -227,16 +227,28 @@ function Todo(){
 		});
 	};
 
+	//tutti i game: restituisce tutti gli elementi dell'achievement passato come paramentro
+	this.getAchievementElements = function(code,res){
+		connection.acquire(function(err,con){
+			con.query('SELECT name,description from achievement where code = ?', code, function(err,result){
+				con.release();
+				res.send(result);
+			});
+		});
+	};
+
+
+
 
 	//per tutti i games(achievement description)
-	this.getAchievementDescr = function(code,res){
+	/*this.getAchievementDescr = function(code,res){
 		connection.acquire(function(err,con){
 			con.query('SELECT description from achievement where code = ?', code, function(err,result){
 				con.release();
 				res.send(result);
 			});
 		});
-	};
+	};*/
 
 
 	//per tutti i games(achievement description)
@@ -260,6 +272,17 @@ function Todo(){
 		});
 	};
 
+	this.checkUser = function(email,password,res){
+		connection.acquire(function(err,con){
+			con.query('SELECT EXISTS (SELECT * from user where email=? and password=?)', [email, password], function(err,result){
+				con.release();
+				res.send(result);
+			});
+		});
+	};
+
+
+
 	//Insert token  
 	this.createSession = function(email,password,res){
 		var token = hash.createToken(email,password);
@@ -270,6 +293,15 @@ function Todo(){
 			});
 		});
 	};	
+
+	this.getSession = function(email,res){
+		connection.acquire(function(err,con){
+			con.query('SELECT session from user where email = ?', email, function(err,result){
+				con.release();
+				res.send(result);
+			});
+		});
+	};
 
 
 	//Delete token  

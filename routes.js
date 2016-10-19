@@ -18,10 +18,6 @@ module.exports = {
 				todo.getHeritagesCount(res);
 			});
 
-
-
-
-
 			app.get('/getVisitedHeritagesGame2/',function(req,res){
 				todo.getVisitedHeritagesGame2(res);
 			});
@@ -30,7 +26,7 @@ module.exports = {
 
 
 
-			app.get('/getTreasureCode/',function(req,res){
+			/*app.get('/getTreasureCode/',function(req,res){
 				todo.getTreasureCode(res);
 			});
 			
@@ -40,7 +36,7 @@ module.exports = {
 
 			app.get('/getHeritageTreasureNumber/:name',function(req,res){
 				todo.getHeritageTreasureNumber(req.params.name,res);
-			});
+			});*/
 			
 
 
@@ -100,9 +96,13 @@ module.exports = {
 				todo.getAchievementName(req.params.code,res);
 			});
 
-			app.get('/getAchievementDescr/:code',function(req,res){
-				todo.getAchievementDescr(req.params.code,res);
+			app.get('/getAchievementElements/:code/',function(req,res){
+				todo.getAchievementElements(req.params.code,res);
 			});
+			
+			/*app.get('/getAchievementDescr/:code',function(req,res){
+				todo.getAchievementDescr(req.params.code,res);
+			});*/
 
 			app.get('/getUserFromSession/:session',function(req,res){
 				todo.getUserFromSession(req.params.session,res);
@@ -113,8 +113,20 @@ module.exports = {
 				todo.createUser(req.params.email,req.params.password,res);
 			});
 
+			app.get('/checkUser/:email/:password',function(req,res){
+				todo.checkUser(req.params.email,req.params.password,res);
+			});
+
+			
+			
+
+
 			app.get('/createSession/:email/:password',function(req,res){
 				todo.createSession(req.params.email,req.params.password,res);
+			});
+
+			app.get('/getSession/:email',function(req,res){
+				todo.getSession(req.params.email,res);
 			});
 
 			app.get('/deleteSession/:email',function(req,res){

@@ -103,14 +103,14 @@ public class PortalsMainActivity extends AppCompatActivity {
         redPortalButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               if (accedi == false) {
+               /*if (accedi == false) {
                     Intent openRedPortal = new Intent(PortalsMainActivity.this,LoginDialogActivity.class);
                     startActivityForResult(openRedPortal, RQ_CODE);
 
-                } else {
+               } else {*/
                     Intent openRedPortal = new Intent(PortalsMainActivity.this, PuzzlePortal.class);
                     startActivity(openRedPortal);
-                }
+               //}
             }
         });
         /**
@@ -153,7 +153,7 @@ public class PortalsMainActivity extends AppCompatActivity {
     }
 
     private void goLoginScreen() {
-        Intent openLoginPage = new Intent(this,LoginActivity.class);
+        Intent openLoginPage = new Intent(this,LoginDialogActivity.class);
         openLoginPage.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(openLoginPage);
     }

@@ -12,10 +12,12 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.List;
+
 public class ArrayAdapterAchievement extends ArrayAdapter<ObjAchievement>{
 
     public ArrayAdapterAchievement(Context context, int textViewResourceId,
-                         ObjAchievement [] objects) {
+                         List<ObjAchievement> objects) {
         super(context, textViewResourceId, objects);
     }
 
