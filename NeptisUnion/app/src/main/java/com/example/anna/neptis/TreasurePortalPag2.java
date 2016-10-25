@@ -53,7 +53,7 @@ public class TreasurePortalPag2 extends FragmentActivity implements OnMapReadyCa
     String url2;
     String latitudine;
     String longitudine;
-    String code,lat,lon,info;
+    String code,lat,lon,info;//attributi di Tesoro
     List list; //lista de tesori presenti nell'heritage passato come parametro
 
 
@@ -67,10 +67,6 @@ public class TreasurePortalPag2 extends FragmentActivity implements OnMapReadyCa
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-
-        //per abilitare la scrollview
-        //ScrollView sView = (ScrollView)findViewById(R.id.ScrollView01);
-
 
 
         /*___________________________gestione della gridView all'interno della scrollbar______________________*/
@@ -112,11 +108,6 @@ public class TreasurePortalPag2 extends FragmentActivity implements OnMapReadyCa
 
                         list.add(new Tesoro(code,lat,lon,info));
 
-
-                        /*LatLng herit = new LatLng(Double.parseDouble(lat),Double.parseDouble(lon));
-                        mMap.addMarker(new MarkerOptions().position(herit).title(heritage));
-                        CameraPosition cameraPosition = new CameraPosition.Builder().target(herit).zoom(15).build();
-                        mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));*/
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -143,26 +134,9 @@ public class TreasurePortalPag2 extends FragmentActivity implements OnMapReadyCa
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         // Instance of ImageAdapter Class
-        // gridView.setAdapter(new ImageAdapter(this));
-        /*__________________________fine gestione gridView all'interno della scrollbar________________________*/
+
+
 
         /*___________________________On Click event for Single Gridview Item___________________________*/
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -179,13 +153,13 @@ public class TreasurePortalPag2 extends FragmentActivity implements OnMapReadyCa
 
              ***********************con i dati che ha detto Alessandro***************/
 
-                Toast toast = Toast.makeText(getApplicationContext(),"Selezionato forziere " + position ,Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(v.getContext(),"Selezionato forziere " + position ,Toast.LENGTH_SHORT);
                 toast.show();
 
             }
         });
         /*___________________fine gestione click sui tesori all'interno della scrollbar____________________*/
-
+         /*__________________________fine gestione gridView all'interno della scrollbar________________________*/
 
 
 

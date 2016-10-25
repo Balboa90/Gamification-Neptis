@@ -28,10 +28,9 @@ import java.util.List;
 public class Achievements extends AppCompatActivity {
 
     TextView title;
-
     ListView list_achieve;
+
     String id = "";
-    //ObjAchievement[] list_active;
     List<ObjAchievement> list_active = new LinkedList<ObjAchievement>();
     String url;
     String url2;
@@ -39,18 +38,14 @@ public class Achievements extends AppCompatActivity {
     private String code;
     String achiev_name;
     String achiev_description;
-    int j;
-    int array_code_length = 0;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
 
         id = getIntent().getExtras().getString("game");
-
         setContentView(R.layout.activity_achievements);
-        //TEST
-        //setContentView(R.layout.activity_achievements_test);
 
         title = (TextView) findViewById(R.id.l_achievements_title);
         list_achieve = (ListView) findViewById(R.id.list_achievements);
@@ -74,17 +69,11 @@ public class Achievements extends AppCompatActivity {
             default: break;
         }
 
-        // Request a string response from the provided URL.
-        //RequestQueue queue2 = Volley.newRequestQueue(Achievements.this);
-
-
         JsonArrayRequest jsArray = new JsonArrayRequest(Request.Method.GET, url,null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
                 // Display the first 500 characters of the response string.
-                //Log.d("Response is: ", response.toString());
                 int contLength = response.length();
-                //achiev_code = new String[contLength];
                 try{
                     for(int i = 0;i< contLength;i++){
                         JSONObject jsObj = (JSONObject)response.get(i);
@@ -115,25 +104,21 @@ public class Achievements extends AppCompatActivity {
 
     public void getAchievElements(final String code,String url2){
         JsonArrayRequest jsAchievElements = new JsonArrayRequest(Request.Method.GET, url2, null, new Response.Listener<JSONArray>() {
-           // int j = 0;
             @Override
             public void onResponse(JSONArray response) {
                 // Display the first 500 characters of the response string.
-                //Log.d("Response is: ", response.toString());
                 try {
                     Log.d("code achiev: ",code);
                     JSONObject jsObj =  response.getJSONObject(0);
                     achiev_name = jsObj.getString("name");
                     Log.d("name achiev: ",achiev_name);
-                    //jsObj =  response.getJSONObject(1);
                     achiev_description = jsObj.getString("description");
                     Log.d("description achiev: ",achiev_description);
 
                     achiev_code = code;
-                    //ObjAchievement a_value = new ObjAchievement(achiev_code, achiev_name, achiev_description);
 
                     list_active.add(new ObjAchievement(achiev_code, achiev_name, achiev_description));
-                    //j++;
+
                     ArrayAdapterAchievement adapter = new ArrayAdapterAchievement(Achievements.this, android.R.layout.simple_list_item_1, list_active);
                     list_achieve.setAdapter(adapter);
 

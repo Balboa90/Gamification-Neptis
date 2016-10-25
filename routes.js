@@ -22,25 +22,6 @@ module.exports = {
 				todo.getVisitedHeritagesGame2(res);
 			});
 
-
-
-
-
-			/*app.get('/getTreasureCode/',function(req,res){
-				todo.getTreasureCode(res);
-			});
-			
-			app.get('/getCoordinatesTreasure/:code',function(req,res){
-				todo.getCoordinatesTreasure(req.params.code,res);
-			});
-
-			app.get('/getHeritageTreasureNumber/:name',function(req,res){
-				todo.getHeritageTreasureNumber(req.params.name,res);
-			});*/
-			
-
-
-
 			app.get('/getTreasureElements/:name',function(req,res){
 				todo.getTreasureElements(req.params.name,res);
 			});
@@ -49,8 +30,30 @@ module.exports = {
 				todo.getFoundTreasures(req.params.code,res);
 			});
 				
-		
+			//********GESTIONE CARTE*********//
+			app.get('/getCardCount/',function(req,res){
+				todo.getCardCount(res);
+			});
 
+			app.get('/getCardCode/',function(req,res){
+				todo.getCardCode(res);
+			});
+
+			
+
+			app.get('/getAllCards/',function(req,res){
+				todo.getAllCards(res);
+			});
+
+			app.get('/getTreasureCards/:code',function(req,res){
+				todo.getTreasureCards(req.params.code,res);
+			});
+				
+
+	
+			
+
+			//********FINE GESTIONE CARTE*********//
 
 
 			app.get('/getMedals/:type',function(req,res){

@@ -170,7 +170,6 @@ public class LoginDialogActivity extends Activity {
     }
 
     private void createSessionToken(String e, String p){
-
         RequestQueue queue = Volley.newRequestQueue(LoginDialogActivity.this);
         url ="http://10.0.2.2:8000/createSession/"+e+"/"+p+"/";
         // Request a string response from the provided URL.

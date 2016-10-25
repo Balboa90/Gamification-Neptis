@@ -39,7 +39,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity" />
+        <activity android:name=".CardInfoActivity" />
         <activity
             android:name=".TreasurePortalPag1"
             android:parentActivityName=".PortalsMainActivity" />
@@ -47,22 +47,24 @@
             android:name=".TreasurePortalPag2"
             android:parentActivityName=".TreasurePortalPag1" />
         <activity
-            android:name=".RegisterActivity"
-            android:parentActivityName=".LoginActivity" />
+            android:name=".RegisterActivity"/>
         <activity
             android:name=".TravelPortalActivity"
             android:parentActivityName=".PortalsMainActivity" />
         <activity
             android:name=".MedalsActivity"
             android:parentActivityName=".TravelPortalActivity" />
-        <activity android:name=".WelcomeActivity" />
         <activity
             android:name=".LoginDialogActivity"
             android:theme="@android:style/Theme.Holo.Light.Dialog.NoActionBar" />
         <activity android:name=".PuzzlePortal" />
         <activity android:name=".Achievements" />
         <activity android:name=".ShowPuzzle" />
-        <activity android:name=".Treasure"></activity>
+
+        <activity android:name=".ManageCards" />
+
+
+
     </application>
 
 </manifest>

@@ -53,36 +53,6 @@ function Todo(){
 		});
 	};
 
-	//game1 ottieni il codice del tesoro
-	/*this.getTreasureCode = function(res){
-		connection.acquire(function(err,con){
-			con.query('SELECT code from treasure', function(err,result){
-				con.release();
-				res.send(result);
-			});
-		});
-	};
-
-	//coordinate singoli tesori game1
-	this.getCoordinatesTreasure = function(code,res){
-		connection.acquire(function(err,con){
-			con.query('SELECT latitude,longitude from treasure where code = ?',name, function(err,result){
-				con.release();
-				res.send(result);
-			});
-		});
-	};
-
-	//game1: ottieni il numero dei tesori relativi all'heritage passato come parametro
-	this.getHeritageTreasureNumber = function(name,res){
-		connection.acquire(function(err,con){
-			con.query('SELECT count(treasure) as treasureCount from TH where heritage = ?',name, function(err,result){
-				con.release();
-				res.send(result);
-			});
-		});
-	};*/
-
 	//game1:ottieni tutti gli elementi del tesoro relativo all'heritage passato come parametro
 	this.getTreasureElements = function(name,res){
 		connection.acquire(function(err,con){
@@ -92,8 +62,6 @@ function Todo(){
 			});
 		});
 	};
-
-
 
 	//game1: ottieni i tesori trovati(saranno i marker verdi nella mappa)
 	this.getFoundTreasures = function(name,res){
@@ -105,8 +73,54 @@ function Todo(){
 		});
 	};
 
+	//*********GESTIONE CARTE*********//
+	//game1:ottieni il totale delle carte
+	this.getCardCount = function(res){
+		connection.acquire(function(err,con){
+			con.query('SELECT count(code) as conto from card', function(err,result){
+				con.release();
+				res.send(result);
+			});
+		});
+	};
 
-	//per tutti i game (medaglie )
+	//game1:ottieni i codici delle carte
+	this.getCardCode = function(res){
+		connection.acquire(function(err,con){
+			con.query('SELECT code from card', function(err,result){
+				con.release();
+				res.send(result);
+			});
+		});
+	};
+
+	//game1:ottieni tutte le carte
+	this.getAllCards = function(res){
+		connection.acquire(function(err,con){
+			con.query('SELECT * from card', function(err,result){
+				con.release();
+				res.send(result);
+			});
+		});
+	};
+
+	//game1:ottieni le carte relative al tesoro passato come paramentro
+	this.getTreasureCards = function(code,res){
+		connection.acquire(function(err,con){
+			con.query('SELECT card from TC where treasure = ?',code, function(err,result){
+				con.release();
+				res.send(result);
+			});
+		});
+	};
+
+
+
+
+	//*********FINE GESTIONE CARTE*********//
+
+
+	//per tutti i game (medaglie)
 	this.getMedals= function(type,res){
 		connection.acquire(function(err,con){
 			con.query('SELECT name from medal where type = ?',type, function(err,result){

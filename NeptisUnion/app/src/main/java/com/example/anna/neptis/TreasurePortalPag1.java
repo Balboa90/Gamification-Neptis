@@ -117,8 +117,10 @@ public class TreasurePortalPag1 extends AppCompatActivity implements OnItemSelec
         card_list_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast toast = Toast.makeText(view.getContext(),"Hai cliccato su cards list",Toast.LENGTH_SHORT);
-                toast.show();
+                Intent openManageCard = new Intent(TreasurePortalPag1.this,ManageCards.class);
+                startActivity(openManageCard);
+                /*Toast toast = Toast.makeText(view.getContext(),"Hai cliccato su cards list",Toast.LENGTH_SHORT);
+                toast.show();*/
 
             }});
         ImageButton achivement_list_image= (ImageButton) findViewById(R.id.achieve);
