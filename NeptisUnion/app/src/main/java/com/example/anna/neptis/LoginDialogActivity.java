@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -42,11 +43,15 @@ public class LoginDialogActivity extends Activity {
     private String user;
     private String pass;
     private String session_result="";
+    private final static String SESSION = "session";
+    private final static String CURRENT_SESSION = "current_session";
+    private final static String DEFAULT_SESSION= "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
 
         final EditText username = (EditText)findViewById(R.id.regEmail);
         final EditText password = (EditText)findViewById(R.id.regPassword);
@@ -110,11 +115,23 @@ public class LoginDialogActivity extends Activity {
                         }
                         if (isLog==1) {
                             Toast.makeText(LoginDialogActivity.this, "Autenticazione avvenuta con successo!", Toast.LENGTH_LONG).show();
+
+
                             // REGISTRA CHIAVE DI SESSIONE
                             createSessionToken(user,pass);
-                            getSessionToken(user);
-                            Intent returnMain = new Intent(LoginDialogActivity.this, PortalsMainActivity.class);
-                            startActivity(returnMain);
+
+                            //l'activity si apre dopo un certo tempo (dopo che è terminato l'insert della chiave di sessione)
+                            Handler mHandler = new Handler();
+                            mHandler.postDelayed(new Runnable() {
+
+                                @Override
+                                public void run() {
+                                    //start your activity here
+                                    getSessionToken(user);
+                                }
+
+                            }, 1000L);
+
                         }else {Toast.makeText(LoginDialogActivity.this, "User inesistente! Ricontrollare i dati inseriti.", Toast.LENGTH_LONG).show();}
                     }
                 }, new Response.ErrorListener() {
@@ -201,7 +218,19 @@ public class LoginDialogActivity extends Activity {
                 try {
                     JSONObject obj_sess = response.getJSONObject(0);
                     session_result = obj_sess.getString("session");
-                    Log.d("session result :",session_result);
+                    Log.d("get session token :",session_result);
+
+                    //////////////////
+                    //SALVA CHIAVE SESSIONE IN PREFERENZE
+                    //////////////////
+                    SharedPreferences prefs = getSharedPreferences(SESSION, Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = prefs.edit();
+                    editor.putString(CURRENT_SESSION, session_result);
+                    editor.apply();
+
+                    Intent returnMain = new Intent(LoginDialogActivity.this, PortalsMainActivity.class);
+                    startActivity(returnMain);
+
                 } catch (JSONException e1) {
                     e1.printStackTrace();
                 }

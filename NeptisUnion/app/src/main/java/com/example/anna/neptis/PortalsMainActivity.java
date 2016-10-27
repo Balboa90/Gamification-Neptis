@@ -1,7 +1,9 @@
 package com.example.anna.neptis;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -35,6 +37,9 @@ public class PortalsMainActivity extends AppCompatActivity {
 
     boolean accedi = false;
     final static int RQ_CODE = 1;
+    private SharedPreferences prefs;
+    private String pre;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,12 +49,11 @@ public class PortalsMainActivity extends AppCompatActivity {
         actionBar.hide();
 
 
-        //verifico se la sessione è iniziata o meno
-        //in questo caso verifico la sessione normale
-        /*if(LoginActivity.flag_login_session == false) {*/
-            //in questo caso verifico la sessione tramite facebook
-
-        //}
+        //DEBUG CONTROLLO PREFERENZE//
+        prefs = getSharedPreferences("session", Context.MODE_PRIVATE);
+        pre = prefs.getString("current_session", "");
+        Log.d("Preferenze salvate: ",pre);
+        //////////////////////////////
 
         /*__________________gestione imageButton dei 4 portali____________________*/
 
@@ -62,14 +66,14 @@ public class PortalsMainActivity extends AppCompatActivity {
         yellowPortalButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*if (accedi == false) {
+                if ( pre == "") {
                     Intent openYellowPortal = new Intent(PortalsMainActivity.this, LoginDialogActivity.class);
                     startActivityForResult(openYellowPortal, RQ_CODE);
 
-                } else {*/
+                } else {
                     Intent openYellowPortal = new Intent(PortalsMainActivity.this, TreasurePortalPag1.class);
                     startActivity(openYellowPortal);
-               // }
+                }
                     }
                // }
 
@@ -84,14 +88,14 @@ public class PortalsMainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                /*if (accedi == false) {
+                if (pre == "") {
                     Intent openGreenPortal = new Intent(PortalsMainActivity.this,LoginDialogActivity.class);
                     startActivityForResult(openGreenPortal, RQ_CODE);
 
-                } else {*/
+                } else {
                     Intent openGreenPortal = new Intent(PortalsMainActivity.this, TravelPortalActivity.class);
                     startActivity(openGreenPortal);
-                //}
+                }
             }
         });
         /**
@@ -103,14 +107,14 @@ public class PortalsMainActivity extends AppCompatActivity {
         redPortalButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               /*if (accedi == false) {
+               if (pre == "") {
                     Intent openRedPortal = new Intent(PortalsMainActivity.this,LoginDialogActivity.class);
                     startActivityForResult(openRedPortal, RQ_CODE);
 
-               } else {*/
+               } else {
                     Intent openRedPortal = new Intent(PortalsMainActivity.this, PuzzlePortal.class);
                     startActivity(openRedPortal);
-               //}
+               }
             }
         });
         /**
@@ -151,6 +155,16 @@ public class PortalsMainActivity extends AppCompatActivity {
 
 
     }
+    @Override
+    protected void onResume(){
+        super.onResume();
+        //DEBUG CONTROLLO PREFERENZE//
+        prefs = getSharedPreferences("session", Context.MODE_PRIVATE);
+        pre = prefs.getString("current_session", "");
+        Log.d("Preferenze salvate: ",pre);
+        //////////////////////////////
+    }
+
 
     private void goLoginScreen() {
         Intent openLoginPage = new Intent(this,LoginDialogActivity.class);
@@ -179,6 +193,15 @@ public class PortalsMainActivity extends AppCompatActivity {
 
 
     public void logout(View view) {
+
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("current_session", "");
+        editor.apply();
+
+        Toast.makeText(view.getContext(),"LogOutEffettuato",Toast.LENGTH_SHORT).show();
+        Intent logout = new Intent(PortalsMainActivity.this,LoginDialogActivity.class);
+        startActivityForResult(logout, RQ_CODE);
+        /*
         if(LoginDialogActivity.flag_login_session == true) {
             deleteFacebookApplication();
             LoginManager.getInstance().logOut();
@@ -187,13 +210,14 @@ public class PortalsMainActivity extends AppCompatActivity {
             startActivity(openPagLogin);
             //goLoginScreen();
             //Per uscire dall'app appena viene premuto il tasto dil logout
-
+        */
             /*moveTaskToBack(true);
             android.os.Process.killProcess(android.os.Process.myPid());
             System.exit(1);*/
-        }else{
+        /*}else{
             Toast.makeText(view.getContext(),"Impossibile effettuare il logout. Utente non loggato..",Toast.LENGTH_SHORT).show();
         }
+        */
 
         //NB: non viene chiusa l'app, rimane aperta in background
         /*Intent intent = new Intent(Intent.ACTION_MAIN);
