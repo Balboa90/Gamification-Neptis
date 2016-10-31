@@ -13,13 +13,16 @@
         android:orientation="vertical"
         android:layout_gravity="center">
 
-        <ListView
-            android:id="@+id/list_treasures"
+        <GridView
+            android:id="@+id/grid_treasures"
             android:layout_width="300dp"
             android:layout_height="100dp"
-            android:descendantFocusability="blocksDescendants"
+            android:columnWidth="90dp"
+            android:numColumns="3"
+            android:gravity="top"
             android:layout_gravity="center"
-            android:layout_centerHorizontal="true"/>
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="5dp"/>
 
         <fragment xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:tools="http://schemas.android.com/tools"

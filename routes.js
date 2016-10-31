@@ -10,33 +10,21 @@ module.exports = {
 				todo.getCoordinatesHeritage(req.params.name,res);
 			});
 
-			app.get('/getVisitedHeritagesCount/:code',function(req,res){
-				todo.getVisitedHeritagesCount(req.params.code,res);
+			app.get('/getVisitedHeritagesCount/',function(req,res){
+				todo.getVisitedHeritagesCount(res);
 			});
 
 			app.get('/getHeritagesCount/',function(req,res){
 				todo.getHeritagesCount(res);
 			});
 
-			app.get('/getVisitedHeritagesGame2/:code',function(req,res){
-				todo.getVisitedHeritagesGame2(req.params.code,res);
+			app.get('/getVisitedHeritagesGame2/',function(req,res){
+				todo.getVisitedHeritagesGame2(res);
 			});
 
 			app.get('/getTreasureElements/:name',function(req,res){
 				todo.getTreasureElements(req.params.name,res);
 			});
-
-
-			app.get('/getInfoTreasure/:code',function(req,res){
-				todo.getInfoTreasure(req.params.code,res);
-			});
-			
-
-			app.get('/getHeritagesGame2/',function(req,res){
-				todo.getHeritagesGame2(res);
-			});
-
-			
 
 			app.get('/getFoundTreasures/:code',function(req,res){
 				todo.getFoundTreasures(req.params.code,res);
@@ -51,19 +39,15 @@ module.exports = {
 				todo.getCardCode(res);
 			});
 
+			
+
 			app.get('/getAllCards/',function(req,res){
 				todo.getAllCards(res);
 			});
 
-			/*app.get('/getTreasureCardInfo/:code',function(req,res){
-				todo.getTreasureCardInfo(req.params.code,res);
-			});*/
-
-			app.get('/getTreasureCardInfo/:email/:code',function(req,res){
-				todo.getTreasureCardInfo(req.params.email,req.params.code,res);
+			app.get('/getTreasureCards/:code',function(req,res){
+				todo.getTreasureCards(req.params.code,res);
 			});
-
-			
 				
 
 	

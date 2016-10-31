@@ -453,7 +453,7 @@ insert into User values('player4@gmail.it','pass4',null,null,0,'game10004','game
 insert into User values('player5@gmail.it','pass5',null,null,0,'game10005','game20005','game30005','game40005');
 insert into User values('player6@gmail.it','pass6',null,null,0,'game10006','game20006','game30006','game40006');
 insert into User values('player7@gmail.it','pass7',null,null,0,'game10007','game20007','game30007','game40007');
-insert into User values('player8','pass8',null,null,0,'game10008','game20008','game30008','game40008');
+insert into User values('player8@gmail.it','pass8',null,null,0,'game10008','game20008','game30008','game40008');
 
 insert into Game1 values('game10001','player1@gmail.it');
 insert into Game1 values('game10002','player2@gmail.it');
@@ -511,7 +511,7 @@ insert into Review values('game40008','Colosseo',0,0,'Mi piacciono i romani');
 
 insert into Tc values('treas0001','card0001');
 insert into Tc values('treas0001','card0005');
-insert into Tc values('treas0001','card0019');
+insert into Tc values('treas0001','card0021');
 insert into Tc values('treas0001','card0020');
 insert into Tc values('treas0001','card0008');
 insert into Tc values('treas0002','card0017');
@@ -641,46 +641,23 @@ insert into G4h values('game40008','Colosseo');
 
 
 
+
+
 insert into G1c values('game10001','card0001');
 insert into G1c values('game10001','card0005');
-insert into G1c values('game10001','card0019');
-insert into G1c values('game10001','card0020');
-insert into G1c values('game10001','card0008');
-insert into G1c values('game10002','card0017');
+insert into G1c values('game10002','card0010');
+insert into G1c values('game10002','card0015');
+insert into G1c values('game10002','card0001');
 insert into G1c values('game10002','card0004');
-insert into G1c values('game10002','card0009');
-insert into G1c values('game10002','card0019');
-insert into G1c values('game10002','card0014');
 insert into G1c values('game10003','card0009');
-insert into G1c values('game10003','card0020');
-insert into G1c values('game10003','card0018');
-insert into G1c values('game10003','card0013');
-insert into G1c values('game10003','card0011');
-insert into G1c values('game10004','card0007');
-insert into G1c values('game10004','card0016');
-insert into G1c values('game10004','card0002');
-insert into G1c values('game10004','card0004');
-insert into G1c values('game10004','card0007');
-insert into G1c values('game10005','card0013');
-insert into G1c values('game10005','card0014');
-insert into G1c values('game10005','card0008');
-insert into G1c values('game10005','card0003');
-insert into G1c values('game10005','card0009');
-insert into G1c values('game10006','card0010');
-insert into G1c values('game10006','card0012');
-insert into G1c values('game10006','card0004');
-insert into G1c values('game10006','card0006');
-insert into G1c values('game10006','card0008');
+insert into G1c values('game10004','card0020');
+insert into G1c values('game10005','card0020');
+insert into G1c values('game10006','card0013');
 insert into G1c values('game10007','card0011');
-insert into G1c values('game10007','card0013');
-insert into G1c values('game10007','card0005');
-insert into G1c values('game10007','card0007');
-insert into G1c values('game10007','card0002');
 insert into G1c values('game10008','card0007');
 insert into G1c values('game10008','card0008');
 insert into G1c values('game10008','card0009');
 insert into G1c values('game10008','card0001');
-insert into G1c values('game10008','card0017');
 
 insert into Mg1 values('mission0001','game10001');
 insert into Mg1 values('mission0005','game10004');

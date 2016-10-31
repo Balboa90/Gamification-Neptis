@@ -29,7 +29,7 @@ public class CardAdapter extends ArrayAdapter<ObjCard> {
         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         convertView = inflater.inflate(R.layout.adapter_card, null);
         ImageView card = (ImageView) convertView.findViewById(R.id.card_icon);
-
+        //TextView code = (TextView)convertView.findViewById(R.id.codice_carta);
         TextView cost = (TextView)convertView.findViewById(R.id.valore_costo);
         TextView name = (TextView)convertView.findViewById(R.id.nome);
 
@@ -37,13 +37,16 @@ public class CardAdapter extends ArrayAdapter<ObjCard> {
         TextView des = (TextView)convertView.findViewById(R.id.d);
         ObjCard t = getItem(position);
 
+        //code.setText(t.getCode());
         cost.setText(t.getCost());
         name.setText(t.getName());
         des.setText(t.getDescription());
         s.setNestedScrollingEnabled(true);
 
-        int img_id = position;
-        card.setImageResource(t.getCardImage(img_id));
+        card.setImageResource(t.getCardImage());
+
+
+
 
 
         return convertView;

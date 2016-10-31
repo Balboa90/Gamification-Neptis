@@ -40,10 +40,6 @@ public class PortalsMainActivity extends AppCompatActivity {
     private SharedPreferences prefs;
     private String pre;
 
-    private String user,pass;
-    private User current_user;
-    TextView utente_loggato;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,23 +47,6 @@ public class PortalsMainActivity extends AppCompatActivity {
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
-
-        utente_loggato = (TextView)findViewById(R.id.nome_user);
-        utente_loggato.setText("Eseguire l'accesso");
-
-
-        accedi = Boolean.parseBoolean(getIntent().getExtras().getString("accedi"));
-
-        if(accedi) {
-            user = getIntent().getExtras().getString("email");
-            Log.d("EMAIL: ", user);
-            pass = getIntent().getExtras().getString("password");
-            Log.d("PASSWORD: ", pass);
-
-            current_user = new User(user, pass);
-            utente_loggato.setText(current_user.getEmail());
-        }
-
 
 
         //DEBUG CONTROLLO PREFERENZE//
@@ -87,17 +66,16 @@ public class PortalsMainActivity extends AppCompatActivity {
         yellowPortalButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*if ( pre == "") {
+                if ( pre == "") {
                     Intent openYellowPortal = new Intent(PortalsMainActivity.this, LoginDialogActivity.class);
                     startActivityForResult(openYellowPortal, RQ_CODE);
 
-                } else {*/
+                } else {
                     Intent openYellowPortal = new Intent(PortalsMainActivity.this, TreasurePortalPag1.class);
-                    openYellowPortal.putExtra("user",user);
                     startActivity(openYellowPortal);
-                //}
-            }
-            // }
+                }
+                    }
+               // }
 
         });
         /**
@@ -116,7 +94,6 @@ public class PortalsMainActivity extends AppCompatActivity {
 
                 } else {
                     Intent openGreenPortal = new Intent(PortalsMainActivity.this, TravelPortalActivity.class);
-                    openGreenPortal.putExtra("user",user);
                     startActivity(openGreenPortal);
                 }
             }
@@ -130,17 +107,14 @@ public class PortalsMainActivity extends AppCompatActivity {
         redPortalButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (pre == "") {
+               if (pre == "") {
                     Intent openRedPortal = new Intent(PortalsMainActivity.this,LoginDialogActivity.class);
                     startActivityForResult(openRedPortal, RQ_CODE);
 
-
-
-                } else {
+               } else {
                     Intent openRedPortal = new Intent(PortalsMainActivity.this, PuzzlePortal.class);
-                    openRedPortal.putExtra("user",user);
                     startActivity(openRedPortal);
-                }
+               }
             }
         });
         /**
@@ -157,6 +131,27 @@ public class PortalsMainActivity extends AppCompatActivity {
             }
         });
         /*____________________fine gestione imageButton dei 4 portali_______________________*/
+
+
+
+
+        /*__________________gestione imageButton login FACEBOOK____________________*/
+        /**
+         *
+         * MANAGEMENT FACEBOOK LOGIN
+         *
+         */
+        /*ImageButton facebookLogin = (ImageButton)findViewById(R.id.facebook_icon);
+        facebookLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast toast = Toast.makeText(view.getContext(),"Facebook login",Toast.LENGTH_SHORT);
+                toast.show();
+            }
+        });*/
+        /*____________________fine gestione imageButton login FACEBOOK_______________________*/
+
+
 
 
     }
@@ -179,7 +174,7 @@ public class PortalsMainActivity extends AppCompatActivity {
 
     //revoke permession
     void deleteFacebookApplication(){
-        new GraphRequest(AccessToken.getCurrentAccessToken(), "/me/permissions", null, HttpMethod.DELETE, new GraphRequest.Callback() {
+       new GraphRequest(AccessToken.getCurrentAccessToken(), "/me/permissions", null, HttpMethod.DELETE, new GraphRequest.Callback() {
             @Override
             public void onCompleted(GraphResponse response) {
                 boolean isSuccess = false;
@@ -202,9 +197,6 @@ public class PortalsMainActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString("current_session", "");
         editor.apply();
-
-        utente_loggato.setText("Eseguire l'accesso");
-        accedi = false;
 
         Toast.makeText(view.getContext(),"LogOutEffettuato",Toast.LENGTH_SHORT).show();
         Intent logout = new Intent(PortalsMainActivity.this,LoginDialogActivity.class);

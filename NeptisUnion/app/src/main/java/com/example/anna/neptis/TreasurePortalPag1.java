@@ -43,8 +43,6 @@ public class TreasurePortalPag1 extends AppCompatActivity implements OnItemSelec
     private ImageView lente = null;
     String item;
 
-    String user;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,8 +50,6 @@ public class TreasurePortalPag1 extends AppCompatActivity implements OnItemSelec
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
-
-        user = getIntent().getExtras().getString("user");
 
         lente = (ImageView)findViewById(R.id.lens);
         //lente.setImageAlpha(100);
@@ -163,7 +159,6 @@ public class TreasurePortalPag1 extends AppCompatActivity implements OnItemSelec
                     //start your activity here
                     Intent openTreasurePage2 = new Intent(TreasurePortalPag1.this,TreasurePortalPag2.class);
                     openTreasurePage2.putExtra("heritage",item);
-                    openTreasurePage2.putExtra("user",user);
                     startActivity(openTreasurePage2);
                 }
 

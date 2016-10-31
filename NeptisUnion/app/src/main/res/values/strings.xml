@@ -21,6 +21,14 @@
     <string name="logout">Logout</string>
 
 
+    <!--<string-array name="spinner_options">
+        <item></item>
+        <item>Colosseo</item>
+        <item>San Pietro</item>
+        <item>Musei Vaticani</item>
+        <item>Villa Borghese</item>
+        <item>Castel Sant\'Angelo</item>
+    </string-array>-->
 
     <string name="title_travel">Travel Portal</string>
     <!-- <string name="google_maps_key">AIzaSyCqEkdkjEv2l9kvTV74woCIHzb98EmSD6s</string>-->

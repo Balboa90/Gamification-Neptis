@@ -17,137 +17,172 @@
         android:layout_gravity="center"
         android:gravity="center">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="420dp"
-            android:id="@+id/portali"
-            android:gravity="center"
-            android:layout_marginTop="70dp">
 
+        <!-- <ImageButton
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:id="@+id/facebook_icon"
+              android:src="@drawable/facebook_icon"
+              android:scaleType="fitStart"
+              android:adjustViewBounds="true"
+              android:layout_marginLeft="@dimen/face_icon_margin_size"
+              android:layout_alignParentTop="true"
+              android:layout_alignParentStart="true" />
 
-            <ImageButton
-                android:layout_width="@dimen/portal_width"
-                android:layout_height="140dp"
-                android:id="@+id/yellow_portal"
-                android:src="@drawable/portal"
-                android:scaleType="fitCenter"
-                android:padding="@dimen/padding_portal"
-                android:background="@android:color/transparent"
-                android:layout_marginBottom="220dp"
-                android:layout_marginRight="180dp"/>
+          <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:textColor="@color/com_facebook_blue"
+              android:textAppearance="?android:attr/textAppearanceMedium"
+              android:text="Login Register"
+              android:id="@+id/login"
+              android:layout_toRightOf="@+id/facebook_icon"
+              android:layout_centerVertical="true"
+              android:layout_marginLeft="@dimen/login_register_margin_size"
+              android:textSize="@dimen/login_text_size" />-->
 
-            <ImageButton
-                android:layout_width="@dimen/portal_width"
-                android:layout_height="140dp"
-                android:id="@+id/green_portal"
-                android:src="@drawable/portal"
-                android:scaleType="fitCenter"
-                android:padding="@dimen/padding_portal"
-                android:background="@android:color/transparent"
-                android:layout_marginLeft="180dp"
-                android:layout_marginBottom="220dp"
-                />
-
-            <ImageButton
-                android:layout_width="@dimen/portal_width"
-                android:layout_height="140dp"
-                android:id="@+id/red_portal"
-                android:src="@drawable/portal"
-                android:scaleType="fitCenter"
-                android:padding="@dimen/padding_portal"
-                android:background="@android:color/transparent"
-                android:layout_marginTop="220dp"
-                android:layout_marginRight="180dp"
-                />
-
-            <ImageButton
-                android:layout_width="@dimen/portal_width"
-                android:layout_height="140dp"
-                android:id="@+id/blue_portal"
-                android:src="@drawable/portal"
-                android:scaleType="fitCenter"
-                android:padding="@dimen/padding_portal"
-                android:background="@android:color/transparent"
-                android:layout_marginTop="220dp"
-                android:layout_marginLeft="180dp"
-                />
-
-
-            <ImageView
-                android:layout_width="@dimen/logo_width_height_size"
-                android:layout_height="@dimen/logo_width_height_size"
-                android:id="@+id/logo_app"
-                android:src="@drawable/logo"
-                android:layout_marginRight="9dp"
-                android:layout_marginTop="145dp"
-                android:layout_marginLeft="113dp"
-                />
-
-
-
-            <TextView
-                android:id="@+id/accesso"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/red_portal"
-                android:text="Hai effettuato il login come: "
-                android:layout_marginTop="35dp"
-                android:layout_marginLeft="10dp"
-                android:textSize="12sp"/>
-
-            <TextView
-                android:id="@+id/nome_user"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/red_portal"
-                android:text="textView"
-                android:layout_marginTop="35dp"
-                android:layout_marginLeft="162dp"
-                android:textSize="12sp"/>
-
-            <ImageButton
-                android:layout_height="23dp"
-                android:layout_width="23dp"
-                android:onClick="logout"
-                android:id="@+id/logout_icon"
-                android:src="@drawable/exit_logout"
-                android:scaleType="centerCrop"
-                android:background="@android:color/transparent"
-                android:layout_below="@+id/red_portal"
-                android:layout_marginTop="30dp"
-                android:layout_marginLeft="280dp"
-                />
-
-        </RelativeLayout>
 
         <TextView
-            android:layout_width="180dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="GoPoleis"
+            android:text="TITLE"
             android:id="@+id/title_text"
             android:textSize="@dimen/title_size"
             android:layout_gravity="center"
             android:gravity="center"
-            android:layout_marginLeft="75dp"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="450dp" />
+            android:layout_alignParentStart="true" />
 
-        <!--<ImageButton
-            android:layout_height="35dp"
-            android:layout_width="35dp"
-            android:onClick="logout"
-            android:id="@+id/logout_icon"
-            android:src="@drawable/exit_logout"
-            android:scaleType="centerCrop"
-            android:background="@android:color/transparent"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="5dp"
-            android:layout_toEndOf="@+id/title_text" />-->
+        <ImageView
+            android:layout_width="@dimen/logo_width_height_size"
+            android:layout_height="@dimen/logo_width_height_size"
+            android:id="@+id/logo_app"
+            android:src="@drawable/logo"
+            android:layout_marginLeft="@dimen/logo_margin_size"
+            android:layout_marginRight="@dimen/logo_margin_size"
+            android:layout_centerInParent="false"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="41dp" />
 
-        <!---->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:id="@+id/portali"
+            android:gravity="center"
+            android:layout_below="@+id/title_text"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="25dp"
+            android:layout_height="430dp">
 
 
+            <!-- <ImageButton
+                android:layout_height="wrap_content"
+                android:id="@+id/facebook_icon"
+                android:src="@drawable/facebook_icon"
+                android:scaleType="fitStart"
+                android:adjustViewBounds="true"
+                android:layout_marginLeft="@dimen/face_icon_margin_size"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentStart="true"
+                android:padding="2dp"
+                android:layout_width="70dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/com_facebook_blue"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Login Register"
+                android:id="@+id/login"
+                android:layout_marginLeft="@dimen/login_register_margin_size"
+                android:textSize="@dimen/login_text_size"
+                android:layout_marginStart="11dp"
+                android:layout_marginBottom="22dp"
+                android:layout_alignParentBottom="true"
+                android:layout_toEndOf="@+id/facebook_icon" />
+            -->
+            <!--<TextView
+                android:textColor="@color/colosseo_background"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/logout"
+                android:id="@+id/logout"
+                android:textSize="7sp"
+                android:layout_below="@+id/logout_icon"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="5dp" />-->
+
+
+            <ImageButton
+                android:onClick="logout"
+                android:id="@+id/logout_icon"
+                android:src="@drawable/exit_logout"
+                android:backgroundTint="@android:color/background_light"
+                android:layout_marginRight="7dp"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/yellow_portal"
+                android:scaleType="centerCrop"
+                android:layout_height="90dp"
+                android:layout_width="90dp"
+                android:background="@android:color/transparent" />
+
+            <ImageButton
+                android:layout_width="@dimen/portal_width"
+                android:layout_height="wrap_content"
+                android:id="@+id/blue_portal"
+                android:src="@drawable/portal"
+                android:layout_marginLeft="@dimen/portals_margin_size"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                android:padding="@dimen/padding_portal"
+                android:layout_below="@+id/logout_icon"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="9dp"
+                android:background="@android:color/transparent" />
+
+            <ImageButton
+                android:layout_width="@dimen/portal_width"
+                android:layout_height="wrap_content"
+                android:id="@+id/yellow_portal"
+                android:src="@drawable/portal"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                android:layout_marginRight="@dimen/portals_margin_size"
+                android:padding="@dimen/padding_portal"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                android:background="@android:color/transparent" />
+
+
+
+            <ImageButton
+                android:layout_height="wrap_content"
+                android:id="@+id/red_portal"
+                android:src="@drawable/portal"
+                android:layout_marginRight="@dimen/portals_margin_size"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                android:padding="@dimen/padding_portal"
+                android:layout_width="@dimen/portal_width"
+                android:background="@android:color/transparent"
+                android:layout_below="@+id/logout_icon"
+                android:layout_alignParentStart="true" />
+
+            <ImageButton
+                android:layout_width="@dimen/portal_width"
+                android:layout_height="wrap_content"
+                android:id="@+id/green_portal"
+                android:src="@drawable/portal"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                android:layout_marginLeft="@dimen/portals_margin_size"
+                android:padding="@dimen/padding_portal"
+                android:background="@android:color/transparent"
+                android:layout_above="@+id/logout_icon"
+                android:layout_alignParentEnd="true" />
+
+        </RelativeLayout>
 
     </RelativeLayout>
 </ScrollView>
