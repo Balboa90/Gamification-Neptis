@@ -47,6 +47,8 @@ public class LoginDialogActivity extends Activity {
     private final static String CURRENT_SESSION = "current_session";
     private final static String DEFAULT_SESSION= "";
 
+    private User u;//current_user
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,6 +94,8 @@ public class LoginDialogActivity extends Activity {
 
                 user = username.getText().toString();
                 pass = password.getText().toString();
+
+                u= new User(user,pass);
 
                 /***********_______START TEMPLATE JSON REQUEST________**********/
 
@@ -229,6 +233,9 @@ public class LoginDialogActivity extends Activity {
                     editor.apply();
 
                     Intent returnMain = new Intent(LoginDialogActivity.this, PortalsMainActivity.class);
+                    returnMain.putExtra("email",u.getEmail());
+                    returnMain.putExtra("password",u.getPassword());
+                    returnMain.putExtra("accedi",Boolean.toString(true));
                     startActivity(returnMain);
 
                 } catch (JSONException e1) {
@@ -255,4 +262,5 @@ public class LoginDialogActivity extends Activity {
     public static boolean getFlagLogin(){
         return flag_login_session;
     }
+
 }

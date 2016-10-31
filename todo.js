@@ -22,21 +22,23 @@ function Todo(){
 			});
 		});
 	};
+
+
 	
 	//game2 (insieme degli heritage visitati nel game2)
-	this.getVisitedHeritagesCount = function(res){
+	this.getVisitedHeritagesCount = function(code,res){
 		connection.acquire(function(err,con){
-			con.query('SELECT count(distinct heritage) as visitConto from g2h', function(err,result){
+			con.query('SELECT count(heritage) as visitConto from g2h where game2 = ?',code, function(err,result){
 				con.release();
 				res.send(result);
 			});
 		});
 	};
 
-	//game2 (insieme degli heritage)
+	//game2 (insieme degli heritage appartenenti al game 2)
 	this.getHeritagesCount = function(res){
 		connection.acquire(function(err,con){
-			con.query('SELECT count(name) as conto from heritage', function(err,result){
+			con.query('SELECT count(name) as conto from heritage where g2 = true', function(err,result){
 				con.release();
 				res.send(result);
 			});
@@ -44,9 +46,20 @@ function Todo(){
 	};
 
 	//game1 (per game2)
-	this.getVisitedHeritagesGame2 = function(res){
+	this.getHeritagesGame2 = function(res){
 		connection.acquire(function(err,con){
-			con.query('SELECT distinct heritage from g2h', function(err,result){
+			con.query('SELECT name,latitude,longitude,period,region,typology from heritage where g2 = true', function(err,result){
+				con.release();
+				res.send(result);
+			});
+		});
+	};
+
+
+	//game1 (per game2)
+	this.getVisitedHeritagesGame2 = function(code,res){
+		connection.acquire(function(err,con){
+			con.query('SELECT heritage from g2h where game2 = ?',code, function(err,result){
 				con.release();
 				res.send(result);
 			});
@@ -57,6 +70,16 @@ function Todo(){
 	this.getTreasureElements = function(name,res){
 		connection.acquire(function(err,con){
 			con.query('SELECT code,latitude,longitude,info from treasure where heritage = ?', name,function(err,result){
+				con.release();
+				res.send(result);
+			});
+		});
+	};
+
+	//game1:ottieni tutti gli elementi del tesoro passato come parametro
+	this.getInfoTreasure = function(code,res){
+		connection.acquire(function(err,con){
+			con.query('SELECT info,latitude,longitude from treasure where code = ?', code,function(err,result){
 				con.release();
 				res.send(result);
 			});
@@ -103,16 +126,27 @@ function Todo(){
 			});
 		});
 	};
-
-	//game1:ottieni le carte relative al tesoro passato come paramentro
-	this.getTreasureCards = function(code,res){
+	/*
+	//game1:ottieni le info della carta relativa al tesoro passato come parametro
+	this.getTreasureCardInfo = function(code,res){
 		connection.acquire(function(err,con){
-			con.query('SELECT card from TC where treasure = ?',code, function(err,result){
+			con.query('SELECT name,cost,description from card where code = any (SELECT card from TC where treasure = ?)',code, function(err,result){
+				con.release();
+				res.send(result);
+			});
+		});
+	};*/
+
+	//game1:ottieni le info della carta, posseduta dallo user(paramentro), relativa al tesoro (parametro)
+	this.getTreasureCardInfo = function(email,code,res){
+		connection.acquire(function(err,con){
+			con.query('SELECT c.name,c.cost,c.description from (TC t, G1C g,user u, card c) where u.email=? AND t.treasure=? AND g.card=t.card AND c.code=t.card AND g.game1=u.game1', [email, code], function(err,result){
 				con.release();
 				res.send(result);
 			});
 		});
 	};
+
 
 
 

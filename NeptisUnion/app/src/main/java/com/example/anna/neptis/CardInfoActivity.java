@@ -39,9 +39,8 @@ public class CardInfoActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_card_info);
 
-        //code = getIntent().getExtras().getString("codice");
         info = (TextView) findViewById(R.id.d);
-        //all_cards_info = new ArrayList<ObjCard>();
+
 
 
 
