@@ -31,11 +31,6 @@ create table Game4(
 	code varchar (100) primary key,
 	user varchar (100) unique);
 
-create table Match1(
-	code varchar (100) primary key,
-	heritage varchar (100),
-	game1 varchar (100) unique);
-
 create table Treasure(
 	code varchar (100) primary key,
 	info varchar (999),
@@ -118,11 +113,11 @@ treasure varchar (100),
 heritage varchar (100),
 primary key (treasure, heritage));
 
-create table Mt(
-match1 varchar (100),
+create table Gt(
+game1 varchar (100),
 treasure varchar (100),
 found boolean,
-primary key (match1, treasure));
+primary key (game1, treasure));
 
 create table Ha(
 heritage varchar (100),
@@ -202,10 +197,6 @@ primary key (game1,card));
 alter table Treasure
 add constraint fk1 foreign key Treasure (heritage) references Heritage (name) ON DELETE CASCADE;
 
-alter table Match1
-add constraint fk2 foreign key Match1 (game1) references Game1 (code) ON DELETE CASCADE,
-add constraint fk3 foreign key Match1 (heritage) references heritage (name) ON DELETE CASCADE;
-
 alter table Heritage
 add constraint fk4 foreign key Heritage (culturalorganization) references Culturalorganization (email)
 ON DELETE CASCADE;
@@ -242,9 +233,9 @@ alter table Tc
 add constraint fk17 foreign key Tc (treasure) references Treasure (code) ON DELETE CASCADE,
 add constraint fk18 foreign key Tc (card) references Card (code) ON DELETE CASCADE;
 
-alter table Mt
-add constraint fk19 foreign key Mt (match1) references Match1 (code) ON DELETE CASCADE,
-add constraint fk20 foreign key Mt (treasure) references Treasure (code) ON DELETE CASCADE;
+alter table Gt
+add constraint fk19 foreign key Gt (game1) references Game1 (code) ON DELETE CASCADE,
+add constraint fk20 foreign key Gt (treasure) references Treasure (code) ON DELETE CASCADE;
 
 alter table Ha
 add constraint fk21 foreign key Ha (heritage) references Heritage (name) ON DELETE CASCADE,
@@ -473,7 +464,6 @@ insert into Game2 values('game20006','player6@gmail.it');
 insert into Game2 values('game20007','player7@gmail.it');
 insert into Game2 values('game20008','player8@gmail.it');
 
-
 insert into Game3 values('game30001','player1@gmail.it');
 insert into Game3 values('game30002','player2@gmail.it');
 insert into Game3 values('game30003','player3@gmail.it');
@@ -493,15 +483,6 @@ insert into Game4 values('game40007','player7@gmail.it');
 insert into Game4 values('game40008','player8@gmail.it');
 
 SET foreign_key_checks = 1;
-
-insert into Match1 values('match0001','Colosseo','game10001');
-insert into Match1 values('match0002','Colosseo','game10002');
-insert into Match1 values('match0003','Altare della Patria','game10003');
-insert into Match1 values('match0004','Ponte Milvio','game10004');
-insert into Match1 values('match0005','Ponte Milvio','game10005');
-insert into Match1 values('match0006','Basilica di San Pietro','game10006');
-insert into Match1 values('match0007','Basilica di San Pietro','game10007');
-insert into Match1 values('match0008','Basilica di San Pietro','game10008');
 
 insert into Review values('game40002','Colosseo',0,0,'Molto bello');
 insert into Review values('game40003','Nuvola di Fuksas',0,0,'Quanto è grande!');
@@ -544,7 +525,7 @@ insert into Tc values('treas0007','card0017');
 insert into Tc values('treas0007','card0018');
 insert into Tc values('treas0007','card0019');
 insert into Tc values('treas0007','card0020');
-insert into Tc values('treas0008','card0021');
+insert into Tc values('treas0008','card0020');
 insert into Tc values('treas0008','card0001');
 insert into Tc values('treas0008','card0002');
 insert into Tc values('treas0008','card0003');
@@ -569,21 +550,21 @@ insert into Ha values('Arco di Trionfo','statoitaliano@gmail.com');
 insert into Ha values('Nuvola di Fuksas','enteprivato@gmail.com');
 SET foreign_key_checks = 1;
 
-insert into Mt values('Match0001','treas0003',true);
-insert into Mt values('Match0001','treas0004',false);
-insert into Mt values('Match0002','treas0003',true);
-insert into Mt values('Match0002','treas0004',false);
-insert into Mt values('Match0003','treas0006',false);
-insert into Mt values('Match0004','treas0009',true);
-insert into Mt values('Match0004','treas0010',false);
-insert into Mt values('Match0005','treas0009',false);
-insert into Mt values('Match0005','treas0010',false);
-insert into Mt values('Match0006','treas0001',true);
-insert into Mt values('Match0006','treas0002',false);
-insert into Mt values('Match0007','treas0001',true);
-insert into Mt values('Match0007','treas0002',false);
-insert into Mt values('Match0008','treas0001',false);
-insert into Mt values('Match0008','treas0002',true);
+insert into Gt values('game10001','treas0003',true);
+insert into Gt values('game10001','treas0004',false);
+insert into Gt values('game10002','treas0003',true);
+insert into Gt values('game10002','treas0004',false);
+insert into Gt values('game10003','treas0006',false);
+insert into Gt values('game10004','treas0009',true);
+insert into Gt values('game10004','treas0010',false);
+insert into Gt values('game10005','treas0009',false);
+insert into Gt values('game10005','treas0010',false);
+insert into Gt values('game10006','treas0001',true);
+insert into Gt values('game10006','treas0002',false);
+insert into Gt values('game10007','treas0001',true);
+insert into Gt values('game10007','treas0002',false);
+insert into Gt values('game10008','treas0001',false);
+insert into Gt values('game10008','treas0002',true);
 
 SET foreign_key_checks = 0;
 insert into Th values('treas0001','Basilica di San Pietro');
@@ -660,7 +641,7 @@ insert into G1c values('game10004','card0007');
 insert into G1c values('game10004','card0016');
 insert into G1c values('game10004','card0002');
 insert into G1c values('game10004','card0004');
-insert into G1c values('game10004','card0007');
+insert into G1c values('game10004','card0008');
 insert into G1c values('game10005','card0013');
 insert into G1c values('game10005','card0014');
 insert into G1c values('game10005','card0008');
