@@ -171,6 +171,7 @@ public class PortalsMainActivity extends AppCompatActivity {
         pre = prefs.getString("current_session", "");
         Log.d("Preferenze salvate: ",pre);
         //////////////////////////////
+
     }
 
 

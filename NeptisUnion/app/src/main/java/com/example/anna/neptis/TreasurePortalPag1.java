@@ -39,7 +39,7 @@ public class TreasurePortalPag1 extends AppCompatActivity implements OnItemSelec
     String [] spinner_options;
     Spinner dropdown;
     private Animation lens_anim = null;
-    private Animation lens_anim2 = null;
+    //private Animation lens_anim2 = null;
     private ImageView lente = null;
     String item;
 

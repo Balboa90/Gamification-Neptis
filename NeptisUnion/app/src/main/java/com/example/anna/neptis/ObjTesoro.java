@@ -16,6 +16,8 @@ public class ObjTesoro {
     private Integer aperto = new Integer(R.drawable.forziere_aperto);
     private Integer chiuso = new Integer(R.drawable.forziere_chiuso);
 
+
+
     public ObjTesoro(String c,String lat,String lon,String i,String u){
         this.code = c;
         this.latitudine = lat;

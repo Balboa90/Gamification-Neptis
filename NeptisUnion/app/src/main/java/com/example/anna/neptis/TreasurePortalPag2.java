@@ -1,5 +1,6 @@
 package com.example.anna.neptis;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.provider.MediaStore;
 import android.renderscript.Double2;
@@ -34,21 +35,24 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.maps.android.SphericalUtil;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-public class TreasurePortalPag2 extends FragmentActivity implements OnMapReadyCallback{
+public class TreasurePortalPag2 extends FragmentActivity implements OnMapReadyCallback,GoogleMap.OnMarkerClickListener {
 
     private final static int CAMERA_REQUEST_CODE = 1;
-    private GoogleMap mMap;
+    private static GoogleMap mMap;
 
     String heritage;//= getIntent().getExtras().getString("heritage")
     String url;
@@ -60,6 +64,8 @@ public class TreasurePortalPag2 extends FragmentActivity implements OnMapReadyCa
     List list; //lista dei tesori presenti nell'heritage passato come parametro
 
     String user;
+
+   // LatLng herit;//coordinate heritage selezionato
 
 
     private MarkerOptions options = new MarkerOptions();
@@ -113,9 +119,9 @@ public class TreasurePortalPag2 extends FragmentActivity implements OnMapReadyCa
 
                         for (LatLng point : latlngs) {
                             options.position(point);
-                            options.title("someTitle");
-                            options.snippet("someDesc");
+                            options.title(code);
                             mMap.addMarker(options);
+                            mMap.setOnMarkerClickListener(TreasurePortalPag2.this);//click su marker
                         }
 
                         list.add(new ObjTesoro(code,lat,lon,info,user));
@@ -142,43 +148,7 @@ public class TreasurePortalPag2 extends FragmentActivity implements OnMapReadyCa
         /***********_______END TEMPLATE JSON REQUEST________**********/
 
 
-
-
-
-
-        // Instance of ImageAdapter Class
-
-
-
-        /*___________________________On Click event for Single Gridview Item___________________________*/
-        /*tesori.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-
-            /********potrebbe essere utile per far apparire una nuova activity con gli elementi presenti in ogni forziere*************
-
-             // Sending image id to FullScreenActivity
-             Intent i = new Intent(getApplicationContext(), FullImageActivity.class);
-             // passing array index
-             i.putExtra("id", position);
-             startActivity(i);
-
-             ***********************con i dati che ha detto Alessandro***************/
-
-                /*Toast toast = Toast.makeText(v.getContext(),"Selezionato forziere " + position ,Toast.LENGTH_SHORT);
-                toast.show();
-
-            }
-        });
-        /*___________________fine gestione click sui tesori all'interno della scrollbar____________________*/
-         /*__________________________fine gestione gridView all'interno della scrollbar________________________*/
-
-
-
-
-
-
-
+        /*__________________________fine gestione gridView all'interno della scrollbar________________________*/
 
 
         //gestione click su fotocamera
@@ -219,6 +189,10 @@ public class TreasurePortalPag2 extends FragmentActivity implements OnMapReadyCa
      * it inside the SupportMapFragment. This method will only be triggered once the user has
      * installed Google Play services and returned to the app.
      */
+    //private static final HashMap<LatLng, Class<? extends Activity>> sTargets = new HashMap();
+
+
+    LatLng herit;
     @Override
     public void onMapReady(GoogleMap googleMap) {
 
@@ -232,7 +206,6 @@ public class TreasurePortalPag2 extends FragmentActivity implements OnMapReadyCa
 
         Log.d("url= ",url);
 
-        //latitudine
         JsonArrayRequest jsCoordinates = new JsonArrayRequest(Request.Method.GET, url,null, new Response.Listener<JSONArray>() {
                 @Override
                 public void onResponse(JSONArray response) {
@@ -245,11 +218,10 @@ public class TreasurePortalPag2 extends FragmentActivity implements OnMapReadyCa
                             //Log.d("VERIFICA LATITUDINE ",latitudine);
                             //Log.d("VERIFICA LONGITUDINE ",longitudine);
 
-                            LatLng herit = new LatLng(Double.parseDouble(latitudine),Double.parseDouble(longitudine));
+                            herit = new LatLng(Double.parseDouble(latitudine),Double.parseDouble(longitudine));
                             mMap.addMarker(new MarkerOptions().position(herit).title(heritage));
                             CameraPosition cameraPosition = new CameraPosition.Builder().target(herit).zoom(15).build();
                             mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -266,6 +238,27 @@ public class TreasurePortalPag2 extends FragmentActivity implements OnMapReadyCa
         queue.add(jsCoordinates);
 
         /***********_______END TEMPLATE JSON REQUEST________**********/
+    }
+
+    private static final int RANGE_METERS = 2 * 1000;//raggio di 2km
+
+    @Override
+    public boolean onMarkerClick(final Marker marker) {
+        Marker m  = marker;
+        LatLng pos = marker.getPosition();
+
+        boolean inRange = SphericalUtil.computeDistanceBetween(pos,herit) < RANGE_METERS;
+
+        if (inRange) {
+            Intent openTreasure = new Intent(TreasurePortalPag2.this,TreasureInfoActivity.class);
+            openTreasure.putExtra("user",user);
+            openTreasure.putExtra("codice_tesoro",marker.getTitle());
+            startActivity(openTreasure);
+            //handle click here
+        }else{
+            Toast.makeText(TreasurePortalPag2.this,"Sei troppo lontano dal tesoro. Avvicinati!",Toast.LENGTH_LONG).show();
+        }
+        return true;
     }
 
     @Override

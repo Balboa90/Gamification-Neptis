@@ -41,12 +41,14 @@ public class TreasureAdapter extends ArrayAdapter<ObjTesoro> {
         st.setNestedScrollingEnabled(true);
         info.setText(t.getInfo());
 
+
         t_card.setFocusableInTouchMode(false);
         t_card.setFocusable(false);
 
         final String user = t.getUser();
 
         final String treasure_code = t.getCode();
+
 
         t_card.setOnClickListener(new View.OnClickListener() {
             @Override
