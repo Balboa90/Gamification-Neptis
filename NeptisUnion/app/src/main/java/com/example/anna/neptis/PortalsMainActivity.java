@@ -44,6 +44,8 @@ public class PortalsMainActivity extends AppCompatActivity {
     private User current_user;
     TextView utente_loggato;
 
+    private boolean flag_login;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,9 +58,19 @@ public class PortalsMainActivity extends AppCompatActivity {
         utente_loggato.setText("Eseguire l'accesso");
 
 
-        accedi = Boolean.parseBoolean(getIntent().getExtras().getString("accedi"));
+        //DEBUG CONTROLLO PREFERENZE//
+        prefs = getSharedPreferences("session", Context.MODE_PRIVATE);
+        pre = prefs.getString("current_session", "");
+        Log.d("Preferenze salvate: ",pre);
+        //////////////////////////////
+        //Log.d("FLAG: ",Boolean.toString(flag_login));
 
-        if(accedi) {
+        /*if(flag_login) {
+            Log.d("Accesso eseguito: ","oooooooooooooooooookkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk");
+            accedi = Boolean.parseBoolean(getIntent().getExtras().getString("accedi"));
+        }
+
+        if(accedi ) {
             user = getIntent().getExtras().getString("email");
             Log.d("EMAIL: ", user);
             pass = getIntent().getExtras().getString("password");
@@ -66,15 +78,8 @@ public class PortalsMainActivity extends AppCompatActivity {
 
             current_user = new User(user, pass);
             utente_loggato.setText(current_user.getEmail());
-        }
+        }*/
 
-
-
-        //DEBUG CONTROLLO PREFERENZE//
-        prefs = getSharedPreferences("session", Context.MODE_PRIVATE);
-        pre = prefs.getString("current_session", "");
-        Log.d("Preferenze salvate: ",pre);
-        //////////////////////////////
 
         /*__________________gestione imageButton dei 4 portali____________________*/
 
@@ -133,9 +138,6 @@ public class PortalsMainActivity extends AppCompatActivity {
                 if (pre == "") {
                     Intent openRedPortal = new Intent(PortalsMainActivity.this,LoginDialogActivity.class);
                     startActivityForResult(openRedPortal, RQ_CODE);
-
-
-
                 } else {
                     Intent openRedPortal = new Intent(PortalsMainActivity.this, PuzzlePortal.class);
                     openRedPortal.putExtra("user",user);
@@ -160,6 +162,7 @@ public class PortalsMainActivity extends AppCompatActivity {
 
 
     }
+
     @Override
     protected void onResume(){
         super.onResume();
@@ -235,17 +238,30 @@ public class PortalsMainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode,int resultCode, Intent data){
+   protected void onActivityResult(int requestCode,int resultCode, Intent data){
         super.onActivityResult(requestCode,resultCode,data);
 
         if(requestCode == RQ_CODE){
-            if(resultCode == Activity.RESULT_OK){
+           if(resultCode == Activity.RESULT_OK){
                 Log.d("Accedi ok: ","Accedi ok");
-                accedi = true;
+                //accedi = true;
             }
+           /*
             else{
                 Log.d("accedi ok: ", " Non ok");
+            }*/
+
+            if(resultCode == 1) {
+                Log.d("Accesso effettuato: ", "ooooooooooooooooooooookkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk");
+                user = data.getStringExtra("email");
+                Log.d("EMAIL: ", user);
+                pass = data.getStringExtra("password");
+                Log.d("PASSWORD: ", pass);
+
+                current_user = new User(user, pass);
+                utente_loggato.setText(current_user.getEmail());
             }
+
         }
 
     }

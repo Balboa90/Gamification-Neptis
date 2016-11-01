@@ -235,8 +235,10 @@ public class LoginDialogActivity extends Activity {
                     Intent returnMain = new Intent(LoginDialogActivity.this, PortalsMainActivity.class);
                     returnMain.putExtra("email",u.getEmail());
                     returnMain.putExtra("password",u.getPassword());
-                    returnMain.putExtra("accedi",Boolean.toString(true));
-                    startActivity(returnMain);
+                    //returnMain.putExtra("accedi",Boolean.toString(true));
+                    setResult(1,returnMain);
+                    //startActivity(returnMain);
+                    finish();
 
                 } catch (JSONException e1) {
                     e1.printStackTrace();
