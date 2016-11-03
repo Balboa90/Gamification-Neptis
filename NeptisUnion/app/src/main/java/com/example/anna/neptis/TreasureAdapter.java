@@ -53,6 +53,8 @@ public class TreasureAdapter extends ArrayAdapter<ObjTesoro> {
         t_card.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                //questa activity si dovrebbe aprire solo se il tesoro è stato trovato dall'utente-aggiungere controllo sul found!
                 Intent openTreasure = new Intent(v.getContext(),TreasureInfoActivity.class);
                 openTreasure.putExtra("codice_tesoro",treasure_code);
                 openTreasure.putExtra("user",user);

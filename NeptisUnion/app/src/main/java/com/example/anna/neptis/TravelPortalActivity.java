@@ -41,9 +41,11 @@ public class TravelPortalActivity extends FragmentActivity implements OnMapReady
     private GoogleMap mMap;
     int contLength;
     String totale;
-    String visitati;
+    int visitati;
     TextView contatore2;
     TextView contatore1;
+
+    String user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +55,9 @@ public class TravelPortalActivity extends FragmentActivity implements OnMapReady
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+        user = getIntent().getExtras().getString("user");
+
+        //Log.d("CURRENT USER: ",user);
 
         /***************gestione click su medals icon****************/
         ImageButton medals_button = (ImageButton)findViewById(R.id.Medals);
@@ -70,6 +75,30 @@ public class TravelPortalActivity extends FragmentActivity implements OnMapReady
         TextView slash = (TextView)findViewById(R.id.slash);
         contatore2 = (TextView)findViewById(R.id.Cont2);
 
+        getHeritagesCount();
+        getVisitedHeritagesCount();
+
+
+        //Log.d("Totale",totale);
+
+        /***************gestione click su achievement****************/
+        ImageButton achievement = (ImageButton)findViewById(R.id.achievement);
+        achievement.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent openAchivement = new Intent(TravelPortalActivity.this, Achievements.class);
+                openAchivement.putExtra("game","game2");
+                startActivity(openAchivement);
+            }
+        });
+        /***************fine gestione click su classification****************/
+
+
+
+
+    }
+
+    public void getHeritagesCount(){
         //***********_______TEMPLATE JSON REQUEST________**********
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this);
@@ -100,12 +129,15 @@ public class TravelPortalActivity extends FragmentActivity implements OnMapReady
 
         // Add the request to the RequestQueue.
         queue.add(jsTotal);
-        //***********_______END TEMPLATE JSON REQUEST________**********
 
+        //***********_______END TEMPLATE JSON REQUEST________**********
+    }
+
+    public void getVisitedHeritagesCount(){
         //***********_______TEMPLATE JSON REQUEST________**********
         // Instantiate the RequestQueue.
         RequestQueue queue2 = Volley.newRequestQueue(this);
-        String url2 ="http://10.0.2.2:8000/getVisitedHeritagesCount/:game20005";
+        String url2 ="http://10.0.2.2:8000/getVisitedHeritagesCount/:user";
 
         // Request a string response from the provided URL.
         JsonArrayRequest jsVisited = new JsonArrayRequest(Request.Method.GET, url2,null, new Response.Listener<JSONArray>() {
@@ -116,9 +148,13 @@ public class TravelPortalActivity extends FragmentActivity implements OnMapReady
                     contLength = response.length();
                     for(int i = 0;i< contLength;i++){
                         JSONObject jsObj = (JSONObject)response.get(i);
-                        visitati = jsObj.getString("visitConto");
-                        Log.d("Risposta: ",visitati);
-                        contatore1.setText(visitati);
+
+                        visitati = jsObj.getInt("visitConto");
+
+                        Log.d("CONTO ",Integer.toString(visitati));
+
+                        contatore1.setText(Integer.toString(visitati));
+
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -132,34 +168,10 @@ public class TravelPortalActivity extends FragmentActivity implements OnMapReady
         });
 
         // Add the request to the RequestQueue.
-        queue.add(jsVisited);
+        queue2.add(jsVisited);
         //***********_______END TEMPLATE JSON REQUEST________**********
 
-
-        /*Button contatore = (Button) findViewById(R.id.Cont);
-        contatore.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(view.getContext(),"Contatore",Toast.LENGTH_SHORT).show();
-            }
-        });*/
         /***************fine gestione click su cont****************/
-
-
-
-
-        /***************gestione click su achievement****************/
-        ImageButton achievement = (ImageButton)findViewById(R.id.achievement);
-        achievement.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent openAchivement = new Intent(TravelPortalActivity.this, Achievements.class);
-                openAchivement.putExtra("game","game2");
-                startActivity(openAchivement);
-            }
-        });
-        /***************fine gestione click su classification****************/
-
 
     }
 
@@ -172,7 +184,7 @@ public class TravelPortalActivity extends FragmentActivity implements OnMapReady
         mMap.addMarker(new MarkerOptions()
                 .position(firenze)
                 .title("This is my title")
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
 
         CameraPosition cameraPosition = new CameraPosition.Builder().target(firenze).zoom(15).build();
         mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));

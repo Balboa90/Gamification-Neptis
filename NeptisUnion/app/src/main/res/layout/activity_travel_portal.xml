@@ -28,7 +28,7 @@
         <fragment
             android:id="@+id/map"
             android:layout_width="match_parent"
-            android:layout_height="420dp"
+            android:layout_height="410dp"
             android:layout_alignParentLeft="true"
             class="com.google.android.gms.maps.SupportMapFragment"
             android:layout_below="@+id/title" />
@@ -45,17 +45,18 @@
             >
 
             <ImageButton
-                android:layout_width="70dp"
-                android:layout_height="80dp"
+                android:layout_width="60dp"
+                android:layout_height="70dp"
                 android:id="@+id/achievement"
-                android:layout_marginRight="10dp"
+                android:layout_marginRight="25dp"
                 android:layout_marginLeft="2dp"
                 android:src="@android:drawable/btn_star_big_on"
                 android:background="@android:color/transparent"
                 android:scaleType="fitCenter"
                 android:padding="4dp"
                 android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true" />
+                android:layout_alignParentEnd="true"
+                />
 
             <!-- <Button
              android:layout_width="120dp"
@@ -69,19 +70,20 @@
 
             <ImageButton
                 android:layout_width="60dp"
-                android:layout_height="70dp"
+                android:layout_height="65dp"
                 android:id="@+id/Medals"
                 android:src="@drawable/medal_image"
                 android:adjustViewBounds="true"
                 android:scaleType="fitXY"
                 android:padding="4dp"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="20dp"
                 android:layout_marginRight="2dp"
+                android:layout_marginTop="5dp"
                 android:background="@android:color/transparent"
-                android:layout_marginStart="9dp"
+
                 android:layout_alignParentTop="true"
                 android:layout_alignParentStart="true"
-                android:layout_marginTop="7dp" />
+                 />
 
 
             <RelativeLayout
@@ -90,17 +92,20 @@
 
                 android:gravity="center"
                 android:layout_alignTop="@+id/Medals"
-                android:layout_centerHorizontal="true">
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
                     android:text="86"
                     android:id="@+id/Cont2"
-                    android:textSize="30sp"
+                    android:textSize="35sp"
                     android:layout_alignWithParentIfMissing="false"
                     android:gravity="center"
                     android:layout_alignParentEnd="true"
+                    android:layout_marginRight="10dp"
                     />
 
                 <TextView
@@ -108,7 +113,7 @@
                     android:layout_height="30dp"
                     android:text="/"
                     android:id="@+id/slash"
-                    android:textSize="30sp"
+                    android:textSize="35sp"
                     android:layout_alignWithParentIfMissing="false"
                     android:gravity="center"
                     android:layout_marginLeft="30dp"
@@ -121,8 +126,9 @@
                     android:layout_height="40dp"
                     android:text="13"
                     android:id="@+id/Cont1"
-                    android:textSize="30sp"
+                    android:textSize="35sp"
                     android:gravity="center"
+                    android:layout_marginLeft="10dp"
                     android:layout_alignTop="@+id/slash"
                     android:layout_alignParentStart="true" />
 

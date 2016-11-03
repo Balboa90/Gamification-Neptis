@@ -65,21 +65,6 @@ public class PortalsMainActivity extends AppCompatActivity {
         //////////////////////////////
         //Log.d("FLAG: ",Boolean.toString(flag_login));
 
-        /*if(flag_login) {
-            Log.d("Accesso eseguito: ","oooooooooooooooooookkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk");
-            accedi = Boolean.parseBoolean(getIntent().getExtras().getString("accedi"));
-        }
-
-        if(accedi ) {
-            user = getIntent().getExtras().getString("email");
-            Log.d("EMAIL: ", user);
-            pass = getIntent().getExtras().getString("password");
-            Log.d("PASSWORD: ", pass);
-
-            current_user = new User(user, pass);
-            utente_loggato.setText(current_user.getEmail());
-        }*/
-
 
         /*__________________gestione imageButton dei 4 portali____________________*/
 
@@ -92,15 +77,15 @@ public class PortalsMainActivity extends AppCompatActivity {
         yellowPortalButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*if ( pre == "") {
+                if (pre == "") {
                     Intent openYellowPortal = new Intent(PortalsMainActivity.this, LoginDialogActivity.class);
                     startActivityForResult(openYellowPortal, RQ_CODE);
 
-                } else {*/
+                } else {
                     Intent openYellowPortal = new Intent(PortalsMainActivity.this, TreasurePortalPag1.class);
                     openYellowPortal.putExtra("user",user);
                     startActivity(openYellowPortal);
-                //}
+                }
             }
             // }
 

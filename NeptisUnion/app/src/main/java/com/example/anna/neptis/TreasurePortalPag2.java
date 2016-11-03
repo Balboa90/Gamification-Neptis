@@ -189,14 +189,10 @@ public class TreasurePortalPag2 extends FragmentActivity implements OnMapReadyCa
      * it inside the SupportMapFragment. This method will only be triggered once the user has
      * installed Google Play services and returned to the app.
      */
-    //private static final HashMap<LatLng, Class<? extends Activity>> sTargets = new HashMap();
-
 
     LatLng herit;
     @Override
     public void onMapReady(GoogleMap googleMap) {
-
-        //heritage = getIntent().getExtras().getString("heritage");
 
         /***********_______START TEMPLATE JSON REQUEST________**********/
         mMap = googleMap;
@@ -219,7 +215,7 @@ public class TreasurePortalPag2 extends FragmentActivity implements OnMapReadyCa
                             //Log.d("VERIFICA LONGITUDINE ",longitudine);
 
                             herit = new LatLng(Double.parseDouble(latitudine),Double.parseDouble(longitudine));
-                            mMap.addMarker(new MarkerOptions().position(herit).title(heritage));
+                            mMap.addMarker(new MarkerOptions().position(herit).title(heritage)); //aggiungere .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW))
                             CameraPosition cameraPosition = new CameraPosition.Builder().target(herit).zoom(15).build();
                             mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
                         }
@@ -242,6 +238,8 @@ public class TreasurePortalPag2 extends FragmentActivity implements OnMapReadyCa
 
     private static final int RANGE_METERS = 2 * 1000;//raggio di 2km
 
+
+    //implementazione click sui marker relativi ai tesori (da escludere il marker dell'heritage-renderlo non cliccabile)
     @Override
     public boolean onMarkerClick(final Marker marker) {
         Marker m  = marker;

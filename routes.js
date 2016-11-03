@@ -10,16 +10,16 @@ module.exports = {
 				todo.getCoordinatesHeritage(req.params.name,res);
 			});
 
-			app.get('/getVisitedHeritagesCount/:code',function(req,res){
-				todo.getVisitedHeritagesCount(req.params.code,res);
+			app.get('/getVisitedHeritagesCount/:email',function(req,res){
+				todo.getVisitedHeritagesCount(req.params.email,res);
 			});
 
 			app.get('/getHeritagesCount/',function(req,res){
 				todo.getHeritagesCount(res);
 			});
 
-			app.get('/getVisitedHeritagesGame2/:code',function(req,res){
-				todo.getVisitedHeritagesGame2(req.params.code,res);
+			app.get('/getVisitedHeritagesGame2/:email',function(req,res){
+				todo.getVisitedHeritagesGame2(req.params.email,res);
 			});
 
 			app.get('/getTreasureElements/:name',function(req,res){

@@ -23,12 +23,10 @@ function Todo(){
 		});
 	};
 
-
-	
 	//game2 (insieme degli heritage visitati nel game2)
-	this.getVisitedHeritagesCount = function(code,res){
+	this.getVisitedHeritagesCount = function(email,res){
 		connection.acquire(function(err,con){
-			con.query('SELECT count(heritage) as visitConto from g2h where game2 = ?',code, function(err,result){
+			con.query('SELECT count(g.heritage) as visitConto from (g2h g,user u) where u.email= ? AND g.game2 = u.game2',email, function(err,result){
 				con.release();
 				res.send(result);
 			});
@@ -57,14 +55,24 @@ function Todo(){
 
 
 	//game1 (per game2)
-	this.getVisitedHeritagesGame2 = function(code,res){
+	/*this.getVisitedHeritagesGame2 = function(code,res){
 		connection.acquire(function(err,con){
 			con.query('SELECT heritage from g2h where game2 = ?',code, function(err,result){
 				con.release();
 				res.send(result);
 			});
 		});
+	};*/
+
+	this.getVisitedHeritagesGame2 = function(email,res){
+		connection.acquire(function(err,con){
+			con.query('SELECT h.latitude,h.longitude from (g2h g,user u,heritage h) where u.email=? AND u.game2=g.game2 AND h.name=g.heritage',email, function(err,result){
+				con.release();
+				res.send(result);
+			});
+		});
 	};
+
 
 	//game1:ottieni tutti gli elementi del tesoro relativo all'heritage passato come parametro
 	this.getTreasureElements = function(name,res){
@@ -126,6 +134,7 @@ function Todo(){
 			});
 		});
 	};
+	
 	/*
 	//game1:ottieni le info della carta relativa al tesoro passato come parametro
 	this.getTreasureCardInfo = function(code,res){
