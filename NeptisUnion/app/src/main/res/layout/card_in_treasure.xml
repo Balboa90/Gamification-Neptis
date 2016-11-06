@@ -5,11 +5,13 @@
 
 
     <ListView
-        android:layout_height="200dp"
+        android:layout_height="100dp"
         android:layout_width="300dp"
         android:id="@+id/carte_forziere"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:layout_below="@+id/t_lon"
+        android:layout_marginTop="20dp"
         android:layout_marginBottom="79dp" />
 
 
@@ -69,6 +71,18 @@
         android:layout_alignStart="@+id/t_lat_val"
         android:layout_marginStart="27dp"
         android:layout_marginTop="23dp" />
+
+    <ImageButton
+        android:id="@+id/ok"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/ok_icon"
+        android:background="@android:color/transparent"
+        android:layout_marginLeft="280dp"
+        android:layout_marginBottom="26dp"
+        android:layout_marginEnd="23dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignEnd="@+id/carte_forziere" />
 
 
     <!-- <ImageButton

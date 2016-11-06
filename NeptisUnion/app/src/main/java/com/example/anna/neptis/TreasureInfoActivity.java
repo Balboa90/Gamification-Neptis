@@ -1,9 +1,13 @@
 package com.example.anna.neptis;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -45,6 +49,8 @@ public class TreasureInfoActivity extends AppCompatActivity {
 
 
     String user;
+    int set_trovato;
+    ImageButton ok;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +62,8 @@ public class TreasureInfoActivity extends AppCompatActivity {
         info = (TextView) findViewById(R.id.t_info);
         latitude = (TextView) findViewById(R.id.t_lat_val);
         longitude = (TextView) findViewById(R.id.t_lon_val);
+        ok = (ImageButton)findViewById(R.id.ok);
+
 
         //heritage_tres =(TextView)findViewById(R.id.heritage_treas);
 
@@ -64,12 +72,13 @@ public class TreasureInfoActivity extends AppCompatActivity {
         treasure_list = new LinkedList<ObjTesoro>();
         //***********_______TEMPLATE JSON REQUEST________**********
         // Instantiate the RequestQueue.
-        treasure_code = getIntent().getExtras().getString("codice_tesoro").trim();
+        treasure_code = getIntent().getExtras().getString("codice_tesoro");
+        set_trovato = Integer.parseInt(getIntent().getExtras().getString("trovato"));
 
         RequestQueue queue = Volley.newRequestQueue(this);
         url = "http://10.0.2.2:8000/getInfoTreasure/" + treasure_code + "/";
 
-        Log.d("codice tesoro: ", treasure_code);
+        //Log.d("codice tesoro: ", treasure_code);
 
         Log.d("url= ", url);
 
@@ -89,7 +98,7 @@ public class TreasureInfoActivity extends AppCompatActivity {
                         latitude.setText(t_lat);
                         longitude.setText(t_lon);
 
-                        treasure_list.add(new ObjTesoro(treasure_code, t_lat, t_lon, t_info, user));
+                        treasure_list.add(new ObjTesoro(treasure_code, t_lat, t_lon, t_info, user,set_trovato));
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -145,6 +154,49 @@ public class TreasureInfoActivity extends AppCompatActivity {
         queue2.add(jsInfoCardTreasure);
 
         /***********_______END TEMPLATE JSON REQUEST________**********/
+
+        final String herit = getIntent().getExtras().getString("heritage");
+        //quando l'utente fa la back da questa pagina, aspetto qualche secondo prima di passare nell'activity principale
+        Handler mHandler = new Handler();
+        mHandler.postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+
+                ok.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent returnToPag2 = new Intent(TreasureInfoActivity.this, TreasurePortalPag2.class);
+                        returnToPag2.putExtra("user",user);
+                        returnToPag2.putExtra("heritage",herit);
+                        startActivity(returnToPag2);
+                    }
+                });
+            }
+
+        }, 1500L);
+
+        /*final String heritage = getIntent().getExtras().getString("heritage");
+
+
+        Handler mHandler = new Handler();
+        mHandler.postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                //start your activity here
+                Intent returnToPag2 = new Intent(TreasureInfoActivity.this, TreasurePortalPag2.class);
+                // returnToPag2.putExtra("email",u.getEmail());
+                returnToPag2.putExtra("user",user);
+                returnToPag2.putExtra("heritage",heritage);
+                //returnMain.putExtra("accedi",Boolean.toString(true));
+                //setResult(2,returnToPag2);
+                startActivity(returnToPag2);
+                //finish();
+
+            }
+
+        }, 3000L);*/
 
     }
 

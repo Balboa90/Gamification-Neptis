@@ -9,9 +9,9 @@ public class User {
     private String email,password;
 
 
-    public User(String e,String p){
+    public User(String e){
         this.email=e;
-        this.password=p;
+        //this.password=p;
     }
 
     public String getEmail(){
@@ -19,8 +19,8 @@ public class User {
     }
 
 
-    public String getPassword(){
+   /* public String getPassword(){
         return this.password;
-    }
+    }*/
 
 }

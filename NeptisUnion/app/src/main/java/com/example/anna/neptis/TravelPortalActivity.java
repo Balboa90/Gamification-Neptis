@@ -153,7 +153,7 @@ public class TravelPortalActivity extends FragmentActivity implements OnMapReady
 
                         Log.d("CONTO ",Integer.toString(visitati));
 
-                        contatore1.setText(Integer.toString(visitati));
+                        contatore1.setText(Integer.toString(visitati));//togliere cast in String
 
                     }
                 } catch (JSONException e) {

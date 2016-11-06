@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,16 +36,16 @@ import org.json.JSONObject;
 
 public class PortalsMainActivity extends AppCompatActivity {
 
-    boolean accedi = false;
+
     final static int RQ_CODE = 1;
     private SharedPreferences prefs;
     private String pre;
 
-    private String user,pass;
     private User current_user;
     TextView utente_loggato;
 
-    private boolean flag_login;
+    String urlToken;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,16 +55,15 @@ public class PortalsMainActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
 
-        utente_loggato = (TextView)findViewById(R.id.nome_user);
+        utente_loggato = (TextView) findViewById(R.id.nome_user);
         utente_loggato.setText("Eseguire l'accesso");
-
 
         //DEBUG CONTROLLO PREFERENZE//
         prefs = getSharedPreferences("session", Context.MODE_PRIVATE);
         pre = prefs.getString("current_session", "");
-        Log.d("Preferenze salvate: ",pre);
+        Log.d("Pref salvate create: ",pre);
         //////////////////////////////
-        //Log.d("FLAG: ",Boolean.toString(flag_login));
+
 
 
         /*__________________gestione imageButton dei 4 portali____________________*/
@@ -83,7 +83,7 @@ public class PortalsMainActivity extends AppCompatActivity {
 
                 } else {
                     Intent openYellowPortal = new Intent(PortalsMainActivity.this, TreasurePortalPag1.class);
-                    openYellowPortal.putExtra("user",user);
+                    openYellowPortal.putExtra("user",current_user.getEmail());
                     startActivity(openYellowPortal);
                 }
             }
@@ -106,7 +106,7 @@ public class PortalsMainActivity extends AppCompatActivity {
 
                 } else {
                     Intent openGreenPortal = new Intent(PortalsMainActivity.this, TravelPortalActivity.class);
-                    openGreenPortal.putExtra("user",user);
+                    openGreenPortal.putExtra("user",current_user.getEmail());
                     startActivity(openGreenPortal);
                 }
             }
@@ -125,7 +125,7 @@ public class PortalsMainActivity extends AppCompatActivity {
                     startActivityForResult(openRedPortal, RQ_CODE);
                 } else {
                     Intent openRedPortal = new Intent(PortalsMainActivity.this, PuzzlePortal.class);
-                    openRedPortal.putExtra("user",user);
+                    openRedPortal.putExtra("user",current_user.getEmail());
                     startActivity(openRedPortal);
                 }
             }
@@ -148,14 +148,56 @@ public class PortalsMainActivity extends AppCompatActivity {
 
     }
 
+
+    public void getUserByToken(String pre){
+        RequestQueue queue = Volley.newRequestQueue(PortalsMainActivity.this);
+        urlToken ="http://10.0.2.2:8000/getUserFromSession/"+pre+"/";
+        // Request a string response from the provided URL.
+        Log.d("url= ",urlToken);
+        JsonArrayRequest jsArray = new JsonArrayRequest(Request.Method.GET, urlToken,null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                // Display the first 500 characters of the response string.
+                try{
+                    int contLength = response.length();
+                    for(int i = 0;i< contLength;i++){
+                        JSONObject jsObj = (JSONObject)response.get(i);
+                        String user = jsObj.getString("email");
+
+                        Log.d("utente userBy: ",user);
+                        current_user = new User(user);
+                        utente_loggato.setText(current_user.getEmail());
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("That didn't work!",error.toString());
+            }
+        });
+
+        // Add the request to the RequestQueue.
+        queue.add(jsArray);
+        /***********_______END TEMPLATE JSON REQUEST________**********/
+
+
+    }
+
+
+
     @Override
     protected void onResume(){
         super.onResume();
+
         //DEBUG CONTROLLO PREFERENZE//
         prefs = getSharedPreferences("session", Context.MODE_PRIVATE);
         pre = prefs.getString("current_session", "");
-        Log.d("Preferenze salvate: ",pre);
+        Log.d("Pref salvat on resume: ",pre);
         //////////////////////////////
+        getUserByToken(pre);
 
     }
 
@@ -193,7 +235,7 @@ public class PortalsMainActivity extends AppCompatActivity {
         editor.apply();
 
         utente_loggato.setText("Eseguire l'accesso");
-        accedi = false;
+
 
         Toast.makeText(view.getContext(),"LogOutEffettuato",Toast.LENGTH_SHORT).show();
         Intent logout = new Intent(PortalsMainActivity.this,LoginDialogActivity.class);
@@ -228,28 +270,11 @@ public class PortalsMainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode,resultCode,data);
 
         if(requestCode == RQ_CODE){
-           if(resultCode == Activity.RESULT_OK){
-                Log.d("Accedi ok: ","Accedi ok");
-                //accedi = true;
-            }
-           /*
-            else{
-                Log.d("accedi ok: ", " Non ok");
-            }*/
-
-            if(resultCode == 1) {
-                Log.d("Accesso effettuato: ", "ooooooooooooooooooooookkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk");
-                user = data.getStringExtra("email");
-                Log.d("EMAIL: ", user);
-                pass = data.getStringExtra("password");
-                Log.d("PASSWORD: ", pass);
-
-                current_user = new User(user, pass);
-                utente_loggato.setText(current_user.getEmail());
-            }
-
+           if(resultCode == Activity.RESULT_OK) {
+               Log.d("Accedi ok: ", "Accedi ok");
+               getUserByToken(pre);
+           }
         }
-
     }
 
 }

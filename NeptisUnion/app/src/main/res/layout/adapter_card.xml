@@ -40,8 +40,6 @@
             android:id="@+id/nome"
             android:text= "nome"
             android:textSize="15dp"
-
-
             android:layout_alignParentStart="true" />
 
         <TextView

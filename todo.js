@@ -75,14 +75,14 @@ function Todo(){
 
 
 	//game1:ottieni tutti gli elementi del tesoro relativo all'heritage passato come parametro
-	this.getTreasureElements = function(name,res){
+	/*this.getTreasureElements = function(name,res){
 		connection.acquire(function(err,con){
 			con.query('SELECT code,latitude,longitude,info from treasure where heritage = ?', name,function(err,result){
 				con.release();
 				res.send(result);
 			});
 		});
-	};
+	};*/
 
 	//game1:ottieni tutti gli elementi del tesoro passato come parametro
 	this.getInfoTreasure = function(code,res){
@@ -95,14 +95,60 @@ function Todo(){
 	};
 
 	//game1: ottieni i tesori trovati(saranno i marker verdi nella mappa)
-	this.getFoundTreasures = function(name,res){
+	/*this.getFoundTreasures = function(name,res){
 		connection.acquire(function(err,con){
 			con.query('SELECT found from MT where treasure = ?',name, function(err,result){
 				con.release();
 				res.send(result);
 			});
 		});
+	};*/
+
+	//game1: ottieni i tesori trovati dall'utente(saranno i marker verdi nella mappa)
+	this.getTreasureElements = function(email,code,res){
+		connection.acquire(function(err,con){
+			con.query('select t.code,t.latitude,t.longitude,t.info,g.found from (GT g,treasure t,user u) where u.email=? AND u.game1=g.game1 AND t.heritage=? AND t.code=g.treasure',[email,code], function(err,result){
+				con.release();
+				res.send(result);
+			});
+		});
 	};
+
+	//game1: ottieni i tesori trovati dall'utente(saranno i marker verdi nella mappa)
+	this.upadateFoundTreas = function(code,game,res){
+		connection.acquire(function(err,con){
+			con.query('UPDATE gt SET found=1 WHERE treasure =? AND found = 0 AND game1=(SELECT game1 from user where email=?)',[code,game], function(err,result){
+				con.release();
+				res.send(result);
+			});
+		});
+	};
+
+	//game1: dato uno user,restituisce il codice del game1
+	/*this.getUserGame = function(email,res){
+		connection.acquire(function(err,con){
+			con.query('SELECT game1 from user where email=?',email, function(err,result){
+				con.release();
+				res.send(result);
+			});
+		});
+	};*/
+
+
+
+
+
+
+	//game1: ottieni i tesori trovati dall'utente(saranno i marker verdi nella mappa)
+	this.getFoundTreasures = function(code,lat,lon,email,res){
+		connection.acquire(function(err,con){
+			con.query('SELECT g.found from (GT g,treasure t,user u) where g.treasure=? AND t.latitude=? AND t.longitude=? AND u.email=? AND u.game1 = g.game1',[code,lat,lon,email], function(err,result){
+				con.release();
+				res.send(result);
+			});
+		});
+	};
+
 
 	//*********GESTIONE CARTE*********//
 	//game1:ottieni il totale delle carte

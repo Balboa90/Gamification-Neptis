@@ -53,6 +53,16 @@ public class TreasurePortalPag1 extends AppCompatActivity implements OnItemSelec
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
 
+
+    }
+
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+
         user = getIntent().getExtras().getString("user");
 
         lente = (ImageView)findViewById(R.id.lens);
@@ -138,7 +148,11 @@ public class TreasurePortalPag1 extends AppCompatActivity implements OnItemSelec
             }
         });
         /******fine configurazione bottoni cards_list e achievement_list******/
+
     }
+
+
+
 
 
     /********************gestione click sugli elementi dello spinner*********************/
@@ -171,6 +185,15 @@ public class TreasurePortalPag1 extends AppCompatActivity implements OnItemSelec
 
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        Intent openParentActivity = getParentActivityIntent();
+        startActivity(openParentActivity);
+    }
+
+
+
 
     public void onNothingSelected(AdapterView<?> arg0) {
 

@@ -22,9 +22,7 @@ module.exports = {
 				todo.getVisitedHeritagesGame2(req.params.email,res);
 			});
 
-			app.get('/getTreasureElements/:name',function(req,res){
-				todo.getTreasureElements(req.params.name,res);
-			});
+			
 
 
 			app.get('/getInfoTreasure/:code',function(req,res){
@@ -38,9 +36,28 @@ module.exports = {
 
 			
 
-			app.get('/getFoundTreasures/:code',function(req,res){
+			/*app.get('/getFoundTreasures/:code',function(req,res){
 				todo.getFoundTreasures(req.params.code,res);
+			});*/
+
+			app.get('/getTreasureElements/:email/:code',function(req,res){
+				todo.getTreasureElements(req.params.email,req.params.code,res);
 			});
+
+			app.get('/upadateFoundTreas/:code/:game',function(req,res){
+				todo.upadateFoundTreas(req.params.code,req.params.game,res);
+			});
+			
+			/*app.get('/getUserGame/:email',function(req,res){
+				todo.getUserGame(req.params.email,res);
+			});*/
+			
+
+			app.get('/getFoundTreasures/:code/:lat/:lon/:email',function(req,res){
+				todo.getFoundTreasures(req.params.code,req.params.lat,req.params.lon,req.params.email,res);
+			});
+			
+
 				
 			//********GESTIONE CARTE*********//
 			app.get('/getCardCount/',function(req,res){
