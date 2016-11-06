@@ -51,18 +51,19 @@ public class TreasureAdapter extends ArrayAdapter<ObjTesoro> {
         final String treasure_code = t.getCode();
 
 
+        if(found == 1) {
+            t_card.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
 
-        t_card.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                //TreasureInfoActivity si dovrebbe aprire solo se il tesoro è stato trovato dall'utente-aggiungere controllo sul found!
-                Intent openTreasure = new Intent(v.getContext(),TreasureInfoActivity.class);
-                openTreasure.putExtra("codice_tesoro",treasure_code);
-                openTreasure.putExtra("user",user);
-                v.getContext().startActivity(openTreasure);
-            }
-        });
+                    //TreasureInfoActivity si dovrebbe aprire solo se il tesoro è stato trovato dall'utente-aggiungere controllo sul found!
+                    Intent openTreasure = new Intent(v.getContext(), TreasureInfoActivity.class);
+                    openTreasure.putExtra("codice_tesoro", treasure_code);
+                    openTreasure.putExtra("user", user);
+                    v.getContext().startActivity(openTreasure);
+                }
+            });
+        }else Toast.makeText(getContext(),"Tesoro non ancora trovato dall'utente!",Toast.LENGTH_SHORT).show();
 
         return convertView;
     }

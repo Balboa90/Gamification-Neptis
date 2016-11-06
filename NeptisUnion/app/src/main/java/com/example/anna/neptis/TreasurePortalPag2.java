@@ -152,9 +152,9 @@ public class TreasurePortalPag2 extends FragmentActivity implements OnMapReadyCa
         final String code_treas = marker.getTitle();
 
         if(code_treas == null){
-
+            //Log.d("MARKER CLICCATO IF: ", code_treas);
         }else {
-            Log.d("MARKER CLICCATO: ", code_treas);
+            Log.d("MARKER CLICCATO ELSE: ", code_treas);
 
 
             //NOTA:la distanza bisogna calcolarla tra posizione utente e marker cliccato non tra herit e marker cliccato
@@ -275,12 +275,14 @@ public class TreasurePortalPag2 extends FragmentActivity implements OnMapReadyCa
                             //options.title(code);
                             options.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
                             mMap.addMarker(options);
+                            mMap.setOnMarkerClickListener(TreasurePortalPag2.this);//click su marker
                         } else {
                             Log.d("entrato nell'else: ","ok");
                             options.title(code);
                             options.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
                             mMap.addMarker(options);
                             mMap.setOnMarkerClickListener(TreasurePortalPag2.this);//click su marker
+
                         }
 
 
