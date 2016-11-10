@@ -397,7 +397,7 @@ insert into Achievement values('achi0016','Rencesitore esperto','Scrivi 100 rece
 insert into Heritage values('Colosseo','Il colosseo è chiamato Anfiteatro Flavio','Impero Romano','Anfiteatro','Lazio','41.89015','12.49244','statoitaliano@gmail.com',true,true,true,true);
 insert into Heritage values('Altare della Patria','Si trova vicino Piazza Venezia','Rinascimento','Monumento','Lazio','41.894599','12.483092','statoitaliano@gmail.com',true,true,false,true);
 insert into Heritage values('Ponte Milvio','Costruito dai Romani','Antica Roma','Ponte','Lazio','41.934662928','12.466831466','comuneroma@gmail.it',true,true,true,false);
-insert into Heritage values('Basilica di San Pietro','Costruita in epoche diverse','Rinascimento','Chiesa','Lazio','41.90226','12.45509','statovaticano@libero.it',true,true,true,true);
+insert into Heritage values('Basilica di San Pietro','Costruita in epoche diverse','Rinascimento','Chiesa','Lazio','41.90226 ','12.45509','statovaticano@libero.it',true,true,true,true);
 insert into Heritage values('Arco di Trionfo','Costruito da Costantino','Impero Romano','Monumento','Lazio','41.889722','12.490833','statoitaliano@gmail.com',true,true,true,false);
 insert into Heritage values('Nuvola di Fuksas','Usata come centro congressi','Arte contemporanea','Museo','Lazio','41.83444 ','12.46965','enteprivato@gmail.com',true,true,false,true);
 
@@ -419,21 +419,21 @@ insert into Infopoint values('info0015','Fatto costruire dal Senato',98.13,98.13
 insert into Infopoint values('info0016','Battaglia di Ponte Milvio',90.94,90.94,'Ponte Milvio');
 insert into Infopoint values('info0017','Edificato sul fiume Tevere',90.95,90.95,'Ponte Milvio');
 
-insert into Treasure values('treas0001','Pietro fu il primo Santo','41.90246','12.45529','Basilica di San Pietro');
-insert into Treasure values('treas0002','La cappella sistina di Michelangelo','41.90200 ','12.45459','Basilica di San Pietro');
-insert into Treasure values('treas0003','Completato dai Flavi','41.89035','12.49264','Colosseo');
-insert into Treasure values('treas0004','Piu di 500 spettacoli annuali ','41.89000','12.49204','Colosseo');
+insert into Treasure values('treas0001','Pietro fu il primo Santo','41.90300 ','12.45609','Basilica di San Pietro');
+insert into Treasure values('treas0002','La cappella sistina di Michelangelo','41.90150 ','12.45409','Basilica di San Pietro');
+insert into Treasure values('treas0003','Completato dai Flavi','41.89095','12.49294','Colosseo');
+insert into Treasure values('treas0004','Piu di 500 spettacoli annuali ','41.88915','12.49144','Colosseo');
 insert into Treasure values('treas0005','Fuksas è un architetto','41.83344 ','12.46865','Nuvola di Fuksas');
-insert into Treasure values('treas0006','InfoTesoroAltare1','41.894499','12.482992','Altare della Patria');
+insert into Treasure values('treas0006','InfoTesoroAltare1','41.893499','12.481992','Altare della Patria');
 insert into Treasure values('treas0007','InfoTesoroArco1','41.889622','12.490733','Arco di Trionfo');
 insert into Treasure values('treas0008','InfoTesoroArco2','41.889822','12.490933','Arco di Trionfo');
-insert into Treasure values('treas0009','InfoTesoroPonteMilvio1','41.934500928','12.466220066','Ponte Milvio');
+insert into Treasure values('treas0009','InfoTesoroPonteMilvio1','41.933562728','12.466631266','Ponte Milvio');
 insert into Treasure values('treas0010','InfoTesoroPonteMilvio2','41.934862998','12.467031536','Ponte Milvio');
 
-insert into Puzzle values('puzzle0001',true,'risposta11','Basilica di San Pietro','Angeli e demoni','description1','hint1',10,'group1');
-insert into Puzzle values('puzzle0002',true,'risposta23','Colosseo','description2','Delitto al colosseo','hint2',10,'group2');
-insert into Puzzle values('puzzle0003',false,'risposta32','Arco di Trionfo','description3','Angeli e demoni - Parte 2','hint3',10,'group1');
-insert into Puzzle values('puzzle0004',true,'risposta44','Ponte Milvio','description4','Il ponte delle spie','hint4',10,'group3');
+insert into Puzzle values('puzzle0001',true,'risposta12','Basilica di San Pietro','Angeli e demoni','Chi è l assassino di Angeli e Demoni','hint1',10,'group1');
+insert into Puzzle values('puzzle0002',true,'rete','Colosseo','Delitto al colosseo','I gladiatori combattevano nel Colosseo impiegando negli scontri una grande varietà di armi: il gladio, la daga, le fruste, le lancie e i tridenti. Esiste però un altra arma che può essere definita non-convenzionale utilizzata dai combattenti. Si tratta della...','Si usa anche nella pesca.',10,'group2');
+insert into Puzzle values('puzzle0003',false,'risposta34','Arco di Trionfo','Angeli e demoni - Parte 2','Che ruolo aveva al vaticano l assassino di Angeli e Demoni','hint3',10,'group1');
+insert into Puzzle values('puzzle0004',true,'risposta45','Ponte Milvio','Il ponte delle spie','Alla fine del ponte delle spie Tom Hanks vive o muore','hint4',10,'group3');
 
 SET foreign_key_checks = 0;
 
@@ -490,6 +490,56 @@ insert into Review values('game40006','Basilica di San Pietro',0,0,'Ci ritorner�
 insert into Review values('game40007','Colosseo',0,0,'Costa troppo');
 insert into Review values('game40008','Colosseo',0,0,'Mi piacciono i romani');
 
+insert into Tc values('treas0001','card0001');
+insert into Tc values('treas0001','card0005');
+insert into Tc values('treas0001','card0019');
+insert into Tc values('treas0001','card0020');
+insert into Tc values('treas0001','card0008');
+insert into Tc values('treas0002','card0017');
+insert into Tc values('treas0002','card0004');
+insert into Tc values('treas0002','card0009');
+insert into Tc values('treas0002','card0019');
+insert into Tc values('treas0002','card0014');
+insert into Tc values('treas0003','card0013');
+insert into Tc values('treas0003','card0012');
+insert into Tc values('treas0003','card0011');
+insert into Tc values('treas0003','card0010');
+insert into Tc values('treas0003','card0007');
+insert into Tc values('treas0004','card0001');
+insert into Tc values('treas0004','card0002');
+insert into Tc values('treas0004','card0003');
+insert into Tc values('treas0004','card0004');
+insert into Tc values('treas0004','card0005');
+insert into Tc values('treas0005','card0006');
+insert into Tc values('treas0005','card0007');
+insert into Tc values('treas0005','card0008');
+insert into Tc values('treas0005','card0009');
+insert into Tc values('treas0005','card0010');
+insert into Tc values('treas0006','card0011');
+insert into Tc values('treas0006','card0012');
+insert into Tc values('treas0006','card0013');
+insert into Tc values('treas0006','card0014');
+insert into Tc values('treas0006','card0015');
+insert into Tc values('treas0007','card0016');
+insert into Tc values('treas0007','card0017');
+insert into Tc values('treas0007','card0018');
+insert into Tc values('treas0007','card0019');
+insert into Tc values('treas0007','card0020');
+insert into Tc values('treas0008','card0020');
+insert into Tc values('treas0008','card0001');
+insert into Tc values('treas0008','card0002');
+insert into Tc values('treas0008','card0003');
+insert into Tc values('treas0008','card0004');
+insert into Tc values('treas0009','card0006');
+insert into Tc values('treas0009','card0009');
+insert into Tc values('treas0009','card0010');
+insert into Tc values('treas0009','card0011');
+insert into Tc values('treas0009','card0012');
+insert into Tc values('treas0010','card0013');
+insert into Tc values('treas0010','card0015');
+insert into Tc values('treas0010','card0017');
+insert into Tc values('treas0010','card0018');
+insert into Tc values('treas0010','card0019');
 
 SET foreign_key_checks = 0;
 insert into Ha values('Colosseo','statoitaliano@gmail.com');
@@ -499,6 +549,63 @@ insert into Ha values('Basilica di San Pietro','statovaticano@libero.it');
 insert into Ha values('Arco di Trionfo','statoitaliano@gmail.com');
 insert into Ha values('Nuvola di Fuksas','enteprivato@gmail.com');
 SET foreign_key_checks = 1;
+
+insert into Gt values('game10001','treas0003',true);
+insert into Gt values('game10001','treas0004',false);
+insert into Gt values('game10001','treas0002',true);
+insert into Gt values('game10001','treas0001',false);
+insert into Gt values('game10001','treas0006',true);
+insert into Gt values('game10001','treas0009',false);
+insert into Gt values('game10001','treas0010',false);
+insert into Gt values('game10002','treas0003',false);
+insert into Gt values('game10002','treas0004',false);
+insert into Gt values('game10002','treas0002',true);
+insert into Gt values('game10002','treas0001',false);
+insert into Gt values('game10002','treas0006',false);
+insert into Gt values('game10002','treas0009',true);
+insert into Gt values('game10002','treas0010',false);
+insert into Gt values('game10003','treas0003',false);
+insert into Gt values('game10003','treas0004',true);
+insert into Gt values('game10003','treas0002',true);
+insert into Gt values('game10003','treas0001',false);
+insert into Gt values('game10003','treas0009',true);
+insert into Gt values('game10003','treas0010',false);
+insert into Gt values('game10003','treas0006',false);
+insert into Gt values('game10004','treas0003',false);
+insert into Gt values('game10004','treas0004',true);
+insert into Gt values('game10004','treas0002',true);
+insert into Gt values('game10004','treas0001',false);
+insert into Gt values('game10004','treas0006',false);
+insert into Gt values('game10004','treas0009',true);
+insert into Gt values('game10004','treas0010',false);
+insert into Gt values('game10005','treas0003',false);
+insert into Gt values('game10005','treas0004',true);
+insert into Gt values('game10005','treas0002',true);
+insert into Gt values('game10005','treas0001',false);
+insert into Gt values('game10005','treas0006',false);
+insert into Gt values('game10005','treas0009',false);
+insert into Gt values('game10005','treas0010',false);
+insert into Gt values('game10006','treas0003',false);
+insert into Gt values('game10006','treas0004',true);
+insert into Gt values('game10006','treas0006',false);
+insert into Gt values('game10006','treas0009',false);
+insert into Gt values('game10006','treas0010',false);
+insert into Gt values('game10006','treas0001',true);
+insert into Gt values('game10006','treas0002',false);
+insert into Gt values('game10007','treas0003',false);
+insert into Gt values('game10007','treas0004',true);
+insert into Gt values('game10007','treas0006',false);
+insert into Gt values('game10007','treas0009',false);
+insert into Gt values('game10007','treas0010',false);
+insert into Gt values('game10007','treas0001',true);
+insert into Gt values('game10007','treas0002',false);
+insert into Gt values('game10008','treas0003',false);
+insert into Gt values('game10008','treas0004',true);
+insert into Gt values('game10008','treas0006',false);
+insert into Gt values('game10008','treas0009',false);
+insert into Gt values('game10008','treas0010',false);
+insert into Gt values('game10008','treas0001',false);
+insert into Gt values('game10008','treas0002',true);
 
 
 
@@ -555,6 +662,50 @@ insert into G4h values('game40004','Nuvola di Fuksas');
 insert into G4h values('game40007','Altare della Patria');
 insert into G4h values('game40008','Colosseo');
 
+
+
+
+insert into G1c values('game10001','card0001');
+insert into G1c values('game10001','card0005');
+insert into G1c values('game10001','card0019');
+insert into G1c values('game10001','card0020');
+insert into G1c values('game10001','card0008');
+insert into G1c values('game10002','card0017');
+insert into G1c values('game10002','card0004');
+insert into G1c values('game10002','card0009');
+insert into G1c values('game10002','card0019');
+insert into G1c values('game10002','card0014');
+insert into G1c values('game10003','card0009');
+insert into G1c values('game10003','card0020');
+insert into G1c values('game10003','card0018');
+insert into G1c values('game10003','card0013');
+insert into G1c values('game10003','card0011');
+insert into G1c values('game10004','card0007');
+insert into G1c values('game10004','card0016');
+insert into G1c values('game10004','card0002');
+insert into G1c values('game10004','card0004');
+insert into G1c values('game10004','card0008');
+insert into G1c values('game10005','card0013');
+insert into G1c values('game10005','card0014');
+insert into G1c values('game10005','card0008');
+insert into G1c values('game10005','card0003');
+insert into G1c values('game10005','card0009');
+insert into G1c values('game10006','card0010');
+insert into G1c values('game10006','card0012');
+insert into G1c values('game10006','card0004');
+insert into G1c values('game10006','card0006');
+insert into G1c values('game10006','card0008');
+insert into G1c values('game10007','card0011');
+insert into G1c values('game10007','card0013');
+insert into G1c values('game10007','card0005');
+insert into G1c values('game10007','card0007');
+insert into G1c values('game10007','card0002');
+insert into G1c values('game10008','card0007');
+insert into G1c values('game10008','card0008');
+insert into G1c values('game10008','card0009');
+insert into G1c values('game10008','card0001');
+insert into G1c values('game10008','card0017');
+
 insert into Mg1 values('mission0001','game10001');
 insert into Mg1 values('mission0005','game10004');
 insert into Mg1 values('mission0011','game10005');
@@ -574,26 +725,3 @@ insert into Mg4 values('mission0001','game40003');
 insert into Mg4 values('mission0002','game40004');
 insert into Mg4 values('mission0004','game40005');
 insert into Mg4 values('mission0010','game40008');
-
-
-
-
-insert into Ag1 values('achi0001','game10004');
-insert into Ag1 values('achi0002','game10005');
-insert into Ag1 values('achi0003','game10006');
-insert into Ag1 values('achi0004','game10007');
-
-insert into Ag2 values('achi0005','game20001');
-insert into Ag2 values('achi0006','game20001');
-insert into Ag2 values('achi0007','game20003');
-insert into Ag2 values('achi0008','game20008');
-
-insert into Ag3 values('achi0009','game30003');
-insert into Ag3 values('achi0010','game30004');
-insert into Ag3 values('achi0011','game30005');
-insert into Ag3 values('achi0012','game30006');
-
-insert into Ag4 values('achi0013','game40001');
-insert into Ag4 values('achi0014','game40002');
-insert into Ag4 values('achi0015','game40007');
-insert into Ag4 values('achi0016','game40008');

@@ -54,7 +54,7 @@ public class PuzzlePortal extends AppCompatActivity {
                     list_item = new String[contLength];
                     for (int i = 0; i < contLength; i++) {
                         JSONObject jsObj = (JSONObject) response.get(i);
-                        String value = jsObj.getString("code");
+                        String value = jsObj.getString("name");
                         list_item[i] = value;
 
                         ArrayAdapter<?> adapter = new ArrayAdapter<Object>(PuzzlePortal.this, android.R.layout.simple_selectable_list_item, list_item);
@@ -91,7 +91,7 @@ public class PuzzlePortal extends AppCompatActivity {
                     list_item2 = new String[contLength];
                     for (int i = 0; i < contLength; i++) {
                         JSONObject jsObj = (JSONObject) response.get(i);
-                        String value = jsObj.getString("code") + "  - coming soon!";
+                        String value = jsObj.getString("name") + "  - coming soon!";
                         list_item2[i] = value;
 
                         ArrayAdapter<?> adapter = new ArrayAdapter<Object>(PuzzlePortal.this, android.R.layout.simple_selectable_list_item, list_item2);

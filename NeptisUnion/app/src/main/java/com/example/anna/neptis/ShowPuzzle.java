@@ -1,9 +1,11 @@
 package com.example.anna.neptis;
 
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,6 +25,10 @@ public class ShowPuzzle extends AppCompatActivity {
 
     String nome;
     String url;
+    String url2;
+    String url3;
+    String risposta;
+    String indizio;
     TextView nome_titolo;
     TextView descrizione;
     ImageButton solve;
@@ -34,22 +40,40 @@ public class ShowPuzzle extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_puzzle);
 
-        nome = getIntent().getExtras().getString("name");
+        String temp = getIntent().getExtras().getString("name");
+
 
         nome_titolo = (TextView) findViewById(R.id.l_puzzle_name);
-        nome_titolo.setText(nome);
+        nome_titolo.setText(temp);
+
+        nome = temp.replace(" ","%20");
 
         descrizione = (TextView) findViewById(R.id.l_test_puzzle_descr);
 
         ///
 
         solve = (ImageButton) findViewById(R.id.ib_solve);
+        solve.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent go_to_answer = new Intent(ShowPuzzle.this,PuzzleAnswerActivity.class);
+                go_to_answer.putExtra("answer",risposta);
+                startActivityForResult(go_to_answer,100);
+            }
+        });
+
         hint = (ImageButton) findViewById(R.id.ib_hint);
+        hint.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(ShowPuzzle.this,indizio,Toast.LENGTH_LONG).show();
+            }
+        });
 
         /***********_______START TEMPLATE JSON REQUEST________**********/
 
         RequestQueue queue = Volley.newRequestQueue(ShowPuzzle.this);
-        url ="http://10.0.2.2:8000/getPuzzleDescription/"+nome;
+        url ="http://10.0.2.2:8000/getPuzzleDescription/"+nome+"/";
         // Request a string response from the provided URL.
         Log.d("url= ",url);
 
@@ -73,5 +97,61 @@ public class ShowPuzzle extends AppCompatActivity {
         // Add the request to the RequestQueue.
         queue.add(jsArray);
         /***********_______END TEMPLATE JSON REQUEST________**********/
+
+        /***********_______START TEMPLATE JSON REQUEST________**********/
+
+        RequestQueue queue2 = Volley.newRequestQueue(ShowPuzzle.this);
+        url2 ="http://10.0.2.2:8000/getPuzzleAnswer/"+nome+"/";
+        // Request a string response from the provided URL.
+        Log.d("url= ",url2);
+
+        JsonArrayRequest jsArray2 = new JsonArrayRequest(Request.Method.GET, url2,null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                try {
+                    JSONObject obj_desc = response.getJSONObject(0);
+                    risposta = obj_desc.getString("answer");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("Volley error:", error.toString());
+            }
+        });
+        // Add the request to the RequestQueue.
+        queue2.add(jsArray2);
+        /***********_______END TEMPLATE JSON REQUEST________**********/
+
+        /***********_______START TEMPLATE JSON REQUEST________**********/
+
+        RequestQueue queue3 = Volley.newRequestQueue(ShowPuzzle.this);
+        url3 ="http://10.0.2.2:8000/getPuzzleHint/"+nome+"/";
+        // Request a string response from the provided URL.
+        Log.d("url= ",url3);
+
+        JsonArrayRequest jsArray3 = new JsonArrayRequest(Request.Method.GET, url3,null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                try {
+                    JSONObject obj_desc = response.getJSONObject(0);
+                    indizio = obj_desc.getString("hint");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("Volley error:", error.toString());
+            }
+        });
+        // Add the request to the RequestQueue.
+        queue3.add(jsArray3);
+        /***********_______END TEMPLATE JSON REQUEST________**********/
     }
+
+
 }
