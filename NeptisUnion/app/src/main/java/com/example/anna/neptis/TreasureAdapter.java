@@ -18,7 +18,7 @@ import java.util.List;
  * Created by Anna on 16/10/2016.
  */
 
-public class TreasureAdapter extends ArrayAdapter<ObjTesoro> {
+/*public class TreasureAdapter extends ArrayAdapter<ObjTesoro> {
 
     public TreasureAdapter(Context context, int textViewResourceId, List<ObjTesoro> items) {
         super(context, textViewResourceId, items);
@@ -31,10 +31,10 @@ public class TreasureAdapter extends ArrayAdapter<ObjTesoro> {
 
         ImageView forziere = (ImageView)convertView.findViewById(R.id.treasure_image);
 
-        TextView c = (TextView)convertView.findViewById(R.id.c);
+        //TextView c = (TextView)convertView.findViewById(R.id.c);
         ScrollView st  = (ScrollView)convertView.findViewById(R.id.TreasureScrollView);
         TextView info = (TextView)convertView.findViewById(R.id.info_treasure);
-        ImageButton t_card = (ImageButton)convertView.findViewById(R.id.carte_tesoro);
+        //ImageButton t_card = (ImageButton)convertView.findViewById(R.id.carte_tesoro);
 
 
         ObjTesoro t = getItem(position);
@@ -44,13 +44,13 @@ public class TreasureAdapter extends ArrayAdapter<ObjTesoro> {
         int found = t.isFound();
         forziere.setImageResource(t.getTreasureImage(found));
 
-        t_card.setFocusableInTouchMode(false);
-        t_card.setFocusable(false);
+        //t_card.setFocusableInTouchMode(false);
+        //t_card.setFocusable(false);
 
         final String user = t.getUser();
         final String treasure_code = t.getCode();
 
-
+        /*
         if(found == 1) {
             t_card.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -70,3 +70,4 @@ public class TreasureAdapter extends ArrayAdapter<ObjTesoro> {
 
 
 }
+ */

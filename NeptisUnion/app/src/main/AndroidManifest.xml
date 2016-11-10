@@ -66,6 +66,10 @@
 
         <activity android:name=".TreasureInfoActivity" />
 
+        <activity android:name=".TreasureNotFoundActivity" />
+
+        <activity android:name=".TreasureFound" />
+
 
     </application>
 

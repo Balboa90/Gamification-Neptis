@@ -1,11 +1,14 @@
 package com.example.anna.neptis;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -47,11 +50,26 @@ public class ManageCards extends AppCompatActivity {
         list = (ListView) findViewById(R.id.listView);
         all_cards = new ArrayList<ObjCard>();
 
+
+        int button_code = getIntent().getExtras().getInt("codice");
+
         //***********_______TEMPLATE JSON REQUEST________**********
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this);
 
-        url ="http://10.0.2.2:8000/getAllCards/";
+        switch(button_code){
+            case 100:
+                url ="http://10.0.2.2:8000/getAllCards/";
+                break;
+
+            case 200:
+                String game = getIntent().getExtras().getString("game_code");
+                Log.d("game_ code",game);
+                url ="http://10.0.2.2:8000/getMyCards/"+ game + "/";
+                break;
+
+            default:break;
+        }
 
         Log.d("url= ",url);
 
@@ -67,10 +85,10 @@ public class ManageCards extends AppCompatActivity {
                         cost = jsObj.getString("cost");
                         name = jsObj.getString("name");
                         description = jsObj.getString("description");
-                        //Log.d("Description: ", description);
+
 
                         all_cards.add(new ObjCard(code,cost,name,description));
-                        list.setAdapter(new CardAdapter(ManageCards.this, android.R.layout.simple_list_item_1, all_cards));
+                        list.setAdapter(new CardAdapter(ManageCards.this, R.layout.adapter_card , all_cards));//android.R.layout.simple_list_item_1
 
                     }
                 } catch (JSONException e) {
@@ -84,24 +102,13 @@ public class ManageCards extends AppCompatActivity {
             }
         });
 
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> adapter, View v, int position, long id) {
-                Intent go_to_info = new Intent(ManageCards.this, CardInfoActivity.class);
-                ObjCard select_card = (ObjCard)adapter.getItemAtPosition(position);
-                String code_sel_card = select_card.getCode();
-                Log.d("codice inviato: ",code_sel_card);
-                go_to_info.putExtra("codice",code_sel_card);
-                startActivity(go_to_info);
-
-            }
-        });
-
         // Add the request to the RequestQueue.
         queue.add(jsCardCodes);
 
         /***********_______END TEMPLATE JSON REQUEST________**********/
 
     }
+
 
 
 

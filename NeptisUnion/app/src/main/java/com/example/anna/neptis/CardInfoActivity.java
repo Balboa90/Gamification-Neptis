@@ -41,12 +41,6 @@ public class CardInfoActivity extends AppCompatActivity{
 
         info = (TextView) findViewById(R.id.d);
 
-
-
-
-
-
-
     }
 }
 

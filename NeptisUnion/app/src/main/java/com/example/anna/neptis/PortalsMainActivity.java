@@ -1,6 +1,7 @@
 package com.example.anna.neptis;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -32,6 +33,8 @@ import com.facebook.login.LoginManager;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 
 
 public class PortalsMainActivity extends AppCompatActivity {
@@ -41,10 +44,18 @@ public class PortalsMainActivity extends AppCompatActivity {
     private SharedPreferences prefs;
     private String pre;
 
+    private SharedPreferences pref_tutorial;
+    private SharedPreferences read_pref_tutorial;
+    private static final String TUTORIAL = "Tutorial";
+    private static final String FLAG_TUTORIAL = "Flag";
+
     private User current_user;
     TextView utente_loggato;
 
     String urlToken;
+
+    Dialog home_dialog,login_dialog;
+    private int flag_tutorial = 0;
 
 
     @Override
@@ -54,6 +65,21 @@ public class PortalsMainActivity extends AppCompatActivity {
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
+
+        pref_tutorial = getSharedPreferences(TUTORIAL,Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref_tutorial.edit();
+        editor.putInt(FLAG_TUTORIAL, 1);
+        editor.apply();
+
+        read_pref_tutorial = getSharedPreferences("Tutorial", Context.MODE_PRIVATE);
+        flag_tutorial = pref_tutorial.getInt("Flag", 2);
+        Log.d("flag salvato PMA: ",Integer.toString(flag_tutorial));
+
+        if(flag_tutorial == 1) {
+            tutorial();
+        }
+
+
 
         utente_loggato = (TextView) findViewById(R.id.nome_user);
         utente_loggato.setText("Eseguire l'accesso");
@@ -84,6 +110,7 @@ public class PortalsMainActivity extends AppCompatActivity {
                 } else {
                     Intent openYellowPortal = new Intent(PortalsMainActivity.this, TreasurePortalPag1.class);
                     openYellowPortal.putExtra("user",current_user.getEmail());
+                    openYellowPortal.putExtra("tutorial",flag_tutorial);
                     startActivity(openYellowPortal);
                 }
             }
@@ -197,6 +224,7 @@ public class PortalsMainActivity extends AppCompatActivity {
         pre = prefs.getString("current_session", "");
         Log.d("Pref salvat on resume: ",pre);
         //////////////////////////////
+
         getUserByToken(pre);
 
     }
@@ -266,15 +294,101 @@ public class PortalsMainActivity extends AppCompatActivity {
     }
 
     @Override
-   protected void onActivityResult(int requestCode,int resultCode, Intent data){
-        super.onActivityResult(requestCode,resultCode,data);
+   protected void onActivityResult(int requestCode,int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode == RQ_CODE){
-           if(resultCode == Activity.RESULT_OK) {
-               Log.d("Accedi ok: ", "Accedi ok");
-               getUserByToken(pre);
-           }
+        if (requestCode == RQ_CODE) {
+            if (resultCode == Activity.RESULT_OK) {
+                Log.d("Accedi ok: ", "Accedi ok");
+                getUserByToken(pre);
+            }
         }
     }
+
+
+    public void tutorial(){
+        pref_tutorial = getSharedPreferences(TUTORIAL,Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref_tutorial.edit();
+        editor.putInt(FLAG_TUTORIAL, 1);
+        editor.apply();
+
+        AlertDialog.Builder miaAlert = new AlertDialog.Builder(this);
+        miaAlert.setTitle("Benvenuto in GoPoleis!");
+        miaAlert.setMessage("Prima di iniziare la nostra avventura volevamo darti delle indicazioni su come muoverti nei portali.\nVuoi avviare il tutorial?");
+        miaAlert.setIcon(R.drawable.logo);
+
+        miaAlert.setCancelable(false);
+        miaAlert.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+
+                home_dialog = new Dialog(PortalsMainActivity.this);
+                home_dialog.setCancelable(false);
+                home_dialog.setContentView(R.layout.tutorial_portal_main_activity);
+                home_dialog.show();
+
+            }
+        });
+
+        miaAlert.setNegativeButton("Skip", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                read_pref_tutorial = getSharedPreferences("Tutorial", Context.MODE_PRIVATE);
+                flag_tutorial = pref_tutorial.getInt("Flag", 2);
+                Log.d("flag salvato: ",Integer.toString(flag_tutorial));
+
+                if(flag_tutorial == 1){
+                    Log.d("if skip button","sono entrato");
+
+                    SharedPreferences.Editor editor = pref_tutorial.edit();
+                    editor.putInt("Flag", 0);
+                    editor.apply();
+
+                    dialog.cancel();
+                    flag_tutorial = 0;
+                }else{
+                    dialog.cancel();
+                    flag_tutorial = 0;
+                }
+            }
+        });
+
+
+
+        AlertDialog alert = miaAlert.create();
+        alert.show();
+
+    }
+
+
+    public void avanti_home(View view) {
+        login_dialog=new Dialog(PortalsMainActivity.this);
+        login_dialog.setCancelable(false);
+        login_dialog.setContentView(R.layout.tutorial_login);
+        home_dialog.cancel();
+        login_dialog.show();
+    }
+
+
+    public void avanti_login(View view) {
+        login_dialog.cancel();
+
+        AlertDialog.Builder inizia = new AlertDialog.Builder(this);
+        inizia.setTitle("Inizia la tua avventura!");
+        inizia.setMessage("Effettua il login ed entra in uno dei portali.\nGoPoleis!");
+        inizia.setIcon(R.drawable.logo);
+
+        inizia.setCancelable(false);
+        inizia.setPositiveButton("Inizia", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.cancel();
+            }
+        });
+
+        flag_tutorial = 0;
+        AlertDialog alert = inizia .create();
+        alert.show();
+
+
+    }
+
 
 }

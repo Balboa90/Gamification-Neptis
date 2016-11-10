@@ -40,12 +40,26 @@ module.exports = {
 				todo.getFoundTreasures(req.params.code,res);
 			});*/
 
-			app.get('/getTreasureElements/:email/:code',function(req,res){
+			/*app.get('/getTreasureElements/:email/:code',function(req,res){
 				todo.getTreasureElements(req.params.email,req.params.code,res);
+			});*/
+
+			app.get('/getTreasureElements/:name',function(req,res){
+				todo.getTreasureElements(req.params.name,res);
 			});
 
-			app.get('/upadateFoundTreas/:code/:game',function(req,res){
-				todo.upadateFoundTreas(req.params.code,req.params.game,res);
+			app.get('/checkTreasureFound/:code_treas/:code_game',function(req,res){
+				todo.checkTreasureFound(req.params.code_treas,req.params.code_game,res);
+			});
+
+			app.get('/addTreasToGame1/:treas_code/:game',function(req,res){
+				todo.addTreasToGame1(req.params.treas_code,req.params.game,res);
+			});
+			
+			
+
+			app.get('/updateFoundTreas/:code/:game',function(req,res){
+				todo.updateFoundTreas(req.params.code,req.params.game,res);
 			});
 			
 			/*app.get('/getUserGame/:email',function(req,res){
@@ -72,14 +86,33 @@ module.exports = {
 				todo.getAllCards(res);
 			});
 
+			app.get('/getMyCards/:game',function(req,res){
+				todo.getMyCards(req.params.game,res);
+			});
+
+			
+
 			/*app.get('/getTreasureCardInfo/:code',function(req,res){
 				todo.getTreasureCardInfo(req.params.code,res);
 			});*/
 
-			app.get('/getTreasureCardInfo/:email/:code',function(req,res){
+			/*app.get('/getTreasureCardInfo/:email/:code',function(req,res){
 				todo.getTreasureCardInfo(req.params.email,req.params.code,res);
+			});*/
+
+			app.get('/getTreasureCardInfo/:code',function(req,res){
+				todo.getTreasureCardInfo(req.params.code,res);
 			});
 
+
+			app.get('/addCardToTreasure/:treas_code/:card_code',function(req,res){
+				todo.addCardToTreasure(req.params.treas_code,req.params.card_code,res);
+			});
+
+			app.get('/addCardToUserCollection/:game/:card_code',function(req,res){
+				todo.addCardToUserCollection(req.params.game,req.params.card_code,res);
+			});
+			
 			
 				
 
@@ -143,6 +176,12 @@ module.exports = {
 			app.get('/getUserFromSession/:session',function(req,res){
 				todo.getUserFromSession(req.params.session,res);
 			});
+			
+			app.get('/getGame1FromSession/:session',function(req,res){
+				todo.getGame1FromSession(req.params.session,res);
+			});
+
+			
 
 			//Insert email e password per login
 			app.get('/createUser/:email/:password',function(req,res){

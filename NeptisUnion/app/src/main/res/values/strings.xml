@@ -1,7 +1,7 @@
 <resources>
     <string name="facebook_app_id">621653938002925</string>
     <string name="app_name">Neptis</string>
-    <string name="treasure">TREASURE</string>
+    //<string name="treasure">TREASURE</string>
     <string name="portal">PORTAL</string>
     <string name="cards_list">CARDS LIST</string>
     <string name="achievement_list">ACHIEVEMENT LIST</string>

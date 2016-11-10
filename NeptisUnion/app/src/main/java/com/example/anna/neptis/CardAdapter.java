@@ -2,6 +2,7 @@ package com.example.anna.neptis;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,21 +31,25 @@ public class CardAdapter extends ArrayAdapter<ObjCard> {
         convertView = inflater.inflate(R.layout.adapter_card, null);
         ImageView card = (ImageView) convertView.findViewById(R.id.card_icon);
 
+        TextView code = (TextView)convertView.findViewById(R.id.card_code);
         TextView cost = (TextView)convertView.findViewById(R.id.valore_costo);
         TextView name = (TextView)convertView.findViewById(R.id.nome);
 
         ScrollView s  = (ScrollView)convertView.findViewById(R.id.ScrollView);
         TextView des = (TextView)convertView.findViewById(R.id.d);
+
         ObjCard t = getItem(position);
 
+        code.setText(t.getCode());
         cost.setText(t.getCost());
         name.setText(t.getName());
         des.setText(t.getDescription());
         s.setNestedScrollingEnabled(true);
 
-        int img_id = position;
-        card.setImageResource(t.getCardImage(img_id));
+        String card_code = t.getCode();
 
+        //Log.d("CARD CODE ADAPTER",card_code);
+        card.setImageResource(t.getCardImage(card_code));
 
         return convertView;
     }

@@ -262,8 +262,8 @@ public class LoginDialogActivity extends Activity {
         callbackManager.onActivityResult(requestCode,resultCode,data);
     }
 
-    public static boolean getFlagLogin(){
+    /*public static boolean getFlagLogin(){
         return flag_login_session;
-    }
+    }*/
 
 }
