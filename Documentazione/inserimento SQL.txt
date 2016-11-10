@@ -85,6 +85,7 @@ create table Heritage(
 	period varchar (100),
 	typology varchar (100),
 	region varchar (100),
+	route varchar (100),
 	latitude varchar(100),
 	longitude varchar(100),
 	culturalorganization varchar (100),
@@ -394,12 +395,12 @@ insert into Achievement values('achi0015','Il grande critico','Scrivi 50 recensi
 insert into Achievement values('achi0016','Rencesitore esperto','Scrivi 100 recensioni');
 
 
-insert into Heritage values('Colosseo','Il colosseo è chiamato Anfiteatro Flavio','Impero Romano','Anfiteatro','Lazio','41.89015','12.49244','statoitaliano@gmail.com',true,true,true,true);
-insert into Heritage values('Altare della Patria','Si trova vicino Piazza Venezia','Rinascimento','Monumento','Lazio','41.894599','12.483092','statoitaliano@gmail.com',true,true,false,true);
-insert into Heritage values('Ponte Milvio','Costruito dai Romani','Antica Roma','Ponte','Lazio','41.934662928','12.466831466','comuneroma@gmail.it',true,true,true,false);
-insert into Heritage values('Basilica di San Pietro','Costruita in epoche diverse','Rinascimento','Chiesa','Lazio','41.90226 ','12.45509','statovaticano@libero.it',true,true,true,true);
-insert into Heritage values('Arco di Trionfo','Costruito da Costantino','Impero Romano','Monumento','Lazio','41.889722','12.490833','statoitaliano@gmail.com',true,true,true,false);
-insert into Heritage values('Nuvola di Fuksas','Usata come centro congressi','Arte contemporanea','Museo','Lazio','41.83444 ','12.46965','enteprivato@gmail.com',true,true,false,true);
+insert into Heritage values('Colosseo','Il colosseo è chiamato Anfiteatro Flavio','Impero Romano','Anfiteatro','Lazio','Roma Imperiale','41.89015','12.49244','statoitaliano@gmail.com',true,true,true,true);
+insert into Heritage values('Altare della Patria','Bellezze di Roma','Si trova vicino Piazza Venezia','Rinascimento','Monumento','Lazio','41.894599','12.483092','statoitaliano@gmail.com',true,true,false,true);
+insert into Heritage values('Ponte Milvio','Costruito dai Romani','Antica Roma','Ponte','Lazio','Roma Imperiale','41.934662928','12.466831466','comuneroma@gmail.it',true,true,true,false);
+insert into Heritage values('Basilica di San Pietro','Costruita in epoche diverse','Rinascimento','Chiesa','Lazio','Roma e la Chiesa','41.90226 ','12.45509','statovaticano@libero.it',true,true,true,true);
+insert into Heritage values('Arco di Trionfo','Costruito da Costantino','Impero Romano','Monumento','Lazio','Roma Imperiale','41.889722','12.490833','statoitaliano@gmail.com',true,true,true,false);
+insert into Heritage values('Nuvola di Fuksas','Usata come centro congressi','Arte contemporanea','Museo','Lazio','Bellezze di Roma','41.83444 ','12.46965','enteprivato@gmail.com',true,true,false,true);
 
 insert into Infopoint values('info0001','Piazza fatta dal Bernini',80.99,80.99,'Basilica di San Pietro');
 insert into Infopoint values('info0002','Altare in oro',80.95,80.95,'Basilica di San Pietro');
