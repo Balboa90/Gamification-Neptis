@@ -10,10 +10,10 @@ create table User(
 	session varchar (100),
 	title varchar (100),
 	coins int,
-	game1 varchar (100) unique,
-	game2 varchar (100) unique,
-	game3 varchar (100) unique,
-	game4 varchar (100) unique);
+	game1 varchar (100),
+	game2 varchar (100),
+	game3 varchar (100),
+	game4 varchar (100)) ;
 
 create table Game1(
 	code varchar (100) primary key,

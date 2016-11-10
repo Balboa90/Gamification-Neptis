@@ -41,7 +41,10 @@ public class PuzzleAnswerActivity extends Activity {
             public void onClick(View v) {
                 String my_answer = answer.getText().toString();
                 if (my_answer.equals(solution)){
-                    Toast.makeText(PuzzleAnswerActivity.this,"Esatto!!",Toast.LENGTH_LONG).show();
+
+                    setResult(RESULT_OK);
+                    finish();
+
                 }
                 else {
                     Toast.makeText(PuzzleAnswerActivity.this,"Hai sbagliato! Ritenta!",Toast.LENGTH_LONG).show();

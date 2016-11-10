@@ -1,6 +1,7 @@
 package com.example.anna.neptis;
 
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -33,6 +34,8 @@ public class ShowPuzzle extends AppCompatActivity {
     TextView descrizione;
     ImageButton solve;
     ImageButton hint;
+    String puzzle_code;
+    String game_code;
 
 
     @Override
@@ -41,6 +44,7 @@ public class ShowPuzzle extends AppCompatActivity {
         setContentView(R.layout.activity_show_puzzle);
 
         String temp = getIntent().getExtras().getString("name");
+        game_code = getIntent().getExtras().getString("game_code");
 
 
         nome_titolo = (TextView) findViewById(R.id.l_puzzle_name);
@@ -151,6 +155,71 @@ public class ShowPuzzle extends AppCompatActivity {
         // Add the request to the RequestQueue.
         queue3.add(jsArray3);
         /***********_______END TEMPLATE JSON REQUEST________**********/
+
+        /***********_______START TEMPLATE JSON REQUEST________**********/
+
+        RequestQueue queue4 = Volley.newRequestQueue(ShowPuzzle.this);
+        String url4 ="http://10.0.2.2:8000/getPuzzleCode/"+nome+"/";
+        // Request a string response from the provided URL.
+        Log.d("url= ",url4);
+
+        JsonArrayRequest jsArray4 = new JsonArrayRequest(Request.Method.GET, url4,null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                try {
+                    JSONObject obj_desc = response.getJSONObject(0);
+                    puzzle_code = obj_desc.getString("code");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("Volley error:", error.toString());
+            }
+        });
+        // Add the request to the RequestQueue.
+        queue4.add(jsArray4);
+        /***********_______END TEMPLATE JSON REQUEST________**********/
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode,int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 100) {
+            if (resultCode == Activity.RESULT_OK) {
+
+                Toast.makeText(ShowPuzzle.this,"THAT WAS EASY!!",Toast.LENGTH_LONG).show();
+
+                /***********_______START TEMPLATE JSON REQUEST________**********/
+
+                RequestQueue queue5 = Volley.newRequestQueue(ShowPuzzle.this);
+                String url5 ="http://10.0.2.2:8000/acquirePuzzle/"+game_code+"/"+puzzle_code+"/";
+                // Request a string response from the provided URL.
+                Log.d("url= ",url5);
+
+                JsonArrayRequest jsArray5 = new JsonArrayRequest(Request.Method.GET, url5,null, new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        Log.d("Acquisisci: ",response.toString());
+                        finish();
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d("Volley error:", error.toString());
+                        finish();
+                    }
+                });
+                // Add the request to the RequestQueue.
+                queue5.add(jsArray5);
+                /***********_______END TEMPLATE JSON REQUEST________**********/
+
+
+        }
+        }
     }
 
 

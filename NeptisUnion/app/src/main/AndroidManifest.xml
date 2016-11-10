@@ -64,8 +64,10 @@
         <activity android:name=".TreasureInfoActivity" />
         <activity android:name=".TreasureNotFoundActivity" />
         <activity android:name=".TreasureFound" />
-        <activity android:name=".PuzzleAnswerActivity"
+        <activity
+            android:name=".PuzzleAnswerActivity"
             android:theme="@android:style/Theme.Holo.Light.Dialog.NoActionBar" />
+        <activity android:name=".ShowMyPuzzles"></activity>
     </application>
 
 </manifest>
