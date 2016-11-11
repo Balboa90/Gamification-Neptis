@@ -1,7 +1,6 @@
 package com.example.anna.neptis;
 
 
-import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -21,6 +20,7 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import android.app.Activity;
 
 public class ShowPuzzle extends AppCompatActivity {
 
@@ -43,6 +43,7 @@ public class ShowPuzzle extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_puzzle);
 
+        //nome = getIntent().getExtras().getString("name");
         String temp = getIntent().getExtras().getString("name");
         game_code = getIntent().getExtras().getString("game_code");
 
@@ -65,6 +66,7 @@ public class ShowPuzzle extends AppCompatActivity {
                 startActivityForResult(go_to_answer,100);
             }
         });
+
 
         hint = (ImageButton) findViewById(R.id.ib_hint);
         hint.setOnClickListener(new View.OnClickListener() {
@@ -156,6 +158,7 @@ public class ShowPuzzle extends AppCompatActivity {
         queue3.add(jsArray3);
         /***********_______END TEMPLATE JSON REQUEST________**********/
 
+
         /***********_______START TEMPLATE JSON REQUEST________**********/
 
         RequestQueue queue4 = Volley.newRequestQueue(ShowPuzzle.this);
@@ -218,9 +221,18 @@ public class ShowPuzzle extends AppCompatActivity {
                 /***********_______END TEMPLATE JSON REQUEST________**********/
 
 
+            }
         }
-        }
+
+
+
     }
 
 
 }
+
+
+
+
+
+

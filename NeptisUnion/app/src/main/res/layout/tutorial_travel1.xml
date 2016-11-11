@@ -16,8 +16,7 @@
         android:layout_width="350dp"
         android:layout_height="290dp"
         android:src="@drawable/mappa_travel"
-        android:scaleType="centerCrop"
-        />
+        android:scaleType="centerCrop" />
 
 
     <RelativeLayout
@@ -29,11 +28,11 @@
         android:id="@+id/relativeLayout3">
 
         <Button
-            android:id="@+id/avanti"
+            android:id="@+id/avanti_travel1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/cardview_shadow_end_color"
-            android:onClick="avanti_tpp2"/>
+            android:onClick="avanti_travel1"/>
 
         <ImageView
             android:layout_width="30dp"

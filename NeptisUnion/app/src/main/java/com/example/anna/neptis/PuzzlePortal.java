@@ -1,8 +1,6 @@
 package com.example.anna.neptis;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -33,9 +31,9 @@ public class PuzzlePortal extends AppCompatActivity {
     ImageButton ib_cerca;
     String[] list_item;
     String[] list_item2;
+
     private String user;
     private String game;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,8 +52,6 @@ public class PuzzlePortal extends AppCompatActivity {
         JsonArrayRequest jsArray = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
-                // Display the first 500 characters of the response string.
-                //Log.d("Response is: ", response.toString());
                 try {
                     int contLength = response.length();
                     list_item = new String[contLength];
@@ -91,6 +87,8 @@ public class PuzzlePortal extends AppCompatActivity {
         JsonArrayRequest jsArray2 = new JsonArrayRequest(Request.Method.GET, url2, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
+                // Display the first 500 characters of the response string.
+                //Log.d("Response is: ", response.toString());
                 try {
                     int contLength = response.length();
                     list_item2 = new String[contLength];
@@ -98,6 +96,7 @@ public class PuzzlePortal extends AppCompatActivity {
                         JSONObject jsObj = (JSONObject) response.get(i);
                         String value = jsObj.getString("name") + "  - coming soon!";
                         list_item2[i] = value;
+
                         ArrayAdapter<?> adapter = new ArrayAdapter<Object>(PuzzlePortal.this, android.R.layout.simple_selectable_list_item, list_item2);
                         list_incoming.setAdapter(adapter);
                     }
@@ -145,12 +144,17 @@ public class PuzzlePortal extends AppCompatActivity {
         queue3.add(jsArray3);
         /***********_______END TEMPLATE JSON REQUEST________**********/
 
+
+
+
+
         list_attivi.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent goto_show_puzzle = new Intent(PuzzlePortal.this, ShowPuzzle.class);
                 Object selected_puzzle = list_attivi.getItemAtPosition(position);
                 String extra_nome = selected_puzzle.toString();
+                //Log.d("Nome del puzzle: ",extra_nome);
                 goto_show_puzzle.putExtra("name", extra_nome);
                 goto_show_puzzle.putExtra("game_code", game);
                 startActivity(goto_show_puzzle);
@@ -183,6 +187,7 @@ public class PuzzlePortal extends AppCompatActivity {
                 Intent goto_mypuzzle = new Intent(PuzzlePortal.this,ShowMyPuzzles.class);
                 goto_mypuzzle.putExtra("game_code", game);
                 startActivity(goto_mypuzzle);
+
             }
         });
 

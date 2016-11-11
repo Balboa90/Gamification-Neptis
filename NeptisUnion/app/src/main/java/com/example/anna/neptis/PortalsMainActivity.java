@@ -66,7 +66,7 @@ public class PortalsMainActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
 
-        pref_tutorial = getSharedPreferences(TUTORIAL,Context.MODE_PRIVATE);
+       /* pref_tutorial = getSharedPreferences(TUTORIAL,Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = pref_tutorial.edit();
         editor.putInt(FLAG_TUTORIAL, 1);
         editor.apply();
@@ -77,7 +77,9 @@ public class PortalsMainActivity extends AppCompatActivity {
 
         if(flag_tutorial == 1) {
             tutorial();
-        }
+        }*/
+
+        tutorial();
 
 
 
@@ -307,10 +309,10 @@ public class PortalsMainActivity extends AppCompatActivity {
 
 
     public void tutorial(){
-        pref_tutorial = getSharedPreferences(TUTORIAL,Context.MODE_PRIVATE);
+        /*pref_tutorial = getSharedPreferences(TUTORIAL,Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = pref_tutorial.edit();
         editor.putInt(FLAG_TUTORIAL, 1);
-        editor.apply();
+        editor.apply();*/
 
         AlertDialog.Builder miaAlert = new AlertDialog.Builder(this);
         miaAlert.setTitle("Benvenuto in GoPoleis!");
@@ -320,22 +322,21 @@ public class PortalsMainActivity extends AppCompatActivity {
         miaAlert.setCancelable(false);
         miaAlert.setPositiveButton("Si", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-
-                home_dialog = new Dialog(PortalsMainActivity.this);
-                home_dialog.setCancelable(false);
-                home_dialog.setContentView(R.layout.tutorial_portal_main_activity);
-                home_dialog.show();
+                Intent openTutorial = new Intent(PortalsMainActivity.this,TutorialDialogActivity.class);
+                startActivity(openTutorial);
 
             }
         });
 
         miaAlert.setNegativeButton("Skip", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-                read_pref_tutorial = getSharedPreferences("Tutorial", Context.MODE_PRIVATE);
+                /*read_pref_tutorial = getSharedPreferences("Tutorial", Context.MODE_PRIVATE);
                 flag_tutorial = pref_tutorial.getInt("Flag", 2);
-                Log.d("flag salvato: ",Integer.toString(flag_tutorial));
+                Log.d("flag salvato: ",Integer.toString(flag_tutorial));*/
 
-                if(flag_tutorial == 1){
+                dialog.cancel();
+
+               /* if(flag_tutorial == 1){
                     Log.d("if skip button","sono entrato");
 
                     SharedPreferences.Editor editor = pref_tutorial.edit();
@@ -345,9 +346,9 @@ public class PortalsMainActivity extends AppCompatActivity {
                     dialog.cancel();
                     flag_tutorial = 0;
                 }else{
-                    dialog.cancel();
+
                     flag_tutorial = 0;
-                }
+                }*/
             }
         });
 

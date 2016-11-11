@@ -70,7 +70,7 @@ public class TreasurePortalPag2 extends FragmentActivity implements OnMapReadyCa
     List list; //lista dei tesori presenti nell'heritage passato come parametro
 
     String user;
-    String game;
+    String game = "";
 
 
 

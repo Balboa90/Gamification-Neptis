@@ -53,8 +53,6 @@ public class TreasurePortalPag1 extends AppCompatActivity implements OnItemSelec
     String pre;
     String game;
 
-    SharedPreferences pref_tutorial;
-    int flag_tutorial;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,13 +64,6 @@ public class TreasurePortalPag1 extends AppCompatActivity implements OnItemSelec
 
         getGameCode();
         user = getIntent().getExtras().getString("user");
-
-        flag_tutorial = getIntent().getExtras().getInt("Tutorial");
-
-
-        if(flag_tutorial == 1){
-            tutorial();
-        }
 
 
         lente = (ImageView)findViewById(R.id.lens);
@@ -187,11 +178,6 @@ public class TreasurePortalPag1 extends AppCompatActivity implements OnItemSelec
 
         game = getIntent().getExtras().getString("game");
         user = getIntent().getExtras().getString("user");
-
-        if(flag_tutorial == 1){
-            tutorial();
-        }
-
 
 
         lente = (ImageView)findViewById(R.id.lens);
@@ -391,41 +377,6 @@ public class TreasurePortalPag1 extends AppCompatActivity implements OnItemSelec
         return game;
     }
 
-    Dialog tpp1_dialog,tpp2_dialog;
-    public void tutorial(){
-        tpp1_dialog=new Dialog(TreasurePortalPag1.this);
-        tpp1_dialog.setCancelable(false);
-        tpp1_dialog.setContentView(R.layout.tutorial_tpp1);
-        tpp1_dialog.show();
-    }
-
-    public void avanti_tpp1(View view){
-        tpp1_dialog.cancel();
-        tpp2_dialog=new Dialog(TreasurePortalPag1.this);
-        tpp2_dialog.setCancelable(false);
-        tpp2_dialog.setContentView(R.layout.tutorial_tpp2);
-        tpp2_dialog.show();
-    }
-
-    public void avanti_tpp2(View view){
-
-        tpp2_dialog.cancel();
-        AlertDialog.Builder inizia = new AlertDialog.Builder(this);
-        inizia.setTitle("Inizia la tua avventura!");
-        inizia.setMessage("Ora tocca a te! Troviamo più tesori possibili per collezionare il maggior numero di carte!\nGoPoleis!");
-        inizia.setIcon(R.drawable.logo);
-
-        inizia.setCancelable(false);
-        inizia.setPositiveButton("Inizia", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                dialog.cancel();
-            }
-        });
-
-
-        AlertDialog alert = inizia .create();
-        alert.show();
-    }
 
 
 
