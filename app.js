@@ -1,7 +1,7 @@
 var express = require ('express');
 var bodyparser = require ('body-parser');
-var connection = require('C:\\Users\\Anna\\Desktop\\connection');
-var routes = require ('C:\\Users\\Anna\\Desktop\\routes');
+var connection = require('/root/connection');
+var routes = require ('/root/routes');
 
 
 var app = express ();

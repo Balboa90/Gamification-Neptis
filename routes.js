@@ -1,4 +1,4 @@
-var todo = require('C:\\Users\\lorpe\\Desktop\\todo');
+var todo = require('/root/todo');
 module.exports = {
 		configure: function(app){
 			
