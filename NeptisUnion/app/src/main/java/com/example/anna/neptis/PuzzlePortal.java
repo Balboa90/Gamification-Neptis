@@ -48,7 +48,7 @@ public class PuzzlePortal extends AppCompatActivity {
 
 
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = "http://10.0.2.2:8000/getEnabledPuzzle/";
+        String url = getString(R.string.server_url)+"getEnabledPuzzle/";
         // Request a string response from the provided URL.
 
         JsonArrayRequest jsArray = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
@@ -85,7 +85,7 @@ public class PuzzlePortal extends AppCompatActivity {
         list_incoming = (ListView) findViewById(R.id.list_incoming);
 
         RequestQueue queue2 = Volley.newRequestQueue(this);
-        String url2 = "http://10.0.2.2:8000/getSoonPuzzle/";
+        String url2 = getString(R.string.server_url)+"getSoonPuzzle/";
         // Request a string response from the provided URL.
 
         JsonArrayRequest jsArray2 = new JsonArrayRequest(Request.Method.GET, url2, null, new Response.Listener<JSONArray>() {
@@ -117,7 +117,7 @@ public class PuzzlePortal extends AppCompatActivity {
         //***********_______END TEMPLATE JSON REQUEST________**********
 
         RequestQueue queue3 = Volley.newRequestQueue(PuzzlePortal.this);
-        String url3 ="http://10.0.2.2:8000/getGame3FromUser/"+user+"/";
+        String url3 = getString(R.string.server_url)+"getGame3FromUser/"+user+"/";
         // Request a string response from the provided URL.
         Log.d("url= ",url3);
         JsonArrayRequest jsArray3 = new JsonArrayRequest(Request.Method.GET, url3,null, new Response.Listener<JSONArray>() {

@@ -57,7 +57,7 @@ public class RegisterActivity extends AppCompatActivity {
             /***********_______START TEMPLATE JSON REQUEST________**********/
 
             RequestQueue queue = Volley.newRequestQueue(RegisterActivity.this);
-            url ="http://10.0.2.2:8000/createUser/"+email+"/"+password+"/";
+            url =getString(R.string.server_url)+"createUser/"+email+"/"+password+"/";
             // Request a string response from the provided URL.
 
             Log.d("url= ",url);

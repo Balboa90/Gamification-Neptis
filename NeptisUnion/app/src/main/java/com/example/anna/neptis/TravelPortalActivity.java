@@ -102,7 +102,7 @@ public class TravelPortalActivity extends FragmentActivity implements OnMapReady
         //***********_______TEMPLATE JSON REQUEST________**********
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url ="http://10.0.2.2:8000/getHeritagesCount/";
+        String url = getString(R.string.server_url)+"getHeritagesCount/";
 
         // Request a string response from the provided URL.
         JsonArrayRequest jsTotal = new JsonArrayRequest(Request.Method.GET, url,null, new Response.Listener<JSONArray>() {
@@ -137,7 +137,7 @@ public class TravelPortalActivity extends FragmentActivity implements OnMapReady
         //***********_______TEMPLATE JSON REQUEST________**********
         // Instantiate the RequestQueue.
         RequestQueue queue2 = Volley.newRequestQueue(this);
-        String url2 ="http://10.0.2.2:8000/getVisitedHeritagesCount/:user";
+        String url2 =getString(R.string.server_url)+"getVisitedHeritagesCount/:user";
 
         // Request a string response from the provided URL.
         JsonArrayRequest jsVisited = new JsonArrayRequest(Request.Method.GET, url2,null, new Response.Listener<JSONArray>() {

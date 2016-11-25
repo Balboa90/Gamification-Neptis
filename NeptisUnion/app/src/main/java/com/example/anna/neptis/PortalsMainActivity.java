@@ -44,8 +44,8 @@ public class PortalsMainActivity extends AppCompatActivity {
     private SharedPreferences prefs;
     private String pre;
 
-    private SharedPreferences pref_tutorial;
-    private SharedPreferences read_pref_tutorial;
+    //private SharedPreferences pref_tutorial;
+    //private SharedPreferences read_pref_tutorial;
     private static final String TUTORIAL = "Tutorial";
     private static final String FLAG_TUTORIAL = "Flag";
 
@@ -55,7 +55,7 @@ public class PortalsMainActivity extends AppCompatActivity {
     String urlToken;
 
     Dialog home_dialog,login_dialog;
-    private int flag_tutorial = 0;
+    private int flag_tutorial = 1;
 
 
     @Override
@@ -66,6 +66,7 @@ public class PortalsMainActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
 
+        /*
         pref_tutorial = getSharedPreferences(TUTORIAL,Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = pref_tutorial.edit();
         editor.putInt(FLAG_TUTORIAL, 1);
@@ -75,11 +76,7 @@ public class PortalsMainActivity extends AppCompatActivity {
         flag_tutorial = pref_tutorial.getInt("Flag", 2);
         Log.d("flag salvato PMA: ",Integer.toString(flag_tutorial));
 
-        if(flag_tutorial == 1) {
-            tutorial();
-        }
-
-
+        */
 
         utente_loggato = (TextView) findViewById(R.id.nome_user);
         utente_loggato.setText("Eseguire l'accesso");
@@ -90,9 +87,11 @@ public class PortalsMainActivity extends AppCompatActivity {
         Log.d("Pref salvate create: ",pre);
         //////////////////////////////
 
+        //DEBUG URL
+        Log.d("server URL: ",getString(R.string.server_url));
 
 
-        /*__________________gestione imageButton dei 4 portali____________________*/
+        /****__________________bottoni dei 4 portali____________________*****/
 
         /**
          *
@@ -178,13 +177,12 @@ public class PortalsMainActivity extends AppCompatActivity {
 
     public void getUserByToken(String pre){
         RequestQueue queue = Volley.newRequestQueue(PortalsMainActivity.this);
-        urlToken ="http://10.0.2.2:8000/getUserFromSession/"+pre+"/";
+        urlToken = getString(R.string.server_url)+"getUserFromSession/"+pre+"/";
         // Request a string response from the provided URL.
         Log.d("url= ",urlToken);
         JsonArrayRequest jsArray = new JsonArrayRequest(Request.Method.GET, urlToken,null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
-                // Display the first 500 characters of the response string.
                 try{
                     int contLength = response.length();
                     for(int i = 0;i< contLength;i++){
@@ -226,6 +224,9 @@ public class PortalsMainActivity extends AppCompatActivity {
         //////////////////////////////
 
         getUserByToken(pre);
+        if(pre.equals("")) {
+            tutorial();
+        }
 
     }
 
@@ -307,10 +308,12 @@ public class PortalsMainActivity extends AppCompatActivity {
 
 
     public void tutorial(){
+        /*
         pref_tutorial = getSharedPreferences(TUTORIAL,Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = pref_tutorial.edit();
         editor.putInt(FLAG_TUTORIAL, 1);
         editor.apply();
+        */
 
         AlertDialog.Builder miaAlert = new AlertDialog.Builder(this);
         miaAlert.setTitle("Benvenuto in GoPoleis!");
@@ -331,6 +334,7 @@ public class PortalsMainActivity extends AppCompatActivity {
 
         miaAlert.setNegativeButton("Skip", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
+                /*
                 read_pref_tutorial = getSharedPreferences("Tutorial", Context.MODE_PRIVATE);
                 flag_tutorial = pref_tutorial.getInt("Flag", 2);
                 Log.d("flag salvato: ",Integer.toString(flag_tutorial));
@@ -348,6 +352,8 @@ public class PortalsMainActivity extends AppCompatActivity {
                     dialog.cancel();
                     flag_tutorial = 0;
                 }
+                */
+                dialog.cancel();
             }
         });
 

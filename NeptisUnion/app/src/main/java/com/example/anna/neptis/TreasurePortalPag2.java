@@ -100,7 +100,7 @@ public class TreasurePortalPag2 extends FragmentActivity implements OnMapReadyCa
         game = getIntent().getExtras().getString("game");
         heritage = getIntent().getExtras().getString("heritage");
 
-        Log.d("CODICE GAME: ",game);
+        //Log.d("CODICE GAME: ",game);
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
@@ -119,7 +119,7 @@ public class TreasurePortalPag2 extends FragmentActivity implements OnMapReadyCa
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this);
         String spaces = heritage.replace(" ","%20");
-        url2 ="http://10.0.2.2:8000/getTreasureElements/" + spaces + "/";
+        url2 = getString(R.string.server_url)+"getTreasureElements/" + spaces + "/";
 
         Log.d("url= ",url2);
 
@@ -269,7 +269,7 @@ public class TreasurePortalPag2 extends FragmentActivity implements OnMapReadyCa
         mMap = googleMap;
         RequestQueue queue = Volley.newRequestQueue(TreasurePortalPag2.this);
         String spaces = heritage.replace(" ","%20");
-        url ="http://10.0.2.2:8000/getCoordinatesHeritage/"+spaces+"/";
+        url = getString(R.string.server_url)+ "getCoordinatesHeritage/"+spaces+"/";
 
         Log.d("url= ",url);
 
@@ -328,7 +328,7 @@ public class TreasurePortalPag2 extends FragmentActivity implements OnMapReadyCa
         if (inRange) {
 
             RequestQueue queue4 = Volley.newRequestQueue(this);
-            urlCheckFound = "http://10.0.2.2:8000/checkTreasureFound/" + code_treas + "/" + game + "/";
+            urlCheckFound = getString(R.string.server_url)+"checkTreasureFound/" + code_treas + "/" + game + "/";
 
             Log.d("url= ", urlCheckFound);
 

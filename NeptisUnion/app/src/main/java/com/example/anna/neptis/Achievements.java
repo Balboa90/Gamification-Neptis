@@ -55,20 +55,21 @@ public class Achievements extends AppCompatActivity {
         RequestQueue queue = Volley.newRequestQueue(this);
         switch(id){
             case "game1":
-                url ="http://10.0.2.2:8000/getAchievementGame1/"; break;
+                url = getString(R.string.server_url) + "getAchievementGame1/"; break;
 
             case "game2":
-                url ="http://10.0.2.2:8000/getAchievementGame2/"; break;
+                url = getString(R.string.server_url) + "getAchievementGame2/"; break;
 
             case "game3":
-                url ="http://10.0.2.2:8000/getAchievementGame3/"; break;
+                url = getString(R.string.server_url) + "getAchievementGame1/"; break;
 
             case "game4":
-                url ="http://10.0.2.2:8000/getAchievementGame4/"; break;
+                url = getString(R.string.server_url) + "getAchievementGame1/"; break;
 
             default: break;
         }
 
+        //***********_______START TEMPLATE JSON REQUEST________**********
         JsonArrayRequest jsArray = new JsonArrayRequest(Request.Method.GET, url,null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
@@ -80,7 +81,7 @@ public class Achievements extends AppCompatActivity {
 
                         code = jsObj.getString("achievement");
                         Log.d("Code: ",code);
-                        url2 = "http://10.0.2.2:8000/getAchievementElements/" + code + "/";
+                        url2 = getString(R.string.server_url) +"getAchievementElements/" + code + "/";
                         Log.d("url2: ",url2);
                         getAchievElements(code,url2);
                     }

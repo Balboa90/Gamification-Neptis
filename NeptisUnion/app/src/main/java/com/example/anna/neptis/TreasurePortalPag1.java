@@ -53,7 +53,7 @@ public class TreasurePortalPag1 extends AppCompatActivity implements OnItemSelec
     String pre;
     String game;
 
-    SharedPreferences pref_tutorial;
+    //SharedPreferences pref_tutorial;
     int flag_tutorial;
 
     @Override
@@ -71,7 +71,7 @@ public class TreasurePortalPag1 extends AppCompatActivity implements OnItemSelec
 
 
         if(flag_tutorial == 1){
-            tutorial();
+            //tutorial();
         }
 
 
@@ -98,7 +98,7 @@ public class TreasurePortalPag1 extends AppCompatActivity implements OnItemSelec
         //***********_______TEMPLATE JSON REQUEST________**********
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url ="http://10.0.2.2:8000/getHeritagesGame1/";
+        String url = getString(R.string.server_url)+"getHeritagesGame1/";
 
         // Request a string response from the provided URL.
         JsonArrayRequest jsArray = new JsonArrayRequest(Request.Method.GET, url,null, new Response.Listener<JSONArray>() {
@@ -189,7 +189,7 @@ public class TreasurePortalPag1 extends AppCompatActivity implements OnItemSelec
         user = getIntent().getExtras().getString("user");
 
         if(flag_tutorial == 1){
-            tutorial();
+            //tutorial();
         }
 
 
@@ -214,10 +214,11 @@ public class TreasurePortalPag1 extends AppCompatActivity implements OnItemSelec
         }
 
         //inserimento item nello spinner da database
+
         //***********_______TEMPLATE JSON REQUEST________**********
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url ="http://10.0.2.2:8000/getHeritagesGame1/";
+        String url = getString(R.string.server_url)+"getHeritagesGame1/";
 
         // Request a string response from the provided URL.
         JsonArrayRequest jsArray = new JsonArrayRequest(Request.Method.GET, url,null, new Response.Listener<JSONArray>() {
@@ -360,7 +361,7 @@ public class TreasurePortalPag1 extends AppCompatActivity implements OnItemSelec
         //***********_______TEMPLATE JSON REQUEST________**********
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url ="http://10.0.2.2:8000/getGame1FromSession/" + pre + "/";
+        String url = getString(R.string.server_url)+"getGame1FromSession/" + pre + "/";
 
         // Request a string response from the provided URL.
         JsonArrayRequest jsArray = new JsonArrayRequest(Request.Method.GET, url,null, new Response.Listener<JSONArray>() {
@@ -391,6 +392,7 @@ public class TreasurePortalPag1 extends AppCompatActivity implements OnItemSelec
         return game;
     }
 
+    /*
     Dialog tpp1_dialog,tpp2_dialog;
     public void tutorial(){
         tpp1_dialog=new Dialog(TreasurePortalPag1.this);
@@ -427,7 +429,7 @@ public class TreasurePortalPag1 extends AppCompatActivity implements OnItemSelec
         alert.show();
     }
 
-
+    */
 
 
 
