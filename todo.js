@@ -269,6 +269,7 @@ function Todo(){
 		});
 	};
 
+
 	//game1:inserisce la carta trovata dall'utente nella collezione
 	this.addCardToUserCollection= function(game,card_code,res){
 		connection.acquire(function(err,con){
@@ -278,10 +279,6 @@ function Todo(){
 			});
 		});
 	};
-
-
-
-
 
 
 
