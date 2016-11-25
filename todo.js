@@ -1,4 +1,4 @@
-var connection = require('/root/connection');
+﻿var connection = require('/root/connection');
 var hash = require('/root/hash');
 
 function Todo(){
@@ -105,17 +105,51 @@ function Todo(){
 	};*/
 
 	//game1: ottieni i tesori trovati dall'utente(saranno i marker verdi nella mappa)
-	this.getTreasureElements = function(email,code,res){
+	/*this.getTreasureElements = function(email,code,res){
 		connection.acquire(function(err,con){
 			con.query('select t.code,t.latitude,t.longitude,t.info,g.found from (GT g,Treasure t,User u) where u.email=? AND u.game1=g.game1 AND t.heritage=? AND t.code=g.treasure',[email,code], function(err,result){
 				con.release();
 				res.send(result);
 			});
 		});
-	};
+	};*/
 
 	//game1: ottieni i tesori trovati dall'utente(saranno i marker verdi nella mappa)
-	this.upadateFoundTreas = function(code,game,res){
+	this.getTreasureElements = function(name,res){
+		connection.acquire(function(err,con){
+			con.query('select code,latitude,longitude,info from Treasure WHERE heritage=?',name, function(err,result){
+				con.release();
+				res.send(result);
+			});
+		});
+	};
+
+	//game1: controlla se il tesoro appartiene a GT (quindi se è stato trovato dall'utente)
+	this.checkTreasureFound = function(code_treas,code_game,res){
+		connection.acquire(function(err,con){
+			con.query('SELECT EXISTS(SELECT * from GT where treasure=? AND game1=?)',[code_treas,code_game], function(err,result){
+				con.release();
+				res.send(result);
+			});
+		});
+	};
+
+	//game1: aggiungi il tesoro a GT (tesoro trovato dall'utente)
+	this.addTreasToGame1 = function(treas_code,game,res){
+		connection.acquire(function(err,con){
+			con.query('INSERT into GT (treasure,game1) value(?,?)',[treas_code,game], function(err,result){
+				con.release();
+				res.send(result);
+			});
+		});
+	};
+
+
+
+
+
+	//game1: ottieni i tesori trovati dall'utente(saranno i marker verdi nella mappa)
+	this.updateFoundTreas = function(code,game,res){
 		connection.acquire(function(err,con){
 			con.query('UPDATE Gt SET found=1 WHERE treasure =? AND found = 0 AND game1=(SELECT game1 from User where email=?)',[code,game], function(err,result){
 				con.release();
@@ -136,9 +170,6 @@ function Todo(){
 
 
 
-
-
-
 	//game1: ottieni i tesori trovati dall'utente(saranno i marker verdi nella mappa)
 	this.getFoundTreasures = function(code,lat,lon,email,res){
 		connection.acquire(function(err,con){
@@ -148,6 +179,8 @@ function Todo(){
 			});
 		});
 	};
+
+
 
 
 	//*********GESTIONE CARTE*********//
@@ -180,6 +213,18 @@ function Todo(){
 			});
 		});
 	};
+
+	//game1:ottieni tutte le carte
+	this.getMyCards = function(game,res){
+		connection.acquire(function(err,con){
+			con.query('select * from Card where code IN (select card from G1c where game1=?) ',game, function(err,result){
+				con.release();
+				res.send(result);
+			});
+		});
+	};
+
+
 	
 	/*
 	//game1:ottieni le info della carta relativa al tesoro passato come parametro
@@ -193,15 +238,47 @@ function Todo(){
 	};*/
 
 	//game1:ottieni le info della carta, posseduta dallo user(paramentro), relativa al tesoro (parametro)
-	this.getTreasureCardInfo = function(email,code,res){
+	/*this.getTreasureCardInfo = function(email,code,res){
 		connection.acquire(function(err,con){
-			con.query('SELECT c.name,c.cost,c.description from (TC t, G1C g,User u, Card c) where u.email=? AND t.treasure=? AND g.card=t.card AND c.code=t.card AND g.game1=u.game1', [email, code], function(err,result){
+			con.query('SELECT c.name,c.cost,c.description from (TC t, G1C 3g,User u, Card c) where u.email=? AND t.treasure=? AND g.card=t.card AND c.code=t.card AND g.game1=u.game1', [email, code], function(err,result){
+				con.release();
+				res.send(result);
+			});
+		});
+	};*/
+
+
+	//game1:ottieni le info della carta, posseduta dallo user(paramentro), relativa al tesoro (parametro)
+	this.getTreasureCardInfo = function(code,res){
+		connection.acquire(function(err,con){
+			con.query('SELECT code,name,cost,description from Card where code = ?', code, function(err,result){
 				con.release();
 				res.send(result);
 			});
 		});
 	};
 
+
+	//game1:inserisce la carta generata randomicamente nella relazione TC
+	this.addCardToTreasure= function(treas_code,card_code,res){
+		connection.acquire(function(err,con){
+			con.query('INSERT into TC (treasure,card) value (?,?)', [treas_code, card_code], function(err,result){
+				con.release();
+				res.send(result);
+			});
+		});
+	};
+
+
+	//game1:inserisce la carta trovata dall'utente nella collezione
+	this.addCardToUserCollection= function(game,card_code,res){
+		connection.acquire(function(err,con){
+			con.query('INSERT into G1C (game1,card) value (?,?)', [game, card_code], function(err,result){
+				con.release();
+				res.send(result);
+			});
+		});
+	};
 
 
 
@@ -319,6 +396,17 @@ function Todo(){
 		});
 	};
 
+	this.acquirePuzzle = function(game,puzzle,res){
+		connection.acquire(function(err,con){
+			con.query('INSERT into G3p (game3,puzzle) values (?,?)', [game, puzzle], function(err,result){
+				console.log(result);
+				con.release();
+				res.send(result);
+			});
+		});
+	};
+
+
 	//game1 (achievement)
 	this.getAchievementGame1 = function(res){
 		connection.acquire(function(err,con){
@@ -394,10 +482,20 @@ function Todo(){
 	};*/
 
 
-	
+	//per tutti i games(achievement description)
 	this.getUserFromSession = function(session,res){
 		connection.acquire(function(err,con){
 			con.query('SELECT email from User where session = ?', session, function(err,result){
+				con.release();
+				res.send(result);
+			});
+		});
+	};
+
+	//per tutti i games(achievement description)
+	this.getGame1FromSession = function(session,res){
+		connection.acquire(function(err,con){
+			con.query('SELECT game1 from User where session = ?', session, function(err,result){
 				con.release();
 				res.send(result);
 			});
@@ -413,7 +511,7 @@ function Todo(){
 		});
 	};
 
-	
+
 	//Insert user 
 	this.createUser = function(email,password,res){
 		connection.acquire(function(err,con){
@@ -442,16 +540,6 @@ function Todo(){
 			});
 
 			con.query('SET foreign_key_checks = 1', function(err,result){
-				console.log(result);
-				con.release();
-				res.send(result);
-			});
-		});
-	};
-	
-	this.acquirePuzzle = function(game,puzzle,res){
-		connection.acquire(function(err,con){
-			con.query('INSERT into G3p (game3,puzzle) values (?,?)', [game, puzzle], function(err,result){
 				console.log(result);
 				con.release();
 				res.send(result);
@@ -537,9 +625,15 @@ function Todo(){
 
 
 	
+
+
+
+
+
+	
 	this.create = function (todo,res){
 		connection.acquire(function(err,con){
-			con.query('INSERT into tab1 set ?',todo,function(err,result){
+			con.query('INSERT into Tab1 set ?',todo,function(err,result){
 				con.release();
 				if(err){
 					res.send({status: 1, message: 'TODO creation failed'});
@@ -552,7 +646,7 @@ function Todo(){
 	
 	this.update = function (todo,res){
 		connection.acquire(function(err,con){
-			con.query('UPDATE into tab1 set ? WHERE id = ?',[todo,todo.id],function(err,result){
+			con.query('UPDATE into Tab1 set ? WHERE id = ?',[todo,todo.id],function(err,result){
 				con.release();
 				if(err){
 					res.send({status: 1, message: 'TODO update failed'});
@@ -565,7 +659,7 @@ function Todo(){
 	
 	this.del = function (id,res){
 		connection.acquire(function(err,con){
-			con.query('DELETE from tab1 WHERE id = ?',[id],function(err,result){
+			con.query('DELETE from Tab1 WHERE id = ?',[id],function(err,result){
 				con.release();
 				if(err){
 					res.send({status: 1, message: 'Failed to delete'});
