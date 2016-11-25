@@ -155,39 +155,6 @@ public class TreasurePortalPag2 extends FragmentActivity implements OnMapReadyCa
 
 
 
-                       /*if(value == 1){ //il tesoro è stato trovato dallo user
-                            Log.d("entrato nell'if: ","ok");
-                            options.title(code);//da commentare dopo
-                            options.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
-                            mMap.addMarker(options);
-                            //mMap.setOnMarkerClickListener(TreasurePortalPag2.this);//click su marker
-                       }else{
-                            Log.d("entrato nell'else: ","ok");
-                            options.title(code);
-                            options.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
-                            mMap.addMarker(options);
-                            //mMap.setOnMarkerClickListener(TreasurePortalPag2.this);//click su marker
-                       }*/
-
-
-
-
-
-                       /*if (found == 1) {
-                            Log.d("entrato nell'if: ","ok");
-                            //options.title(code);
-                            options.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
-                            mMap.addMarker(options);
-                            mMap.setOnMarkerClickListener(TreasurePortalPag2.this);//click su marker
-                        } else {
-                            Log.d("entrato nell'else: ","ok");
-                            options.title(code);
-                            options.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
-                            mMap.addMarker(options);
-                            mMap.setOnMarkerClickListener(TreasurePortalPag2.this);//click su marker
-
-                        }*/
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                         /*list.add(new ObjTesoro(code,lat,lon,info,user));//aggiungere found(value)
                         TreasureAdapter adapter = new TreasureAdapter(TreasurePortalPag2.this, R.layout.adapter_treasure, list);
@@ -341,7 +308,7 @@ public class TreasurePortalPag2 extends FragmentActivity implements OnMapReadyCa
                     try {
                         obj_found = response.getJSONObject(0);
                         Log.d("found result: ",obj_found.toString());
-                        found = obj_found.getInt("EXISTS(SELECT * from GT where treasure='"+code_treas+"' AND game1='"+ game +"')");
+                        found = obj_found.getInt("EXISTS(SELECT * from Gt where treasure='"+code_treas+"' AND game1='"+ game +"')");
                         Log.d("FOUND? ",Integer.toString(found));
 
                         if(found == 1){//se il tesoro è in GT(trovato-posseduto dallo user)
@@ -373,7 +340,7 @@ public class TreasurePortalPag2 extends FragmentActivity implements OnMapReadyCa
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     Log.d("Error: ",error.toString());
-                    //Toast.makeText(LoginDialogActivity.this,"Errore di autenticazione",Toast.LENGTH_LONG).show();
+
                 }
             });
             // Add the request to the RequestQueue.
