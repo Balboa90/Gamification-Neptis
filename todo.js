@@ -97,7 +97,7 @@ function Todo(){
 	//game1: ottieni i tesori trovati(saranno i marker verdi nella mappa)
 	/*this.getFoundTreasures = function(name,res){
 		connection.acquire(function(err,con){
-			con.query('SELECT found from MT where treasure = ?',name, function(err,result){
+			con.query('SELECT found from Mt where treasure = ?',name, function(err,result){
 				con.release();
 				res.send(result);
 			});
@@ -107,7 +107,7 @@ function Todo(){
 	//game1: ottieni i tesori trovati dall'utente(saranno i marker verdi nella mappa)
 	/*this.getTreasureElements = function(email,code,res){
 		connection.acquire(function(err,con){
-			con.query('select t.code,t.latitude,t.longitude,t.info,g.found from (GT g,Treasure t,User u) where u.email=? AND u.game1=g.game1 AND t.heritage=? AND t.code=g.treasure',[email,code], function(err,result){
+			con.query('select t.code,t.latitude,t.longitude,t.info,g.found from (Gt g,Treasure t,User u) where u.email=? AND u.game1=g.game1 AND t.heritage=? AND t.code=g.treasure',[email,code], function(err,result){
 				con.release();
 				res.send(result);
 			});
@@ -127,17 +127,18 @@ function Todo(){
 	//game1: controlla se il tesoro appartiene a GT (quindi se è stato trovato dall'utente)
 	this.checkTreasureFound = function(code_treas,code_game,res){
 		connection.acquire(function(err,con){
-			con.query('SELECT EXISTS(SELECT * from GT where treasure=? AND game1=?)',[code_treas,code_game], function(err,result){
+			con.query('SELECT EXISTS(SELECT * from Gt where treasure=? AND game1=?)',[code_treas,code_game], function(err,result){
 				con.release();
+				console.log(result);
 				res.send(result);
 			});
 		});
 	};
 
-	//game1: aggiungi il tesoro a GT (tesoro trovato dall'utente)
+	//game1: aggiungi il tesoro a Gt (tesoro trovato dall'utente)
 	this.addTreasToGame1 = function(treas_code,game,res){
 		connection.acquire(function(err,con){
-			con.query('INSERT into GT (treasure,game1) value(?,?)',[treas_code,game], function(err,result){
+			con.query('INSERT into Gt (treasure,game1) value(?,?)',[treas_code,game], function(err,result){
 				con.release();
 				res.send(result);
 			});
@@ -173,7 +174,7 @@ function Todo(){
 	//game1: ottieni i tesori trovati dall'utente(saranno i marker verdi nella mappa)
 	this.getFoundTreasures = function(code,lat,lon,email,res){
 		connection.acquire(function(err,con){
-			con.query('SELECT g.found from (GT g,Treasure t,User u) where g.treasure=? AND t.latitude=? AND t.longitude=? AND u.email=? AND u.game1 = g.game1',[code,lat,lon,email], function(err,result){
+			con.query('SELECT g.found from (Gt g,Treasure t,User u) where g.treasure=? AND t.latitude=? AND t.longitude=? AND u.email=? AND u.game1 = g.game1',[code,lat,lon,email], function(err,result){
 				con.release();
 				res.send(result);
 			});
@@ -230,7 +231,7 @@ function Todo(){
 	//game1:ottieni le info della carta relativa al tesoro passato come parametro
 	this.getTreasureCardInfo = function(code,res){
 		connection.acquire(function(err,con){
-			con.query('SELECT name,cost,description from Card where code = any (SELECT card from TC where treasure = ?)',code, function(err,result){
+			con.query('SELECT name,cost,description from Card where code = any (SELECT card from Tc where treasure = ?)',code, function(err,result){
 				con.release();
 				res.send(result);
 			});
@@ -240,7 +241,7 @@ function Todo(){
 	//game1:ottieni le info della carta, posseduta dallo user(paramentro), relativa al tesoro (parametro)
 	/*this.getTreasureCardInfo = function(email,code,res){
 		connection.acquire(function(err,con){
-			con.query('SELECT c.name,c.cost,c.description from (TC t, G1C 3g,User u, Card c) where u.email=? AND t.treasure=? AND g.card=t.card AND c.code=t.card AND g.game1=u.game1', [email, code], function(err,result){
+			con.query('SELECT c.name,c.cost,c.description from (Tc t, G1c g,User u, Card c) where u.email=? AND t.treasure=? AND g.card=t.card AND c.code=t.card AND g.game1=u.game1', [email, code], function(err,result){
 				con.release();
 				res.send(result);
 			});
@@ -262,7 +263,7 @@ function Todo(){
 	//game1:inserisce la carta generata randomicamente nella relazione TC
 	this.addCardToTreasure= function(treas_code,card_code,res){
 		connection.acquire(function(err,con){
-			con.query('INSERT into TC (treasure,card) value (?,?)', [treas_code, card_code], function(err,result){
+			con.query('INSERT into Tc (treasure,card) value (?,?)', [treas_code, card_code], function(err,result){
 				con.release();
 				res.send(result);
 			});
@@ -273,7 +274,7 @@ function Todo(){
 	//game1:inserisce la carta trovata dall'utente nella collezione
 	this.addCardToUserCollection= function(game,card_code,res){
 		connection.acquire(function(err,con){
-			con.query('INSERT into G1C (game1,card) value (?,?)', [game, card_code], function(err,result){
+			con.query('INSERT into G1c (game1,card) value (?,?)', [game, card_code], function(err,result){
 				con.release();
 				res.send(result);
 			});
