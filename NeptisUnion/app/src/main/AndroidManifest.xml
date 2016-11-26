@@ -47,8 +47,7 @@
         <activity
             android:name=".TreasurePortalPag2"
             android:parentActivityName=".TreasurePortalPag1" />
-        <activity
-            android:name=".RegisterActivity"/>
+        <activity android:name=".RegisterActivity" />
         <activity
             android:name=".TravelPortalActivity"
             android:parentActivityName=".PortalsMainActivity" />
@@ -62,29 +61,14 @@
         <activity android:name=".PuzzlePortal" />
         <activity android:name=".Achievements" />
         <activity android:name=".ShowPuzzle" />
-
         <activity android:name=".ManageCards" />
-
         <activity android:name=".TreasureInfoActivity" />
-
         <activity android:name=".TreasureNotFoundActivity" />
-
         <activity android:name=".TreasureFound" />
-
-        <activity android:name=".PuzzleAnswerActivity"
+        <activity
+            android:name=".PuzzleAnswerActivity"
             android:theme="@android:style/Theme.Holo.Light.Dialog.NoActionBar" />
-<<<<<<< HEAD
-
-
-        <activity android:name=".TutorialDialogActivity"
-            android:theme="@android:style/Theme.Holo.Light.Dialog.NoActionBar" />
-
         <activity android:name=".ShowMyPuzzles" />
-
-
-=======
-        <activity android:name=".ShowMyPuzzles" />
->>>>>>> origin/master
     </application>
 
 </manifest>

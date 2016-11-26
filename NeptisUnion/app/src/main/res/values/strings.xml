@@ -1,13 +1,8 @@
 <resources>
     <string name="facebook_app_id">621653938002925</string>
-<<<<<<< HEAD
-    <string name="app_name">Neptis</string>
-    //<string name="treasure">TREASURE</string>
-=======
     <string name="app_name">GoPoleis</string>
     //
     <string name="treasure">TREASURE</string>
->>>>>>> origin/master
     <string name="portal">PORTAL</string>
     <string name="cards_list">CARDS LIST</string>
     <string name="achievement_list">ACHIEVEMENT LIST</string>
@@ -25,7 +20,6 @@
     <string name="cancel_login">Operazione annullata</string>
     <string name="error_login">Errore nel login!</string>
     <string name="logout">Logout</string>
-
 
 
     <string name="title_travel">Travel Portal</string>

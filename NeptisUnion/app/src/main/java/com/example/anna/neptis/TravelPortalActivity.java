@@ -1,8 +1,5 @@
 package com.example.anna.neptis;
 
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.ActionBar;
@@ -50,8 +47,6 @@ public class TravelPortalActivity extends FragmentActivity implements OnMapReady
 
     String user;
 
-    Dialog tutorial1,tutorial2;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,7 +56,6 @@ public class TravelPortalActivity extends FragmentActivity implements OnMapReady
         mapFragment.getMapAsync(this);
 
         user = getIntent().getExtras().getString("user");
-
 
         //Log.d("CURRENT USER: ",user);
 
@@ -98,11 +92,11 @@ public class TravelPortalActivity extends FragmentActivity implements OnMapReady
             }
         });
         /***************fine gestione click su classification****************/
+
+
+
+
     }
-
-
-
-
 
     public void getHeritagesCount(){
         //***********_______TEMPLATE JSON REQUEST________**********
@@ -143,11 +137,7 @@ public class TravelPortalActivity extends FragmentActivity implements OnMapReady
         //***********_______TEMPLATE JSON REQUEST________**********
         // Instantiate the RequestQueue.
         RequestQueue queue2 = Volley.newRequestQueue(this);
-<<<<<<< HEAD
-        String url2 ="http://10.0.2.2:8000/getVisitedHeritagesCount/"+ user+"/";
-=======
         String url2 =getString(R.string.server_url)+"getVisitedHeritagesCount/:user";
->>>>>>> origin/master
 
         // Request a string response from the provided URL.
         JsonArrayRequest jsVisited = new JsonArrayRequest(Request.Method.GET, url2,null, new Response.Listener<JSONArray>() {

@@ -52,6 +52,8 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View view) {
             email = reg_email.getText().toString();
             password = reg_password.getText().toString();
+
+
             /***********_______START TEMPLATE JSON REQUEST________**********/
 
             RequestQueue queue = Volley.newRequestQueue(RegisterActivity.this);

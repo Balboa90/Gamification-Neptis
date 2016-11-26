@@ -1,7 +1,5 @@
 package com.example.anna.neptis;
 
-
-
 import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -43,8 +41,10 @@ public class PuzzleAnswerActivity extends Activity {
             public void onClick(View v) {
                 String my_answer = answer.getText().toString();
                 if (my_answer.equals(solution)){
+
                     setResult(RESULT_OK);
                     finish();
+
                 }
                 else {
                     Toast.makeText(PuzzleAnswerActivity.this,"Hai sbagliato! Ritenta!",Toast.LENGTH_LONG).show();

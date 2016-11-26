@@ -53,11 +53,8 @@ public class TreasurePortalPag1 extends AppCompatActivity implements OnItemSelec
     String pre;
     String game;
 
-<<<<<<< HEAD
-=======
     //SharedPreferences pref_tutorial;
     int flag_tutorial;
->>>>>>> origin/master
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,8 +67,6 @@ public class TreasurePortalPag1 extends AppCompatActivity implements OnItemSelec
         getGameCode();
         user = getIntent().getExtras().getString("user");
 
-<<<<<<< HEAD
-=======
         flag_tutorial = getIntent().getExtras().getInt("Tutorial");
 
 
@@ -79,7 +74,6 @@ public class TreasurePortalPag1 extends AppCompatActivity implements OnItemSelec
             //tutorial();
         }
 
->>>>>>> origin/master
 
         lente = (ImageView)findViewById(R.id.lens);
         //lente.setImageAlpha(100);
@@ -194,14 +188,11 @@ public class TreasurePortalPag1 extends AppCompatActivity implements OnItemSelec
         game = getIntent().getExtras().getString("game");
         user = getIntent().getExtras().getString("user");
 
-<<<<<<< HEAD
-=======
         if(flag_tutorial == 1){
             //tutorial();
         }
 
 
->>>>>>> origin/master
 
         lente = (ImageView)findViewById(R.id.lens);
         //lente.setImageAlpha(100);
@@ -401,8 +392,6 @@ public class TreasurePortalPag1 extends AppCompatActivity implements OnItemSelec
         return game;
     }
 
-<<<<<<< HEAD
-=======
     /*
     Dialog tpp1_dialog,tpp2_dialog;
     public void tutorial(){
@@ -439,7 +428,6 @@ public class TreasurePortalPag1 extends AppCompatActivity implements OnItemSelec
         AlertDialog alert = inizia .create();
         alert.show();
     }
->>>>>>> origin/master
 
     */
 
