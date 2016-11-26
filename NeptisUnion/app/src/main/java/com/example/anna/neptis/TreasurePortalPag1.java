@@ -53,6 +53,11 @@ public class TreasurePortalPag1 extends AppCompatActivity implements OnItemSelec
     String pre;
     String game;
 
+<<<<<<< HEAD
+=======
+    //SharedPreferences pref_tutorial;
+    int flag_tutorial;
+>>>>>>> origin/master
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +70,16 @@ public class TreasurePortalPag1 extends AppCompatActivity implements OnItemSelec
         getGameCode();
         user = getIntent().getExtras().getString("user");
 
+<<<<<<< HEAD
+=======
+        flag_tutorial = getIntent().getExtras().getInt("Tutorial");
+
+
+        if(flag_tutorial == 1){
+            //tutorial();
+        }
+
+>>>>>>> origin/master
 
         lente = (ImageView)findViewById(R.id.lens);
         //lente.setImageAlpha(100);
@@ -89,7 +104,7 @@ public class TreasurePortalPag1 extends AppCompatActivity implements OnItemSelec
         //***********_______TEMPLATE JSON REQUEST________**********
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url ="http://10.0.2.2:8000/getHeritagesGame1/";
+        String url = getString(R.string.server_url)+"getHeritagesGame1/";
 
         // Request a string response from the provided URL.
         JsonArrayRequest jsArray = new JsonArrayRequest(Request.Method.GET, url,null, new Response.Listener<JSONArray>() {
@@ -179,6 +194,14 @@ public class TreasurePortalPag1 extends AppCompatActivity implements OnItemSelec
         game = getIntent().getExtras().getString("game");
         user = getIntent().getExtras().getString("user");
 
+<<<<<<< HEAD
+=======
+        if(flag_tutorial == 1){
+            //tutorial();
+        }
+
+
+>>>>>>> origin/master
 
         lente = (ImageView)findViewById(R.id.lens);
         //lente.setImageAlpha(100);
@@ -200,10 +223,11 @@ public class TreasurePortalPag1 extends AppCompatActivity implements OnItemSelec
         }
 
         //inserimento item nello spinner da database
+
         //***********_______TEMPLATE JSON REQUEST________**********
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url ="http://10.0.2.2:8000/getHeritagesGame1/";
+        String url = getString(R.string.server_url)+"getHeritagesGame1/";
 
         // Request a string response from the provided URL.
         JsonArrayRequest jsArray = new JsonArrayRequest(Request.Method.GET, url,null, new Response.Listener<JSONArray>() {
@@ -346,7 +370,7 @@ public class TreasurePortalPag1 extends AppCompatActivity implements OnItemSelec
         //***********_______TEMPLATE JSON REQUEST________**********
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url ="http://10.0.2.2:8000/getGame1FromSession/" + pre + "/";
+        String url = getString(R.string.server_url)+"getGame1FromSession/" + pre + "/";
 
         // Request a string response from the provided URL.
         JsonArrayRequest jsArray = new JsonArrayRequest(Request.Method.GET, url,null, new Response.Listener<JSONArray>() {
@@ -377,8 +401,47 @@ public class TreasurePortalPag1 extends AppCompatActivity implements OnItemSelec
         return game;
     }
 
+<<<<<<< HEAD
+=======
+    /*
+    Dialog tpp1_dialog,tpp2_dialog;
+    public void tutorial(){
+        tpp1_dialog=new Dialog(TreasurePortalPag1.this);
+        tpp1_dialog.setCancelable(false);
+        tpp1_dialog.setContentView(R.layout.tutorial_tpp1);
+        tpp1_dialog.show();
+    }
+
+    public void avanti_tpp1(View view){
+        tpp1_dialog.cancel();
+        tpp2_dialog=new Dialog(TreasurePortalPag1.this);
+        tpp2_dialog.setCancelable(false);
+        tpp2_dialog.setContentView(R.layout.tutorial_tpp2);
+        tpp2_dialog.show();
+    }
+
+    public void avanti_tpp2(View view){
+
+        tpp2_dialog.cancel();
+        AlertDialog.Builder inizia = new AlertDialog.Builder(this);
+        inizia.setTitle("Inizia la tua avventura!");
+        inizia.setMessage("Ora tocca a te! Troviamo più tesori possibili per collezionare il maggior numero di carte!\nGoPoleis!");
+        inizia.setIcon(R.drawable.logo);
+
+        inizia.setCancelable(false);
+        inizia.setPositiveButton("Inizia", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.cancel();
+            }
+        });
 
 
+        AlertDialog alert = inizia .create();
+        alert.show();
+    }
+>>>>>>> origin/master
+
+    */
 
 
 

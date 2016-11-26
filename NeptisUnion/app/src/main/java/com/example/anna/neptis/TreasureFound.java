@@ -85,7 +85,7 @@ public class TreasureFound extends AppCompatActivity {
         //set_trovato = Integer.parseInt(getIntent().getExtras().getString("trovato"));
 
         RequestQueue queue = Volley.newRequestQueue(this);
-        url = "http://10.0.2.2:8000/getInfoTreasure/" + treasure_code + "/";
+        url = getString(R.string.server_url)+"getInfoTreasure/" + treasure_code + "/";
 
         //Log.d("codice tesoro: ", treasure_code);
 

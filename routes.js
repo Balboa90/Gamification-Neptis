@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 var todo = require('C:\\Users\\Anna\\Desktop\\todo');
+=======
+var todo = require('/root/todo');
+>>>>>>> origin/master
 module.exports = {
 		configure: function(app){
 			

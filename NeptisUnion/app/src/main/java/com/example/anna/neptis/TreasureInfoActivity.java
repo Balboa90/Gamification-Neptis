@@ -87,7 +87,7 @@ public class TreasureInfoActivity extends AppCompatActivity {
         //set_trovato = Integer.parseInt(getIntent().getExtras().getString("trovato"));
 
         RequestQueue queue = Volley.newRequestQueue(this);
-        url = "http://10.0.2.2:8000/getInfoTreasure/" + treasure_code + "/";
+        url = getString(R.string.server_url)+"getInfoTreasure/" + treasure_code + "/";
 
         //Log.d("codice tesoro: ", treasure_code);
 
@@ -141,7 +141,7 @@ public class TreasureInfoActivity extends AppCompatActivity {
             //***********_______TEMPLATE JSON REQUEST________**********
             // Instantiate the RequestQueue.
             RequestQueue queue2 = Volley.newRequestQueue(this);
-            url2 = "http://10.0.2.2:8000/getTreasureCardInfo/" + random_card_code[i]  + "/";
+            url2 = getString(R.string.server_url)+"getTreasureCardInfo/" + random_card_code[i]  + "/";
 
             Log.d("url= ", url2);
 
@@ -248,7 +248,7 @@ public class TreasureInfoActivity extends AppCompatActivity {
             //***********_______TEMPLATE JSON REQUEST________**********
             // Instantiate the RequestQueue.
             RequestQueue queue3 = Volley.newRequestQueue(this);
-            url3 = "http://10.0.2.2:8000/addCardToTreasure/" + treas_code + "/" + card_code[i] + "/";//modificare con getCardInfo
+            url3 = getString(R.string.server_url)+"addCardToTreasure/" + treas_code + "/" + card_code[i] + "/";//modificare con getCardInfo
 
             Log.d("url= ", url3);
 
@@ -277,7 +277,7 @@ public class TreasureInfoActivity extends AppCompatActivity {
             //***********_______TEMPLATE JSON REQUEST________**********
             // Instantiate the RequestQueue.
             RequestQueue queue3 = Volley.newRequestQueue(this);
-            url4 = "http://10.0.2.2:8000/addCardToUserCollection/" + game + "/" + card_code[i] + "/";//modificare con getCardInfo
+            url4 = getString(R.string.server_url)+"addCardToUserCollection/" + game + "/" + card_code[i] + "/";//modificare con getCardInfo
 
             Log.d("url= ", url4);
 

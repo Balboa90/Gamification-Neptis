@@ -70,7 +70,7 @@ public class TreasureNotFoundActivity extends AppCompatActivity {
                 //una volta cliccato sul bottone open_treas
                 //aggiungo il tesoro a GT e apro di nuovo TreasureInfoActivity passandogli game e user
                 RequestQueue queue = Volley.newRequestQueue(v.getContext());
-                url2 = "http://10.0.2.2:8000/addTreasToGame1/" + treasure_code + "/"+ game+"/";
+                url2 = getString(R.string.server_url)+"addTreasToGame1/" + treasure_code + "/"+ game+"/";
 
                 Log.d("url= ", url2);
 
@@ -119,7 +119,7 @@ public class TreasureNotFoundActivity extends AppCompatActivity {
         //set_trovato = Integer.parseInt(getIntent().getExtras().getString("trovato"));
 
         RequestQueue queue = Volley.newRequestQueue(this);
-        url = "http://10.0.2.2:8000/getInfoTreasure/" + treasure_code + "/";
+        url = getString(R.string.server_url)+"getInfoTreasure/" + treasure_code + "/";
 
         //Log.d("codice tesoro: ", treasure_code);
 

@@ -48,7 +48,7 @@ public class ManageCards extends AppCompatActivity {
         setContentView(R.layout.activity_manage_cards);
 
         list = (ListView) findViewById(R.id.listView);
-        all_cards = new ArrayList<ObjCard>();
+        all_cards = new ArrayList<>();
 
 
         int button_code = getIntent().getExtras().getInt("codice");
@@ -56,16 +56,17 @@ public class ManageCards extends AppCompatActivity {
         //***********_______TEMPLATE JSON REQUEST________**********
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this);
+        String game = getIntent().getExtras().getString("game_code");
 
         switch(button_code){
             case 100:
-                url ="http://10.0.2.2:8000/getAllCards/";
+                url = getString(R.string.server_url) +"getAllCards/";
                 break;
 
             case 200:
-                String game = getIntent().getExtras().getString("game_code");
-                Log.d("game_ code",game);
-                url ="http://10.0.2.2:8000/getMyCards/"+ game + "/";
+
+                //Log.d("game_ code",game);
+                url = getString(R.string.server_url) + "getMyCards/"+ game + "/";
                 break;
 
             default:break;

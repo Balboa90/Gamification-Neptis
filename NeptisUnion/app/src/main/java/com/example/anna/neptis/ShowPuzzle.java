@@ -79,7 +79,7 @@ public class ShowPuzzle extends AppCompatActivity {
         /***********_______START TEMPLATE JSON REQUEST________**********/
 
         RequestQueue queue = Volley.newRequestQueue(ShowPuzzle.this);
-        url ="http://10.0.2.2:8000/getPuzzleDescription/"+nome+"/";
+        url = getString(R.string.server_url)+"getPuzzleDescription/"+nome+"/";
         // Request a string response from the provided URL.
         Log.d("url= ",url);
 
@@ -107,7 +107,7 @@ public class ShowPuzzle extends AppCompatActivity {
         /***********_______START TEMPLATE JSON REQUEST________**********/
 
         RequestQueue queue2 = Volley.newRequestQueue(ShowPuzzle.this);
-        url2 ="http://10.0.2.2:8000/getPuzzleAnswer/"+nome+"/";
+        url2 = getString(R.string.server_url)+"getPuzzleAnswer/"+nome+"/";
         // Request a string response from the provided URL.
         Log.d("url= ",url2);
 
@@ -134,7 +134,7 @@ public class ShowPuzzle extends AppCompatActivity {
         /***********_______START TEMPLATE JSON REQUEST________**********/
 
         RequestQueue queue3 = Volley.newRequestQueue(ShowPuzzle.this);
-        url3 ="http://10.0.2.2:8000/getPuzzleHint/"+nome+"/";
+        url3 = getString(R.string.server_url)+"getPuzzleHint/"+nome+"/";
         // Request a string response from the provided URL.
         Log.d("url= ",url3);
 
@@ -162,7 +162,7 @@ public class ShowPuzzle extends AppCompatActivity {
         /***********_______START TEMPLATE JSON REQUEST________**********/
 
         RequestQueue queue4 = Volley.newRequestQueue(ShowPuzzle.this);
-        String url4 ="http://10.0.2.2:8000/getPuzzleCode/"+nome+"/";
+        String url4 = getString(R.string.server_url)+"getPuzzleCode/"+nome+"/";
         // Request a string response from the provided URL.
         Log.d("url= ",url4);
 
@@ -199,7 +199,7 @@ public class ShowPuzzle extends AppCompatActivity {
                 /***********_______START TEMPLATE JSON REQUEST________**********/
 
                 RequestQueue queue5 = Volley.newRequestQueue(ShowPuzzle.this);
-                String url5 ="http://10.0.2.2:8000/acquirePuzzle/"+game_code+"/"+puzzle_code+"/";
+                String url5 = getString(R.string.server_url)+"acquirePuzzle/"+game_code+"/"+puzzle_code+"/";
                 // Request a string response from the provided URL.
                 Log.d("url= ",url5);
 

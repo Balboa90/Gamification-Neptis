@@ -45,7 +45,6 @@ public class LoginDialogActivity extends Activity {
     private String session_result="";
     private final static String SESSION = "session";
     private final static String CURRENT_SESSION = "current_session";
-    private final static String DEFAULT_SESSION= "";
 
     //private User u;//current_user
 
@@ -61,6 +60,7 @@ public class LoginDialogActivity extends Activity {
 
 
         /*******gestione click bottone Login with facebook********/
+        /*
         callbackManager = CallbackManager.Factory.create();
         loginButton = (LoginButton) findViewById(R.id.loginButton);
 
@@ -81,6 +81,7 @@ public class LoginDialogActivity extends Activity {
                 Toast.makeText(getApplicationContext(), R.string.error_login, Toast.LENGTH_SHORT).show();
             }
         });
+        */
         /*******fine gestione click bottone Login with facebook********/
 
 
@@ -100,7 +101,7 @@ public class LoginDialogActivity extends Activity {
                 /***********_______START TEMPLATE JSON REQUEST________**********/
 
                 RequestQueue queue = Volley.newRequestQueue(LoginDialogActivity.this);
-                url ="http://10.0.2.2:8000/checkUser/"+user+"/"+pass+"/";
+                url = getString(R.string.server_url) + "checkUser/"+user+"/"+pass+"/";
                 // Request a string response from the provided URL.
 
                 Log.d("url= ",url);
@@ -113,7 +114,7 @@ public class LoginDialogActivity extends Activity {
                         try {
                             obj_log = response.getJSONObject(0);
                             Log.d("log result: ",obj_log.toString());
-                            isLog = obj_log.getInt("EXISTS (SELECT * from user where email='"+user+"' and password='"+ pass+"')");
+                            isLog = obj_log.getInt("EXISTS (SELECT * from User where email='"+user+"' and password='"+ pass+"')");
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -192,7 +193,7 @@ public class LoginDialogActivity extends Activity {
 
     private void createSessionToken(String e, String p){
         RequestQueue queue = Volley.newRequestQueue(LoginDialogActivity.this);
-        url ="http://10.0.2.2:8000/createSession/"+e+"/"+p+"/";
+        url = getString(R.string.server_url) +"createSession/"+e+"/"+p+"/";
         // Request a string response from the provided URL.
         Log.d("url= ",url);
         JsonObjectRequest jsObject = new JsonObjectRequest(Request.Method.GET, url,null, new Response.Listener<JSONObject>() {
@@ -213,7 +214,7 @@ public class LoginDialogActivity extends Activity {
 
     private void getSessionToken(String e){
         RequestQueue queue = Volley.newRequestQueue(LoginDialogActivity.this);
-        url ="http://10.0.2.2:8000/getSession/"+e+"/";
+        url = getString(R.string.server_url) + "getSession/"+e+"/";
         // Request a string response from the provided URL.
         Log.d("url= ",url);
         JsonArrayRequest jsObject = new JsonArrayRequest(Request.Method.GET, url,null, new Response.Listener<JSONArray>() {

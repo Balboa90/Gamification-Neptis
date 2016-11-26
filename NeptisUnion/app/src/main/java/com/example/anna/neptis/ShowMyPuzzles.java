@@ -36,7 +36,7 @@ public class ShowMyPuzzles extends AppCompatActivity {
         game = getIntent().getExtras().getString("game_code");
 
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = "http://10.0.2.2:8000/getMyPuzzles/"+game+"/";
+        String url = getString(R.string.server_url)+"getMyPuzzles/"+game+"/";
         // Request a string response from the provided URL.
 
         JsonArrayRequest jsArray = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
