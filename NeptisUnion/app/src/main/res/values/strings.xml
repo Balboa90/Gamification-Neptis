@@ -31,5 +31,6 @@
 
     <!--<string name="server_url">http://10.0.2.2:8000/</string>-->
     <string name="server_url">http://77.81.226.246:8000/</string>
+    <string name="gopoleis">GoPoleis</string>
 
 </resources>

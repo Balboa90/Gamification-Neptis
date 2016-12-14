@@ -86,18 +86,17 @@
         android:layout_width="70dp"
         android:layout_height="35dp"
         android:src="@drawable/tutorial_freccia_register"
-        android:layout_marginLeft="30dp"
         android:layout_above="@+id/registra"
         android:layout_alignStart="@+id/registra"
-        android:layout_marginStart="33dp" />
+        android:layout_marginStart="30dp" />
 
     <TextView
         android:id="@+id/registra"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:text="Se non ti sei ancora registrato, puoi farlo cliccando su Register Here e seguire le indicazioni che si presentano nella nuova pagina."
-        android:textSize="13dp"
-        android:layout_marginLeft="30dp"
+        android:textSize="13sp"
+        android:layout_marginStart="30dp"
         android:textColor="#283593"
         android:layout_below="@+id/registerHere"
         android:layout_centerHorizontal="true"
@@ -153,7 +152,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/regEmail"
             android:text="Email"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:layout_alignParentEnd="false"
             android:layout_alignParentStart="false"
             android:layout_alignParentTop="false"
@@ -164,7 +163,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/regEmail"
 
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:id="@+id/regPassword"
             android:text="Password"
             android:layout_alignParentStart="true"
